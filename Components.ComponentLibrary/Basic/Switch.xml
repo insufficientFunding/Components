@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Component xmlns="https://schemas.alaskasvingen.com/components/schema.xsd">
+	<Declaration>
+		<Metadata Name="Name" Value="Switch" />
+		<Metadata Name="Experimental.Features.Definitions" Value="true" />
+
+		<Property Name="Text" Type="String" Default="S\u2081" ShowInEditor="true" />
+
+		<Property Name="Open" Type="Boolean" Default="true" ShowInEditor="false" />
+
+		<Property Name="Type" Type="Enum" Default="Toggle" ShowInEditor="false">
+			<Option>Toggle</Option>
+			<Option>PushButton</Option>
+			<Option>ManualButton</Option>
+			<Option>ChangeoverSwitch</Option>
+		</Property>
+
+		<Configuration>
+			<Bounds>
+				<BoundsOption Value="1, 1" />
+			</Bounds>
+		</Configuration>
+	</Declaration>
+
+	<Definitions>
+		<Definition Name="EndOffsetS">
+			<When Conditions="$Open == true" Value="0" />
+			<When Conditions="$Open == false" Value="0.6" />
+		</Definition>
+
+		<Definition Name="ChangeoverEndOffsetS">
+			<When Conditions="$Open == true" Value="-0.5" />
+			<When Conditions="$Open == false" Value="0.5" />
+		</Definition>
+
+		<Definition Name="ButtonOffsetS">
+			<When Conditions="$Open == true" Value="0" />
+			<When Conditions="$Open == false" Value="0.275" />
+		</Definition>
+	</Definitions>
+
+	<Render AutoRotate="HorizontalToVertical, FlipPrimary">
+		<!-- Main Switch -->
+		<RenderGroup Conditions="$Type != ChangeoverSwitch">
+
+			<!-- Switch -->
+			<Line Start="_Middle -0.5x" End="_Middle +0.55x -0.3y +($EndOffsetS)y" />
+
+			<RenderGroup Conditions="$Open == false">
+				<Line Start="_Middle +0.5x" End="_Middle +0.5x +0.35y" />
+			</RenderGroup>
+		</RenderGroup>
+
+		<!-- Changeover Switch -->
+		<RenderGroup Conditions="$Type == ChangeoverSwitch">
+			<!-- Input and output -->
+			<Line Start="_Middle -1x" End="_Middle -0.5x" />
+			<Line Start="_Middle +1x -0.5y" End="_Middle +0.5x -0.5y" />
+			<Line Start="_Middle +1x +0.5y" End="_Middle +0.5x +0.5y" />
+
+			<!-- Contacts -->
+			<Ellipse Position="_Middle -0.5x" Radius="0.025, 0.025" Fill="true" Thickness="2" />
+			<Ellipse Position="_Middle +0.5x -0.5y" Radius="0.025, 0.025" Fill="true" Thickness="2" />
+			<Ellipse Position="_Middle +0.5x +0.5y" Radius="0.025, 0.025" Fill="true" Thickness="2" />
+
+			<!-- Switch -->
+			<Line Start="_Middle -0.5x" End="_Middle +0.5x +($ChangeoverEndOffsetS)y" />
+		</RenderGroup>
+
+		<!-- Push Button -->
+		<RenderGroup Conditions="$Type == PushButton">
+			<Path Position="_Middle -0.3x -1.6y +($ButtonOffsetS)y">
+				<LineTo Position="0, -0.2" />
+				<LineTo Position="0.6, 0" />
+				<LineTo Position="0, 0.2" />
+			</Path>
+		</RenderGroup>
+
+		<RenderGroup Conditions="$Type == ManualButton">
+			<Line Start="_Middle -0.3x -1.8y + ($ButtonOffsetS)y" End="_Middle +0.3x -1.8y + ($ButtonOffsetS)y" />
+		</RenderGroup>
+
+		<!-- Spring -->
+		<RenderGroup Conditions="$Type == PushButton | $Type == ManualButton">
+			<Path Position="_Middle -1.7y +($ButtonOffsetS)y">
+				<LineTo Position="0, 0.15" />
+				<MoveTo Position="0, 0.15" />
+
+				<LineTo Position="0, 0.125" />
+				<LineTo Position="-0.3, 0.2" />
+				<LineTo Position="0.3, 0.2" />
+				<LineTo Position="0, 0.125" />
+
+				<MoveTo Position="0, 0.15" />
+
+				<LineTo Position="0, 0.15" />
+				<MoveTo Position="0, 0.15" />
+
+				<LineTo Position="0, 0.15" />
+				<MoveTo Position="0, 0.15" />
+			</Path>
+		</RenderGroup>
+	</Render>
+</Component>

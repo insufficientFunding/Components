@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Component xmlns="https://schemas.alaskasvingen.com/components/schema.xsd">
+	<Declaration>
+		<Metadata Name="Name" Value="Circuit Breaker" />
+		<Metadata Name="Experimental.Features.Definitions" Value="true" />
+
+		<Property Name="ConnectionNamesVisible" Type="Boolean" Default="false" ShowInEditor="false" />
+
+		<Property Name="Type" Type="Enum" Default="OnePoled" ShowInEditor="false">
+			<Option>OnePoled</Option>
+			<Option>TwoPoled</Option>
+			<Option>ThreePoled</Option>
+		</Property>
+
+		<Configuration>
+			<Bounds>
+				<BoundsOption Value="2, 2" />
+			</Bounds>
+		</Configuration>
+	</Declaration>
+
+	<Definitions>
+		<Definition Name="MarkingOffsetS">
+			<When Conditions="$Type == OnePoled | $Type == TwoPoled" Value="0" />
+			<When Conditions="$Type == ThreePoled" Value="-1" />
+		</Definition>
+	</Definitions>
+
+	<Render AutoRotate="HorizontalToVertical, FlipPrimary">
+		<!-- Pole 1 -->
+		<RenderGroup>
+			<!-- Input and output -->
+			<Line Start="_Middle -1x" End="_Middle -0.7x" />
+			<Line Start="_Middle +1x" End="_Middle +0.7x" />
+
+			<!-- Switch -->
+			<Line Start="_Middle -0.7x" End="_Middle +0.7x -0.5y" />
+		</RenderGroup>
+
+		<!-- Pole 2 -->
+		<RenderGroup Conditions="$Type == TwoPoled | $Type == ThreePoled">
+			<!-- Input and output -->
+			<Line Start="_Middle -1x +1y" End="_Middle -0.7x +1y" />
+			<Line Start="_Middle +1x +1y" End="_Middle +0.7x +1y" />
+
+			<!-- Switch -->
+			<Line Start="_Middle -0.7x +1y" End="_Middle +0.7x +0.5y" />
+		</RenderGroup>
+
+		<!-- Pole 3 -->
+		<RenderGroup Conditions="$Type == ThreePoled">
+			<!-- Input and output -->
+			<Line Start="_Middle -1x -1y" End="_Middle -0.7x -1y" />
+			<Line Start="_Middle +1x -1y" End="_Middle +0.7x -1y" />
+
+			<!-- Switch -->
+			<Line Start="_Middle -0.7x -1y" End="_Middle +0.7x -1.5y" />
+		</RenderGroup>
+
+		<!-- Markings -->
+		<RenderGroup>
+			<RenderGroup Conditions="$Type == TwoPoled">
+				<Path Position="_Middle -0.4x +0.8925y">
+					<LineTo Position="0, -0.1" />
+					<MoveTo Position="0, -0.1" />
+					<LineTo Position="0, -0.1" />
+					<MoveTo Position="0, -0.1" />
+					<LineTo Position="0, -0.1" />
+					<MoveTo Position="0, -0.1" />
+					<LineTo Position="0, -0.1" />
+					<MoveTo Position="0, -0.1" />
+					<LineTo Position="0, -0.1" />
+				</Path>
+			</RenderGroup>
+
+			<RenderGroup Conditions="$Type == ThreePoled">
+				<Path Position="_Middle -0.4x +0.8925y">
+					<LineTo Position="0, -0.1" />
+					<MoveTo Position="0, -0.1" />
+					<LineTo Position="0, -0.1" />
+					<MoveTo Position="0, -0.1" />
+					<LineTo Position="0, -0.1" />
+					<MoveTo Position="0, -0.1" />
+					<LineTo Position="0, -0.1" />
+					<MoveTo Position="0, -0.1" />
+					<LineTo Position="0, -0.1" />
+					<MoveTo Position="0, -0.1" />
+					<LineTo Position="0, -0.1" />
+					<MoveTo Position="0, -0.1" />
+					<LineTo Position="0, -0.1" />
+					<MoveTo Position="0, -0.1" />
+					<LineTo Position="0, -0.1" />
+					<MoveTo Position="0, -0.1" />
+					<LineTo Position="0, -0.1" />
+					<MoveTo Position="0, -0.1" />
+					<LineTo Position="0, -0.1" />
+				</Path>
+			</RenderGroup>
+
+			<Path Position="_Middle +0.2x -0.325y +($MarkingOffsetS)y">
+				<LineTo Position="0, -0.4" />
+				<LineTo Position="0.2, 0" />
+				<LineTo Position="0, -0.4" />
+				<LineTo Position="-0.2, 0" />
+				<LineTo Position="0, -0.4" />
+			</Path>
+
+			<Path Position="_Middle -0.17x -0.195y +($MarkingOffsetS)y">
+				<LineTo Position="0, -0.4" />
+				<EllipticalArcTo Position="0, -0.4"
+					Radii="0.1, 0.1"
+					Angle="0"
+					IsLargeArc="false"
+					Direction="CounterClockwise" />
+				<LineTo Position="0, -0.4" />
+			</Path>
+		</RenderGroup>
+
+		<!-- Text -->
+		<RenderGroup Conditions="$ConnectionNamesVisible == true">
+			<RenderGroup Conditions="$Type == OnePoled | $Type == TwoPoled">
+				<Text Value="1" X="_Middle +1.2" Y="_Middle -0.35" Size="Small" Alignment="CenterCenter" />
+				<Text Value="2" X="_Middle -1.1" Y="_Middle -0.35" Size="Small" Alignment="CenterCenter" />
+			</RenderGroup>
+
+			<RenderGroup Conditions="$Type == TwoPoled">
+				<Text Value="3" X="_Middle +1.2" Y="_Middle +0.65" Size="Small" Alignment="CenterCenter" />
+				<Text Value="4" X="_Middle -1.1" Y="_Middle +0.65" Size="Small" Alignment="CenterCenter" />
+			</RenderGroup>
+			
+			<RenderGroup Conditions="$Type == ThreePoled">
+				<Text Value="1" X="_Middle +1.2" Y="_Middle -1.35" Size="Small" Alignment="CenterCenter" />
+				<Text Value="2" X="_Middle -1.1" Y="_Middle -1.35" Size="Small" Alignment="CenterCenter" />
+
+				<Text Value="3" X="_Middle +1.2" Y="_Middle -0.35" Size="Small" Alignment="CenterCenter" />
+				<Text Value="4" X="_Middle -1.1" Y="_Middle -0.35" Size="Small" Alignment="CenterCenter" />
+
+				<Text Value="5" X="_Middle +1.2" Y="_Middle +0.65" Size="Small" Alignment="CenterCenter" />
+				<Text Value="6" X="_Middle -1.1" Y="_Middle +0.65" Size="Small" Alignment="CenterCenter" />
+			</RenderGroup>
+		</RenderGroup>
+	</Render>
+</Component>

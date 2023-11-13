@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Component xmlns="https://schemas.alaskasvingen.com/components/schema.xsd">
+	<Declaration>
+		<Metadata Name="Name" Value="Diode" />
+
+		<Property Name="Type" Type="Enum" Default="Standard" ShowInEditor="false">
+			<Option>Standard</Option>
+			<Option>Zener</Option>
+			<Option>LED</Option>
+			<Option>Photo</Option>
+			<Option>Schottky</Option>
+		</Property>
+		
+		<Configuration>
+			<Bounds>
+				<BoundsOption Value="1, 1" />
+			</Bounds>
+		</Configuration>
+	</Declaration>
+
+	<Render AutoRotate="HorizontalToVertical, FlipPrimary">
+		<RenderGroup>
+			<Path Position="_Middle -0.25x -0.25y">
+				<LineTo Position="0, 0.5" />
+				<LineTo Position="0.5, -0.25" />
+				<ClosePath />
+			</Path>
+
+			<Line Start="_Middle +0.25x -0.275y" End="_Middle +0.25x +0.275y" />
+
+			<Line Start="_Middle -0.25x" End="_Middle -0.5x" />
+			<Line Start="_Middle +0.25x" End="_Middle +0.5x" />
+		</RenderGroup>
+		
+		<RenderGroup Conditions="$Type == Zener">
+			<Line Start="_Middle +0.25x +0.275y" End="_Middle +0.1x +0.275y" />
+		</RenderGroup>
+
+		<RenderGroup Conditions="$Type == Schottky">
+			<Line Start="_Middle +0.25x +0.275y" End="_Middle +0.125x +0.275y" />
+			<Line Start="_Middle +0.125x +0.275y" End="_Middle +0.125x +0.175y" />
+			
+			<Line Start="_Middle +0.25x -0.275y" End="_Middle +0.375x -0.275y" />
+			<Line Start="_Middle +0.375x -0.275y" End="_Middle +0.375x -0.175y" />
+		</RenderGroup>
+
+		<RenderGroup Conditions="$Type == LED">
+			<Path Position="_Middle +0.25x -0.55y" Thickness="0.75">
+				<LineTo Position="-0.125, 0.275" />
+			</Path>
+			
+			<Path Position="_Middle +0.25x -0.55y" Fill="true">
+				<LineTo Position="-0.06, 0.06" />
+				<LineTo Position="0.0525, 0.0255" />
+				<ClosePath />
+			</Path>
+
+			<Path Position="_Middle +0.1x -0.625y" Thickness="0.75">
+				<LineTo Position="-0.125, 0.275" />
+			</Path>
+
+			<Path Position="_Middle +0.1x -0.625y" Fill="true">
+				<LineTo Position="-0.06, 0.06" />
+				<LineTo Position="0.0525, 0.0255" />
+				<ClosePath />
+			</Path>
+		</RenderGroup>
+
+		<RenderGroup Conditions="$Type == Photo">
+			<Path Position="_Middle +0.125x -0.275y" Thickness="0.75">
+				<LineTo Position="0.125, -0.275" />
+			</Path>
+
+			<Path Position="_Middle +0.125x -0.275y" Fill="true">
+				<LineTo Position="0.06, -0.06" />
+				<LineTo Position="-0.0525, -0.0255" />
+				<ClosePath />
+			</Path>
+
+			<Path Position="_Middle -0.025x -0.35y" Thickness="0.75">
+				<LineTo Position="0.125, -0.275" />
+			</Path>
+
+			<Path Position="_Middle -0.025x -0.35y" Fill="true">
+				<LineTo Position="0.06, -0.06" />
+				<LineTo Position="-0.0525, -0.0255" />
+				<ClosePath />
+			</Path>
+		</RenderGroup>
+
+	</Render>
+</Component>

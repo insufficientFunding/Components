@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Component xmlns="https://schemas.alaskasvingen.com/components/schema.xsd">
+	<Declaration>
+		<Metadata Name="Name" Value="Bridge" />
+
+		<Property Name="Type" Type="Enum" Default="Arc" ShowInEditor="false">
+			<Option>Arc</Option>
+			<Option>Opening</Option>
+		</Property>
+
+		<Configuration>
+			<Bounds>
+				<BoundsOption Value="1, 1" />
+			</Bounds>
+		</Configuration>
+	</Declaration>
+
+	<Render AutoRotate="HorizontalToVertical, FlipPrimary">
+		<RenderGroup>
+			<Line Start="_Middle -0.5x" End="_Middle -0.15x" />
+			<Line Start="_Middle +0.15x" End="_Middle +0.5x" />
+		</RenderGroup>
+
+		<RenderGroup Conditions="$Type == Arc">
+			<Path Position="_Middle -0.15x">
+				<EllipticalArcTo Position="0.3, 0"
+					Radii="0.15, 0.15"
+					Angle="0"
+					IsLargeArc="false"
+					Direction="Clockwise" />
+			</Path>
+		</RenderGroup>
+	</Render>
+</Component>

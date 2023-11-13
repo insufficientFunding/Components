@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net7.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
+		<AssemblyName>Egoland.Components.IntegrationTest</AssemblyName>
+		<LangVersion>default</LangVersion>
+		<PackageId>Egoland.Components.IntegrationTest</PackageId>
+		<Authors>Egoland</Authors>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Content Include="..\.dockerignore">
+	    <Link>.dockerignore</Link>
+	  </Content>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0-rc.2.23479.6" />
+	  <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0-rc.2.23479.6" />
+	  <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0-rc.2.23479.6" />
+	  <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0-rc.2.23479.6" />
+	  <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.0-rc.2.23479.6" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Components.Avalonia\Components.Avalonia.csproj" />
+	  <ProjectReference Include="..\Components.ComponentLibrary\Components.ComponentLibrary.csproj" />
+	  <ProjectReference Include="..\Components\Components.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Svg\" />
+	</ItemGroup>
+
+</Project>

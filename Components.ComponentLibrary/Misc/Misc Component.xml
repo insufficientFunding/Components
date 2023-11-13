@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Component xmlns="https://schemas.alaskasvingen.com/components/schema.xsd">
+	<Declaration>
+		<Metadata Name="Name" Value="Misc Component" />
+
+		<Property Name="Text" Type="String" Default="EA" ShowInEditor="true" />
+		
+		<Configuration>
+			<Bounds>
+				<BoundsOption Value="1, 1" />
+			</Bounds>
+		</Configuration>
+	</Declaration>
+	
+	<Render AutoRotate="Off">
+		<RenderGroup>
+			<Rectangle Position="_Middle -0.5x -0.5y" Size="1, 1" />
+			
+			<RenderGroup Conditions="$ShowText">
+				<Text Value="$Text" X="_Middle" Y="_Middle" Alignment="CenterCenter" Size="Large" Weight="Light" />
+			</RenderGroup>
+		</RenderGroup>
+	</Render>
+</Component>

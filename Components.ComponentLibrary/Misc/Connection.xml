@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Component xmlns="https://schemas.alaskasvingen.com/components/schema.xsd">
+	<Declaration>
+		<Metadata Name="Name" Value="Connection" />
+
+		<Configuration>
+			<Bounds>
+				<BoundsOption Value="0.5, 0.5" />
+			</Bounds>
+		</Configuration>
+	</Declaration>
+	
+	<Render AutoRotate="Off">
+		<RenderGroup>
+			<Ellipse Position="_Middle" Radius="0.025, 0.025" Fill="true" Thickness="2" />
+		</RenderGroup>
+	</Render>
+</Component>

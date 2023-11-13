@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Component xmlns="https://schemas.alaskasvingen.com/components/schema.xsd">
+	<Declaration>
+		<Metadata Name="Name" Value="Lamp" />
+
+		<Property Name="ConnectionsVisible" Type="Boolean" Default="true" ShowInEditor="false" />
+
+		<Configuration>
+			<Bounds>
+				<BoundsOption Value="1, 1" />
+			</Bounds>
+		</Configuration>
+	</Declaration>
+
+	<Render AutoRotate="HorizontalToVertical, FlipPrimary">
+		<RenderGroup>
+			<Ellipse Position="_Middle" Radius="0.5, 0.5" />
+
+			<Line Start="_Middle -0.33x -0.33y" End="_Middle +0.33x +0.33y" />
+			<Line Start="_Middle +0.33x -0.33y" End="_Middle -0.33x +0.33y" />
+		</RenderGroup>
+		
+		<RenderGroup Conditions="$ConnectionsVisible == true">
+			<Line Start="_Middle -1x" End="_Middle -0.5x" />
+			<Line Start="_Middle +0.5x" End="_Middle +1x" />
+		</RenderGroup>
+	</Render>
+</Component>

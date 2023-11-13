@@ -1,0 +1,12 @@
+C:\Users\julia\RiderProjects\Components\Components\obj\Debug\net7.0\Components.csproj.AssemblyReference.cache
+C:\Users\julia\RiderProjects\Components\Components\obj\Debug\net7.0\Components.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\julia\RiderProjects\Components\Components\obj\Debug\net7.0\Components.AssemblyInfoInputs.cache
+C:\Users\julia\RiderProjects\Components\Components\obj\Debug\net7.0\Components.AssemblyInfo.cs
+C:\Users\julia\RiderProjects\Components\Components\obj\Debug\net7.0\Components.csproj.CoreCompileInputs.cache
+C:\Users\julia\RiderProjects\Components\Components\bin\Debug\net7.0\Egoland.Components.deps.json
+C:\Users\julia\RiderProjects\Components\Components\bin\Debug\net7.0\Egoland.Components.dll
+C:\Users\julia\RiderProjects\Components\Components\bin\Debug\net7.0\Egoland.Components.pdb
+C:\Users\julia\RiderProjects\Components\Components\obj\Debug\net7.0\Egoland.Components.dll
+C:\Users\julia\RiderProjects\Components\Components\obj\Debug\net7.0\refint\Egoland.Components.dll
+C:\Users\julia\RiderProjects\Components\Components\obj\Debug\net7.0\Egoland.Components.pdb
+C:\Users\julia\RiderProjects\Components\Components\obj\Debug\net7.0\ref\Egoland.Components.dll

@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Component xmlns="https://schemas.alaskasvingen.com/components/schema.xsd">
+	<Declaration>
+		<Metadata Name="Name" Value="Thermostat" />
+
+		<Configuration>
+			<Bounds>
+				<BoundsOption Value="4, 4" />
+			</Bounds>
+		</Configuration>
+	</Declaration>
+
+	<Render AutoRotate="Off">
+		<RenderGroup>
+			<Rectangle Position="_Start +1x +1y" Size="4, 4" />
+			
+			<Ellipse Position="_Start +1.5x +1.5y" Radius="0.1, 0.1" />
+			<Ellipse Position="_Start +1.5x +2y" Radius="0.1, 0.1" />
+			
+			<Ellipse Position="_Middle -1x +0.5y" Radius="0.1, 0.1" />
+			<Ellipse Position="_Middle -0.5x +0.5y" Radius="0.1, 0.1" />
+			<Ellipse Position="_Middle +0.5y" Radius="0.1, 0.1" />
+			<Ellipse Position="_Middle +0.5x +0.5y" Radius="0.1, 0.1" />
+			<Ellipse Position="_Middle +1x +0.5y" Radius="0.1, 0.1" />
+			<Ellipse Position="_Middle +1.5x +0.5y" Radius="0.1, 0.1" />
+		</RenderGroup>
+		
+		<!-- Text -->
+		<RenderGroup>
+			<Text Value="8" X="_Start +1.7" Y="_Start +1.48" Alignment="CenterLeft" Size="Small" />
+			<Text Value="7" X="_Start +1.7" Y="_Start +1.98" Alignment="CenterLeft" Size="Small" />
+			
+			<Text Value="6" X="_Middle -1" Y="_Middle +0.7" Alignment="TopCenter" Size="Small" />
+			<Text Value="5" X="_Middle -0.5" Y="_Middle +0.7" Alignment="TopCenter" Size="Small" />
+			<Text Value="4" X="_Middle" Y="_Middle +0.7" Alignment="TopCenter" Size="Small" />
+			<Text Value="3" X="_Middle +0.5" Y="_Middle +0.7" Alignment="TopCenter" Size="Small" />
+			<Text Value="2" X="_Middle +1" Y="_Middle +0.7" Alignment="TopCenter" Size="Small" />
+			<Text Value="1" X="_Middle +1.5" Y="_Middle +0.7" Alignment="TopCenter" Size="Small" />
+			
+			<Text Value="L" X="_Middle" Y="_Middle +0.2" Alignment="BottomCenter" Size="Small" />
+			<Text Value="N" X="_Middle +1" Y="_Middle +0.2" Alignment="BottomCenter" Size="Small" />
+		</RenderGroup>
+		
+		<!-- Output -->
+		<RenderGroup>
+			<!-- L -->
+			<Line Start="_Middle +1.15y" End="_Middle +2.4y" />
+			
+			<Path Position="_Middle +2.815y" Thickness="1.1">
+				<LineTo Position="-0.135, -0.25" />
+				<LineTo Position="0.27, 0" />
+				<ClosePath />
+			</Path>
+			
+			<!-- N -->
+			<Line Start="_Middle +1x +1.15y" End="_Middle +1x +2.4y" />
+			
+			<Text Value="N" X="_Middle +1" Y="_Middle +2.675" Weight="Light" />
+		</RenderGroup>
+	</Render>
+</Component>

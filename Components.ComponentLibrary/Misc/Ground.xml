@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Component xmlns="https://schemas.alaskasvingen.com/components/schema.xsd">
+	<Declaration>
+		<Metadata Name="Name" Value="Ground" />
+		
+		<Configuration>
+			<Bounds>
+				<BoundsOption Value="1, 1" />
+			</Bounds>
+		</Configuration>
+	</Declaration>
+	
+	<Render AutoRotate="Off">
+		<RenderGroup>
+			<Line Start="_Middle" End=" _Middle -0.5y" />
+			<Line Start="_Middle -0.5x" End="_Middle +0.5x" />
+			<Line Start="_Middle -0.3x +0.2y" End="_Middle +0.3x +0.2y" />
+			<Line Start="_Middle -0.1x +0.4y" End="_Middle +0.1x +0.4y" />
+		</RenderGroup>
+	</Render>
+</Component>

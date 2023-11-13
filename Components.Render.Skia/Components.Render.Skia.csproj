@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<AssemblyName>Egoland.Components.Render.Skia</AssemblyName>
+		<LangVersion>default</LangVersion>
+		<Authors>Malware</Authors>
+		<Company>Egoland</Company>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="SkiaSharp" Version="2.88.6" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Components\Components.csproj" />
+	</ItemGroup>
+
+</Project>

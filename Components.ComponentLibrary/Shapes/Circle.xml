@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Component xmlns="https://schemas.alaskasvingen.com/components/schema.xsd">
+	<Declaration>
+		<Metadata Name="Name" Value="Circle" />
+
+		<Property Name="Type" Type="Enum" Default="Medium" ShowInEditor="false">
+			<Option>Tiny</Option>
+			<Option>Small</Option>
+			<Option>Medium</Option>
+			<Option>Large</Option>
+			<Option>Massive</Option>
+		</Property>
+		
+		<Configuration>
+			<Bounds>
+				<BoundsOption Conditions="$Type == Tiny" Value="0.5, 0.5" />
+				<BoundsOption Conditions="$Type == Small" Value="1, 1" />
+				<BoundsOption Conditions="$Type == Medium" Value="1.5, 1.5" />
+				<BoundsOption Conditions="$Type == Large" Value="2, 2" />
+				<BoundsOption Conditions="$Type == Massive" Value="3, 3" />
+			</Bounds>
+		</Configuration>
+	</Declaration>
+	
+	<Render AutoRotate="Off">
+		<RenderGroup Conditions="$Type == Tiny">
+			<Ellipse Position="_Middle" Radius="0.5, 0.5" />
+		</RenderGroup>
+		
+		<RenderGroup Conditions="$Type == Small">
+			<Ellipse Position="_Middle" Radius="1, 1" />
+		</RenderGroup>
+		
+		<RenderGroup Conditions="$Type == Medium">
+			<Ellipse Position="_Middle" Radius="1.5, 1.5" />
+		</RenderGroup>
+		
+		<RenderGroup Conditions="$Type == Large">
+			<Ellipse Position="_Middle" Radius="2, 2" />
+		</RenderGroup>
+		
+		<RenderGroup Conditions="$Type == Massive">
+			<Ellipse Position="_Middle" Radius="3, 3" />
+		</RenderGroup>
+	</Render>
+</Component>

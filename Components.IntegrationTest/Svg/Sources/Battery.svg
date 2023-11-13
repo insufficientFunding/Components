@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" width="6" height="6" xmlns="http://www.w3.org/2000/svg">
+	<line x1="2.5" y1="3" x2="2.85" y2="3" style="stroke:rgb(255, 255, 255);stroke-linecap:square;stroke-width:0.1" />
+	<line x1="3.15" y1="3" x2="3.5" y2="3" style="stroke:rgb(255, 255, 255);stroke-linecap:square;stroke-width:0.1" />
+	<line x1="2.85" y1="2.8" x2="2.85" y2="3.2" style="stroke:rgb(255, 255, 255);stroke-linecap:square;stroke-width:0.1" />
+	<line x1="3.15" y1="2.55" x2="3.15" y2="3.45" style="stroke:rgb(255, 255, 255);stroke-linecap:square;stroke-width:0.1" />
+</svg>

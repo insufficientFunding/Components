@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Component xmlns="https://schemas.alaskasvingen.com/components/schema.xsd">
+	<Declaration>
+		<Metadata Name="Name" Value="Battery" />
+		<Metadata Name="Experimental.Features.Definitions" Value="true" />
+
+		<Property Name="Text" Type="String" Default="U\u2081" ShowInEditor="true" />
+		
+		<Property Name="Voltage" Type="Double" Default="9" ShowInEditor="true">
+			<Formatting>
+				<Format Conditions="$Voltage[LessThan]1" Value="$Voltage(Multiply_1000)(Round_1)  mV" />
+				<Format Conditions="$Voltage[LessThan]1000" Value="$Voltage  V" />
+				<Format Value="$Voltage(Divide_1000)(Round_1)  kV" />
+			</Formatting>
+		</Property>
+		<Configuration>
+			<Bounds>
+				<BoundsOption Value="1, 1" />
+			</Bounds>
+		</Configuration>
+	</Declaration>
+	
+	<Definitions>
+		<Definition Name="TextAlignment">
+			<When Conditions="Horizontal" Value="BottomCenter" />
+			<When Conditions="!Horizontal" Value="CenterRight" />
+		</Definition>
+		
+		<Definition Name="TextOffsetP">
+			<When Conditions="Horizontal | !$ShowVoltage" Value="0" />
+			<When Conditions="!Horizontal , $ShowVoltage" Value="0.3" />
+		</Definition>
+		
+		<Definition Name="TextOffsetS">
+			<When Conditions="!Horizontal | !$ShowVoltage" Value="-0.55" />
+			<When Conditions="Horizontal , $ShowVoltage" Value="-0.85" />
+		</Definition>
+		
+		<Constant Name="VoltageOffsetS" Value="-0.55" />
+	</Definitions>
+
+	<Render AutoRotate="HorizontalToVertical, FlipPrimary">
+		<!-- Text -->
+		<RenderGroup Conditions="$ShowVoltage">
+			<Text Value="$Voltage" X="_Middle" Y="_Middle + $VoltageOffsetS" Alignment="$TextAlignment" Size="Small" />
+		</RenderGroup>
+
+		<RenderGroup Conditions="$ShowText">
+			<Text Value="$Text" X="_Middle + $TextOffsetP" Y="_Middle + $TextOffsetS" Alignment="$TextAlignment" Size="Tiny" />
+		</RenderGroup>
+		
+		<RenderGroup>
+			<Line Start="_Middle -0.5x" End="_Middle -0.15x" />
+			<Line Start="_Middle +0.15x" End="_Middle +0.5x" />
+
+			<Line Start="_Middle -0.15x -0.2y" End="_Middle -0.15x +0.2y" />
+			<Line Start="_Middle +0.15x -0.45y" End="_Middle +0.15x +0.45y" />
+		</RenderGroup>
+	</Render>
+</Component>

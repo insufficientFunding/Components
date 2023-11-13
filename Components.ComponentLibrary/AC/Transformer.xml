@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Component xmlns="https://schemas.alaskasvingen.com/components/schema.xsd">
+	<Declaration>
+		<Metadata Name="Name" Value="Transformer" />
+		<Metadata Name="Experimental.Features.Definitions" Value="true" />
+		
+		<Property Name="PrimaryVoltage" Type="Double" Default="220" ShowInEditor="true">
+			<Formatting>
+				<Format Conditions="$PrimaryVoltage[LessThan]1000" Value="$PrimaryVoltage  V" />
+				<Format Value="$PrimaryVoltage(Divide_1000)(Round_1)  kV" />
+			</Formatting>
+		</Property>
+		
+		<Property Name="SecondaryVoltage" Type="Double" Default="24" ShowInEditor="true">
+			<Formatting>
+				<Format Conditions="$SecondaryVoltage[LessThan]1000" Value="$SecondaryVoltage  V" />
+				<Format Value="$SecondaryVoltage(Divide_1000)(Round_1)  kV" />
+			</Formatting>
+		</Property>
+
+		<Configuration>
+			<Bounds>
+				<BoundsOption Value="1.5, 2" />
+			</Bounds>
+		</Configuration>
+	</Declaration>
+
+	<Definitions>
+		<Definition Name="PrimaryTextAlignment">
+			<When Conditions="Horizontal" Value="CenterRight" />
+			<When Conditions="!Horizontal" Value="TopCenter" />
+		</Definition>
+		
+		<Definition Name="SecondaryTextAlignment">
+			<When Conditions="Horizontal" Value="CenterLeft" />
+			<When Conditions="!Horizontal" Value="BottomCenter" />
+		</Definition>
+	</Definitions>
+	
+	<Render AutoRotate="HorizontalToVertical, FlipPrimary">
+		<RenderGroup>
+			<Path Position="_Middle -0.75x -1y">
+				<EllipticalArcTo
+					Position="0, 0.5"
+					Radii="0.25, 0.25"
+					Angle="0"
+					IsLargeArc="false"
+					Direction="Clockwise" />
+				<EllipticalArcTo
+					Position="0, 0.5"
+					Radii="0.25, 0.25"
+					Angle="0"
+					IsLargeArc="false"
+					Direction="Clockwise" />
+				<EllipticalArcTo
+					Position="0, 0.5"
+					Radii="0.25, 0.25"
+					Angle="0"
+					IsLargeArc="false"
+					Direction="Clockwise" />
+				<EllipticalArcTo
+					Position="0, 0.5"
+					Radii="0.25, 0.25"
+					Angle="0"
+					IsLargeArc="false"
+					Direction="Clockwise" />
+			</Path>
+
+			<Path Position="_Middle +0.75x -1y">
+				<EllipticalArcTo
+					Position="0, 0.5"
+					Radii="0.25, 0.25"
+					Angle="0"
+					IsLargeArc="false"
+					Direction="CounterClockwise" />
+				<EllipticalArcTo
+					Position="0, 0.5"
+					Radii="0.25, 0.25"
+					Angle="0"
+					IsLargeArc="false"
+					Direction="CounterClockwise" />
+				<EllipticalArcTo
+					Position="0, 0.5"
+					Radii="0.25, 0.25"
+					Angle="0"
+					IsLargeArc="false"
+					Direction="CounterClockwise" />
+				<EllipticalArcTo
+					Position="0, 0.5"
+					Radii="0.25, 0.25"
+					Angle="0"
+					IsLargeArc="false"
+					Direction="CounterClockwise" />
+			</Path>
+
+			<Line Start="_Middle -0.2x -1.05y" End="_Middle -0.2x +1.05y" />
+			<Line Start="_Middle +0.2x -1.05y" End="_Middle +0.2x +1.05y" />
+
+			<Line Start="_Middle -0.75x -1y" End="_Middle -1x -1y" />
+			<Line Start="_Middle -0.75x +1y" End="_Middle -1x +1y" />
+
+			<Line Start="_Middle +0.75x -1y" End="_Middle +1x -1y" />
+			<Line Start="_Middle +0.75x +1y" End="_Middle +1x +1y" />
+		</RenderGroup>
+
+		<RenderGroup Conditions="$ShowPrimaryVoltage">
+			<Text X="_Middle -1" Y="_Middle" Value="$PrimaryVoltage" Size="Small" Alignment="$PrimaryTextAlignment" />
+		</RenderGroup>
+
+		<RenderGroup Conditions="$ShowSecondaryVoltage">
+			<Text X="_Middle +1" Y="_Middle" Value="$SecondaryVoltage" Size="Small" Alignment="$SecondaryTextAlignment" />
+		</RenderGroup>
+	</Render>
+</Component>

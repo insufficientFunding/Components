@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Component xmlns="https://schemas.alaskasvingen.com/components/schema.xsd">
+	<Declaration>
+		<Metadata Name="Name" Value="Capacitor" />
+		<Metadata Name="Experimental.Features.Definitions" Value="true" />
+
+		<Property Name="Text" Type="String" Default="C\u2081" ShowInEditor="true" />
+		
+		<Property Name="Capacitance" Type="Double" Default="0.00047" ShowInEditor="true">
+			<Formatting>
+				<Format Conditions="$Capacitance[GreaterThan]1" Value="$Capacitance  F" />
+				<Format Conditions="$Capacitance[GreaterOrEqual]0.001" Value="$Capacitance(Multiply_1000)(Round_1)  mF" />
+				<Format Conditions="$Capacitance[GreaterOrEqual]0.000001" Value="$Capacitance(Multiply_1000000)(Round_1)  \u00B5F" />
+				<Format Conditions="$Capacitance[GreaterOrEqual]0.000000001" Value="$Capacitance(Multiply_1000000000)(Round_1)  nF" />
+				<Format Value="$Capacitance(Multiply_1000000000000)(Round_1)  pF" />
+			</Formatting>
+		</Property>
+		
+		<Property Name="Type" Type="Enum" Default="Standard" ShowInEditor="false">
+			<Option>Standard</Option>
+			<Option>Variable</Option>
+			<Option>Trimmer</Option>
+			<Option>Polarised</Option>
+		</Property>
+		
+		<Configuration>
+			<Bounds>
+				<BoundsOption Value="1, 1" />
+			</Bounds>
+		</Configuration>
+	</Declaration>
+
+
+
+	<Definitions>
+		<Definition Name="TextAlignment">
+			<When Conditions="Horizontal" Value="BottomCenter" />
+			<When Conditions="!Horizontal" Value="CenterRight" />
+		</Definition>
+
+		<Definition Name="TextOffsetP">
+			<When Conditions="Horizontal | !$ShowCapacitance" Value="0" />
+			<When Conditions="!Horizontal , $ShowCapacitance" Value="0.25" />
+		</Definition>
+
+		<Definition Name="TextOffsetS">
+			<When Conditions="!Horizontal | !$ShowCapacitance" Value="-0.65" />
+			<When Conditions="Horizontal , $ShowCapacitance" Value="-0.9" />
+		</Definition>
+
+		<Constant Name="CapacitanceOffsetS" Value="-0.65" />
+	</Definitions>
+
+	<Render AutoRotate="HorizontalToVertical, FlipPrimary">
+		<!-- Text -->
+		<RenderGroup Conditions="$ShowCapacitance">
+			<Text Value="$Capacitance" X="_Middle" Y="_Middle + $CapacitanceOffsetS" Alignment="$TextAlignment" Size="Tiny" />
+		</RenderGroup>
+
+		<RenderGroup Conditions="$ShowText">
+			<Text Value="$Text" X="_Middle + $TextOffsetP" Y="_Middle + $TextOffsetS" Alignment="$TextAlignment" Size="Tiny" />
+		</RenderGroup>
+
+		<RenderGroup>
+			<Line Start="_Middle -0.5x" End="_Middle -0.15x" />
+			<Line Start="_Middle +0.15x" End="_Middle +0.5x" />
+
+			<Line Start="_Middle -0.15x -0.475y" End="_Middle -0.15x +0.475y" />
+			<Line Start="_Middle +0.15x -0.475y" End="_Middle +0.15x +0.475y" />
+		</RenderGroup>
+
+		<RenderGroup Conditions="$Type == Variable">
+			<Line Start="_Middle -0.5x +0.5y" End="_Middle +0.5x -0.5y" />
+			<Line Start="_Middle +0.5x -0.5y" End="_Middle +0.35x -0.5y" />
+			<Line Start="_Middle +0.5x -0.5y" End="_Middle +0.5x -0.35y" />
+		</RenderGroup>
+
+		<RenderGroup Conditions="$Type == Trimmer">
+			<Line Start="_Middle -0.4x +0.4y" End="_Middle +0.4x -0.4y" />
+			<Line Start="_Middle +0.325x -0.475y" End="_Middle +0.475x -0.325y" />
+		</RenderGroup>
+		
+		<RenderGroup Conditions="$Type == Polarised">
+			<Line Start="_Middle +0.425x -0.425y" End="_Middle +0.425x -0.275y" />
+			<Line Start="_Middle +0.35x -0.35y" End="_Middle +0.5x -0.35y" />
+		</RenderGroup>
+	</Render></Component>
