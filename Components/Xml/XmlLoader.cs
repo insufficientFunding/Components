@@ -2,7 +2,9 @@
 using Components.Interfaces.TypeDescription;
 using Components.Render.TypeDescription.TypeDescription;
 using Components.Xml.Features;
+using Components.Xml.Interfaces;
 using Components.Xml.Logging;
+using Components.Xml.Parsers;
 using Components.Xml.Parsers.ComponentPoints;
 using Components.Xml.Parsers.Conditions;
 using Components.Xml.Readers;
@@ -33,6 +35,7 @@ public class XmlLoader : IDisposable
         serviceBuilder.RegisterType<ConditionParser> ().As<IConditionParser> ().InstancePerLifetimeScope ();
         serviceBuilder.RegisterType<ComponentPointParser> ().As<IComponentPointParser> ().Named<IComponentPointParser> ("default").InstancePerLifetimeScope ();
         serviceBuilder.RegisterType<AutoRotateOptionsReader> ().As<IAutoRotateOptionsReader> ().InstancePerDependency ();
+        serviceBuilder.RegisterType<AttributeParser> ().As<IAttributeParser> ().InstancePerLifetimeScope ();
 
         serviceBuilder.RegisterType<DeclarationSectionReader> ().Named<IXmlSectionReader> (ComponentNamespace.NamespaceName + "Declaration").InstancePerDependency ();
 
@@ -74,7 +77,7 @@ public class XmlLoader : IDisposable
             XElement root = XElement.Load (stream, LoadOptions.SetLineInfo);
             XElement? declaration = root.Element (ComponentNamespace + "Declaration");
             if (declaration == null)
-                return XmlLoadLoggerExtensions.LogErrorReturn (logger, declaration, $"Declaration element not found in component XML file '{(stream as FileStream)?.Name}'");
+                return XmlLoadLoggerExtensions.LogErrorReturnFalse (logger, declaration, $"Declaration element not found in component XML file '{(stream as FileStream)?.Name}'");
 
             FeatureSwitcher featureSwitcher = new FeatureSwitcher ();
 

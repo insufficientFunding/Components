@@ -5,7 +5,7 @@ using Components.Interfaces;
 namespace Components;
 
 /// <inheritdoc cref="IComponentProperty"/>
-public class ComponentProperty : IComponentProperty
+internal class ComponentProperty : IComponentProperty
 {
     public PropertyName Name { get; init; }
     

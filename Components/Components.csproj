@@ -7,10 +7,11 @@
 		<AssemblyName>Egoland.Components</AssemblyName>
 		<Authors>Malware</Authors>
 		<LangVersion>default</LangVersion>
-		<PackageProjectUrl>https://github.com/insufficientFunding/Components/Components</PackageProjectUrl>
+		<PackageProjectUrl>https://github.com/insufficientFunding/Components/tree/master/Components</PackageProjectUrl>
 		<PackageLicenseExpression>GPL-2.0-or-later</PackageLicenseExpression>
 		<PackageReadmeFile>readme.md</PackageReadmeFile>
 		<RepositoryUrl>https://github.com/insufficientFunding/Components</RepositoryUrl>
+		<Version>1.0.1</Version>
 	</PropertyGroup>
 
 	<ItemGroup>

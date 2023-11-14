@@ -21,4 +21,8 @@ public abstract class Component : IElectricalComponent
     }
 
     public abstract bool TryGetProperty (string propertyName, out IComponentProperty? property);
+
+    public abstract bool TrySetProperty<T> (string propertyName, T? value);
+    
+    public abstract void Dispose ();
 }

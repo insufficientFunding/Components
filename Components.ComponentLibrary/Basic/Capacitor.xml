@@ -4,9 +4,9 @@
 		<Metadata Name="Name" Value="Capacitor" />
 		<Metadata Name="Experimental.Features.Definitions" Value="true" />
 
-		<Property Name="Text" Type="String" Default="C\u2081" ShowInEditor="true" />
+		<Property Name="Text" Type="String" Default="C\u2081" Serializable="true" />
 		
-		<Property Name="Capacitance" Type="Double" Default="0.00047" ShowInEditor="true">
+		<Property Name="Capacitance" Type="Double" Default="0.00047" Serializable="true">
 			<Formatting>
 				<Format Conditions="$Capacitance[GreaterThan]1" Value="$Capacitance  F" />
 				<Format Conditions="$Capacitance[GreaterOrEqual]0.001" Value="$Capacitance(Multiply_1000)(Round_1)  mF" />
@@ -16,7 +16,7 @@
 			</Formatting>
 		</Property>
 		
-		<Property Name="Type" Type="Enum" Default="Standard" ShowInEditor="false">
+		<Property Name="Type" Type="Enum" Default="Standard">
 			<Option>Standard</Option>
 			<Option>Variable</Option>
 			<Option>Trimmer</Option>

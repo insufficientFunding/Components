@@ -3,7 +3,7 @@
 	<Declaration>
 		<Metadata Name="Name" Value="Lamp" />
 
-		<Property Name="ConnectionsVisible" Type="Boolean" Default="true" ShowInEditor="false" />
+		<Property Name="ConnectionsVisible" Type="Boolean" Default="true" />
 
 		<Configuration>
 			<Bounds>

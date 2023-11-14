@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Component xmlns="https://schemas.alaskasvingen.com/components/schema.xsd">
+	<Declaration>
+		<Metadata Name="Name" Value="Transistor" />
+
+		<Property Name="Type" Type="Enum" Default="PNP">
+			<Option>PNP</Option>
+			<Option>NPN</Option>
+		</Property>
+
+		<Property Name="ShowLabels" Type="Boolean" Default="true" />
+
+		<Configuration>
+			<Bounds>
+				<BoundsOption Value="1, 1" />
+			</Bounds>
+		</Configuration>
+	</Declaration>
+
+	<Render AutoRotate="HorizontalToVertical, FlipPrimary">
+		<!-- Body -->
+		<RenderGroup>
+			<!-- Base -->
+			<Line Start="_Middle -1x -1y" End="_Middle -1x +1y" />
+			<Line Start="_Middle -1x" End="_Middle -2x" />
+
+			<!-- Emitter -->
+			<Path Position="_Middle -2y">
+				<LineTo Position="0, 1" />
+				<LineTo Position="-1, 0.5" />
+			</Path>
+
+			<!-- Collector -->
+			<Path Position="_Middle +2y">
+				<LineTo Position="0, -1" />
+				<LineTo Position="-1, -0.5" />
+			</Path>
+
+			<!-- PNP -->
+			<RenderGroup Conditions="$Type == PNP">
+				<Path Position="_Middle -0.6x +0.7y" Fill="true">
+					<LineTo Position="0.2, 0.25" />
+					<LineTo Position="0.11, -0.25" />
+					<ClosePath />
+				</Path>
+			</RenderGroup>
+
+			<!-- NPN -->
+			<RenderGroup Conditions="$Type == NPN">
+				<Path Position="_Middle -0.35x +0.82y" Fill="true">
+					<LineTo Position="-0.2, -0.25" />
+					<LineTo Position="-0.11, 0.25" />
+					<ClosePath />
+				</Path>
+			</RenderGroup>
+		</RenderGroup>
+	</Render>
+</Component>

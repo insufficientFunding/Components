@@ -3,7 +3,7 @@
 	<Declaration>
 		<Metadata Name="Name" Value="Bridge" />
 
-		<Property Name="Type" Type="Enum" Default="Arc" ShowInEditor="false">
+		<Property Name="Type" Type="Enum" Default="Arc">
 			<Option>Arc</Option>
 			<Option>Opening</Option>
 		</Property>

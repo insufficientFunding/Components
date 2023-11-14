@@ -3,7 +3,7 @@
 	<Declaration>
 		<Metadata Name="Name" Value="Circle" />
 
-		<Property Name="Type" Type="Enum" Default="Medium" ShowInEditor="false">
+		<Property Name="Type" Type="Enum" Default="Medium">
 			<Option>Tiny</Option>
 			<Option>Small</Option>
 			<Option>Medium</Option>

@@ -6,7 +6,6 @@ internal interface IXmlLoadLogger
 {
     void Log (LogLevel level, FileRange position, string message, Exception? innerException = null);
 }
-
 internal static class XmlLoadLoggerExtensions
 {
     public static void Log (this IXmlLoadLogger logger, LogLevel level, XElement? element, string message)
@@ -39,17 +38,31 @@ internal static class XmlLoadLoggerExtensions
         logger.Log (LogLevel.Error, attribute, message);
     }
 
-    public static bool LogErrorReturn (this IXmlLoadLogger logger, XAttribute? attribute, string message)
+    public static bool LogErrorReturnFalse (this IXmlLoadLogger logger, XAttribute? attribute, string message)
     {
         logger.Log (LogLevel.Error, attribute, message);
 
         return false;
     }
 
-    public static bool LogErrorReturn (this IXmlLoadLogger logger, XElement? element, string message)
+    public static bool LogErrorReturnFalse (this IXmlLoadLogger logger, XElement? element, string message)
     {
         logger.Log (LogLevel.Error, element, message);
 
         return false;
+    }
+
+    public static bool LogReturn (this IXmlLoadLogger logger, bool returnBool, LogLevel logLevel, XAttribute? attribute, string message)
+    {
+        logger.Log (logLevel, attribute, message);
+
+        return returnBool;
+    }
+
+    public static bool LogReturn (this IXmlLoadLogger logger, bool returnBool, LogLevel logLevel, XElement? element, string message)
+    {
+        logger.Log (logLevel, element, message);
+
+        return returnBool;
     }
 }

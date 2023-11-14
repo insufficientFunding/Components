@@ -4,9 +4,9 @@
 		<Metadata Name="Name" Value="Circuit Breaker" />
 		<Metadata Name="Experimental.Features.Definitions" Value="true" />
 
-		<Property Name="ConnectionNamesVisible" Type="Boolean" Default="false" ShowInEditor="false" />
+		<Property Name="ConnectionNamesVisible" Type="Boolean" Default="false" />
 
-		<Property Name="Type" Type="Enum" Default="OnePoled" ShowInEditor="false">
+		<Property Name="Type" Type="Enum" Default="OnePoled">
 			<Option>OnePoled</Option>
 			<Option>TwoPoled</Option>
 			<Option>ThreePoled</Option>

@@ -3,7 +3,7 @@
 	<Declaration>
 		<Metadata Name="Name" Value="Misc Component" />
 
-		<Property Name="Text" Type="String" Default="EA" ShowInEditor="true" />
+		<Property Name="Text" Type="String" Default="EA" Serializable="true" />
 		
 		<Configuration>
 			<Bounds>

@@ -134,7 +134,7 @@
 			<xs:attribute name="Name" type="xs:string" use="required" />
 			<xs:attribute name="Type" type="ex:PropertyType" use="required" />
 			<xs:attribute name="Default" type="xs:string" use="required" />
-			<xs:attribute name="Serializable" type="xs:boolean" default="true">
+			<xs:attribute name="Serializable" type="xs:boolean" default="false">
 				<xs:annotation>
 					<xs:documentation>Indicates if the property can be serialized, i.e. text that can be rendered to the
 						viewport

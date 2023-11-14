@@ -7,14 +7,20 @@
 		<AssemblyName>Egoland.Components.Avalonia</AssemblyName>
 		<LangVersion>default</LangVersion>
 		<Authors>Malware</Authors>
+		<PackageProjectUrl>https://github.com/insufficientFunding/Components/tree/master/Components.Avalonia</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/insufficientFunding/Components</RepositoryUrl>
+		<PackageLicenseExpression>GPL-2.0-or-later</PackageLicenseExpression>
+		<PackageReadmeFile>readme.md</PackageReadmeFile>
+		<Version>1.0.1</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Components\Components.csproj" />
+		<PackageReference Include="Avalonia" Version="11.0.5" />
+		<PackageReference Include="Egoland.Components" Version="1.0.1" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Avalonia" Version="11.0.5" />
+		<None Include="readme.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
 
 </Project>

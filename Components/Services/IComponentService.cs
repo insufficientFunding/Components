@@ -7,6 +7,8 @@ namespace Components.Services;
 /// </summary>
 public interface IComponentService
 {
+    #region Components
+    
     /// <summary>
     ///     Creates a component from a <see cref="IComponentDescription"/> matching the given name.
     /// </summary>
@@ -14,6 +16,19 @@ public interface IComponentService
     /// <returns>A component created from the given description, or null if no such description exists.</returns>
     IPositionalComponent? CreateComponent (string name);
 
+    /// <summary>
+    ///     Gets all active components created by this service.
+    /// </summary>
+    /// <returns>A collection of all active components created by this service.</returns>
+    HashSet<IPositionalComponent> GetComponents ();
+    
+    /// <summary>
+    ///     Removes the given component from this service, and disposes of it.
+    /// </summary>
+    /// <param name="component"></param>
+    void RemoveComponent (IPositionalComponent component);
+    
+    #endregion
     /// <summary>
     ///     Attempts to get a <see cref="IComponentDescription"/> matching the given name.
     /// </summary>

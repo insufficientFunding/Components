@@ -15,7 +15,7 @@ public interface IComponentProperty
     /// <summary>
     ///     Gets the value of the property.
     /// </summary>
-    PropertyValue Value { get; }
+    PropertyValue Value { get; internal protected set; }
     
     /// <summary>
     ///     Gets the type of the property.
@@ -28,7 +28,12 @@ public interface IComponentProperty
     string []? EnumOptions { get; }
     
     /// <summary>
+    ///     Gets a boolean value indicating whether the property can be serialized.
+    /// </summary>
+    public bool Serializable { get; init; }
+    
+    /// <summary>
     ///     Gets a boolean value indicating whether the property is currently visible in the editor.
     /// </summary>
-    bool IsVisible { get; }
+    bool IsVisible { get; internal protected set; }
 }

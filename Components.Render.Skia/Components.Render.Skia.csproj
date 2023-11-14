@@ -8,14 +8,19 @@
 		<LangVersion>default</LangVersion>
 		<Authors>Malware</Authors>
 		<Company>Egoland</Company>
+		<PackageProjectUrl>https://github.com/insufficientFunding/Components/tree/master/Components.Render.Skia</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/insufficientFunding/Components</RepositoryUrl>
+		<PackageLicenseExpression>GPL-2.0-or-later</PackageLicenseExpression>
+		<PackageReadmeFile>readme.md</PackageReadmeFile>
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="SkiaSharp" Version="2.88.6" />
+		<PackageReference Include="SkiaSharp" Version="2.88.6" />
+		<PackageReference Include="Egoland.Components" Version="1.0.1" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Components\Components.csproj" />
+		<None Include="readme.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
 
 </Project>

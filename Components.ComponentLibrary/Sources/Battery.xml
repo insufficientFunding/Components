@@ -4,15 +4,16 @@
 		<Metadata Name="Name" Value="Battery" />
 		<Metadata Name="Experimental.Features.Definitions" Value="true" />
 
-		<Property Name="Text" Type="String" Default="U\u2081" ShowInEditor="true" />
+		<Property Name="Text" Type="String" Default="U\u2081" Serializable="true" />
 		
-		<Property Name="Voltage" Type="Double" Default="9" ShowInEditor="true">
+		<Property Name="Voltage" Type="Double" Default="9" Serializable="true">
 			<Formatting>
 				<Format Conditions="$Voltage[LessThan]1" Value="$Voltage(Multiply_1000)(Round_1)  mV" />
 				<Format Conditions="$Voltage[LessThan]1000" Value="$Voltage  V" />
 				<Format Value="$Voltage(Divide_1000)(Round_1)  kV" />
 			</Formatting>
 		</Property>
+		
 		<Configuration>
 			<Bounds>
 				<BoundsOption Value="1, 1" />

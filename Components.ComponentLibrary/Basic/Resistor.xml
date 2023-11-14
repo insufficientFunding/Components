@@ -4,9 +4,9 @@
 		<Metadata Name="Name" Value="Resistor" />
 		<Metadata Name="Experimental.Features.Definitions" Value="true" />
 
-		<Property Name="Text" Type="String" Default="R\u2081" ShowInEditor="true" />
+		<Property Name="Text" Type="String" Default="R\u2081" Serializable="true" />
 
-		<Property Name="Resistance" Type="Double" Default="4700" ShowInEditor="true">
+		<Property Name="Resistance" Type="Double" Default="4700" Serializable="true">
 			<Formatting>
 				<Format Conditions="$Resistance[LessThan]1000" Value="$Resistance  \u2126" />
 				<Format Conditions="$Resistance[LessThan]1000000" Value="$Resistance(Divide_1000)(Round_1)  k\u2126" />
@@ -14,7 +14,7 @@
 			</Formatting>
 		</Property>
 
-		<Property Name="Type" Type="Enum" Default="Standard" ShowInEditor="false">
+		<Property Name="Type" Type="Enum" Default="Standard">
 			<Option>Standard</Option>
 			<Option>Variable</Option>
 			<Option>Thermistor</Option>

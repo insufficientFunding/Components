@@ -7,6 +7,7 @@ using Components.Render.TypeDescription;
 using Components.Render.TypeDescription.Conditions;
 using Components.Render.TypeDescription.TypeDescription;
 using Components.Xml.Flatten;
+using Components.Xml.Interfaces;
 using Components.Xml.Logging;
 using Components.Xml.Parsers.ComponentPoints;
 using Components.Xml.Parsers.Conditions;
@@ -20,6 +21,7 @@ internal class RenderSectionReader : IXmlSectionReader
 {
     private readonly IXmlLoadLogger _logger;
     private readonly IConditionParser _conditionParser;
+    private readonly IAttributeParser _attributeParser;
     private readonly IIndex<string, IRenderCommandReader> _renderCommandReaders;
     private readonly IComponentPointParser _componentPointParser;
     private readonly IAutoRotateOptionsReader _autoRotateOptionsReader;
@@ -28,12 +30,14 @@ internal class RenderSectionReader : IXmlSectionReader
     public RenderSectionReader (
         IXmlLoadLogger logger,
         IConditionParser conditionParser,
+        IAttributeParser attributeParser,
         IIndex<string, IRenderCommandReader> renderCommandReaders,
         IComponentPointParser componentPointParser,
         IAutoRotateOptionsReader autoRotateOptionsReader)
     {
         _logger = logger;
         _conditionParser = conditionParser;
+        _attributeParser = attributeParser;
         _renderCommandReaders = renderCommandReaders;
         _componentPointParser = componentPointParser;
         _autoRotateOptionsReader = autoRotateOptionsReader;
@@ -58,7 +62,7 @@ internal class RenderSectionReader : IXmlSectionReader
             .GroupBy (x => ConditionsReducer.SimplifyConditions (x.Conditions))
             .Select (g => new RenderDescription (g.Key, g
                                                      .SelectMany (
-                                                     x => x.Value)
+                                                         x => x.Value)
                                                      .ToArray ())).ToArray ();
     }
 
@@ -124,16 +128,16 @@ internal class RenderSectionReader : IXmlSectionReader
     {
         command = new XmlLineCommand ();
 
-        if (element.Attribute ("Thickness") != null)
-            command.Thickness = element.Attribute ("Thickness")!.Value.ParseDecimal ();
+        if (_attributeParser.ParseDouble (element, "Thickness", _logger, out double? value, 1D))
+            command.Thickness = (double)value!;
 
         if (!_componentPointParser.TryParse (element.Attribute ("Start")!, out XmlComponentPoint start))
-            return _logger.LogErrorReturn (element, $"Invalid position value '{start}'");
+            return _logger.LogErrorReturnFalse (element, $"Invalid position value '{start}'");
 
         command.Start = start;
 
         if (!_componentPointParser.TryParse (element.Attribute ("End")!, out XmlComponentPoint end))
-            return _logger.LogErrorReturn (element, $"Invalid position value '{start}'");
+            return _logger.LogErrorReturnFalse (element, $"Invalid position value '{start}'");
 
         command.End = end;
 
@@ -144,8 +148,8 @@ internal class RenderSectionReader : IXmlSectionReader
     {
         command = new XmlEllipseCommand ();
 
-        if (element.Attribute ("Thickness") != null)
-            command.StrokeThickness = element.Attribute ("Thickness")!.Value.ParseDecimal ();
+        if (_attributeParser.ParseDouble (element, "Thickness", _logger, out double? value, 1D))
+            command.StrokeThickness = (double)value!;
 
         XAttribute? fill = element.Attribute ("Fill");
         if (fill != null && fill.Value.ToLowerInvariant () != "false")
@@ -155,7 +159,7 @@ internal class RenderSectionReader : IXmlSectionReader
         if (Position != null)
         {
             if (!_componentPointParser.TryParse (Position, out XmlComponentPoint position))
-                return _logger.LogErrorReturn (element, $"Invalid position value '{position!}'");
+                return _logger.LogErrorReturnFalse (element, $"Invalid position value '{position!}'");
 
             command.Position = position;
         }
@@ -165,7 +169,7 @@ internal class RenderSectionReader : IXmlSectionReader
         if (element.GetAttributeValue ("Radius", _logger, out string? radius))
         {
             if (!Size.TryParse (radius!, out Size? radii))
-                return _logger.LogErrorReturn (element, $"Invalid radius value '{radius}'");
+                return _logger.LogErrorReturnFalse (element, $"Invalid radius value '{radius}'");
 
             command.Size = radii!;
         }
@@ -179,8 +183,8 @@ internal class RenderSectionReader : IXmlSectionReader
     {
         command = new XmlRectangleCommand ();
 
-        if (element.Attribute ("Thickness") != null)
-            command.StrokeThickness = element.Attribute ("Thickness")!.Value.ParseDecimal ();
+        if (_attributeParser.ParseDouble (element, "Thickness", _logger, out double? value, 1D))
+            command.StrokeThickness = (double)value!;
 
         XAttribute? fill = element.Attribute ("Fill");
         if (fill != null && fill.Value.ToLowerInvariant () != "false")
@@ -189,7 +193,7 @@ internal class RenderSectionReader : IXmlSectionReader
         if (element.GetAttribute ("Position", _logger, out XAttribute? pos))
         {
             if (!_componentPointParser.TryParse (pos!, out XmlComponentPoint position))
-                return _logger.LogErrorReturn (element, $"Invalid position value '{pos!.Value}'");
+                return _logger.LogErrorReturnFalse (element, $"Invalid position value '{pos!.Value}'");
 
             command.Position = position;
         }
@@ -199,7 +203,7 @@ internal class RenderSectionReader : IXmlSectionReader
         if (element.GetAttributeValue ("Size", _logger, out string? sizeString))
         {
             if (!Size.TryParse (sizeString!, out Size? size))
-                return _logger.LogErrorReturn (element, $"Invalid size value '{size}'");
+                return _logger.LogErrorReturnFalse (element, $"Invalid size value '{size}'");
 
             command.Size = size!;
         }
@@ -213,8 +217,8 @@ internal class RenderSectionReader : IXmlSectionReader
     {
         command = new XmlRenderPath ();
 
-        if (element.Attribute ("Thickness") != null)
-            command.Thickness = element.Attribute ("Thickness")!.Value.ParseDecimal ();
+        if (_attributeParser.ParseDouble (element, "Thickness", _logger, out double? value, 1D))
+            command.Thickness = (double)value!;
 
         XAttribute? fill = element.Attribute ("Fill");
         if (fill != null && fill.Value.ToLowerInvariant () != "false")
@@ -223,7 +227,7 @@ internal class RenderSectionReader : IXmlSectionReader
         if (element.GetAttribute ("Position", _logger, out XAttribute? pos))
         {
             if (!_componentPointParser.TryParse (pos!, out XmlComponentPoint position))
-                return _logger.LogErrorReturn (element, $"Invalid position value '{pos!.Value}'");
+                return _logger.LogErrorReturnFalse (element, $"Invalid position value '{pos!.Value}'");
 
             command.Start = position;
         }

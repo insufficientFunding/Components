@@ -8,6 +8,7 @@ using Components.Render.TypeDescription.Conditions;
 using Components.Render.TypeDescription.TypeDescription;
 using Components.Xml.Extensions;
 using Components.Xml.Features;
+using Components.Xml.Interfaces;
 using Components.Xml.Logging;
 using Components.Xml.Parsers.Conditions;
 using System.Xml.Linq;
@@ -84,7 +85,7 @@ internal class DeclarationSectionReader : IXmlSectionReader
         string propertyName = propertyElement.Attribute ("Name")!.Value;
         string type = propertyElement.Attribute ("Type")!.Value;
         string defaultValue = propertyElement.Attribute ("Default")!.Value;
-        string? showInEditor = propertyElement.Attribute ("ShowInEditor")?.Value;
+        string? serializable = propertyElement.Attribute ("Serializable")?.Value;
 
         PropertyType propertyType;
         switch (type)
@@ -104,7 +105,7 @@ internal class DeclarationSectionReader : IXmlSectionReader
         }
 
         PropertyValue? propertyDefaultValue = PropertyValue.Parse (defaultValue, propertyType.ToPropertyType ());
-        bool showInEditorValue = bool.Parse (showInEditor ?? "false");
+        bool showInEditorValue = bool.Parse (serializable ?? "false");
 
         return new ComponentDescriptionProperty (propertyName, propertyDefaultValue, propertyType, null!, showInEditorValue);
     }
@@ -114,7 +115,7 @@ internal class DeclarationSectionReader : IXmlSectionReader
         string? propertyName = propertyElement.Attribute ("Name")?.Value;
         string? type = propertyElement.Attribute ("Type")?.Value;
         string? defaultValue = propertyElement.Attribute ("Default")?.Value;
-        string? showInEditor = propertyElement.Attribute ("ShowInEditor")?.Value;
+        string? serializable = propertyElement.Attribute ("Serializable")?.Value;
 
         if (propertyName == null || defaultValue == null)
             throw new ArgumentException ("Not all properties were found.");
@@ -169,7 +170,7 @@ internal class DeclarationSectionReader : IXmlSectionReader
             }
         }
 
-        bool showInEditorValue = bool.Parse (showInEditor ?? "false");
+        bool showInEditorValue = bool.Parse (serializable ?? "false");
 
         ComponentDescriptionProperty descriptionDescriptionProperty = new ComponentDescriptionProperty (propertyName, propertyDefaultValue, propertyType, formatRules.ToArray (), showInEditorValue, propertyOptions?.ToArray ());
 

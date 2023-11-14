@@ -3,7 +3,7 @@
 	<Declaration>
 		<Metadata Name="Name" Value="Diode" />
 
-		<Property Name="Type" Type="Enum" Default="Standard" ShowInEditor="false">
+		<Property Name="Type" Type="Enum" Default="Standard">
 			<Option>Standard</Option>
 			<Option>Zener</Option>
 			<Option>LED</Option>

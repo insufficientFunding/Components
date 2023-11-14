@@ -33,7 +33,7 @@ internal class TextCommandReader : IRenderCommandReader
             tAlignment = alignmentAttribute!.Value;
 
         if (!Enum.TryParse (tAlignment, out TextAlignment alignment))
-            return _logger.LogErrorReturn (element.Attribute ("Alignment"), $"Invalid value for text alignment: '{tAlignment}'");
+            return _logger.LogErrorReturnFalse (element.Attribute ("Alignment"), $"Invalid value for text alignment: '{tAlignment}'");
 
         textCommand.Alignment = alignment;
 
@@ -43,7 +43,7 @@ internal class TextCommandReader : IRenderCommandReader
             tWeight = weightAttribute!.Value;
 
         if (!Enum.TryParse (tWeight, out FontWeight weight))
-            return _logger.LogErrorReturn (element.Attribute ("Weight"), $"Invalid value for text weight: '{tWeight}'");
+            return _logger.LogErrorReturnFalse (element.Attribute ("Weight"), $"Invalid value for text weight: '{tWeight}'");
 
         textCommand.Weight = weight;
 

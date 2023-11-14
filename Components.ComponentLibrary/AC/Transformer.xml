@@ -3,15 +3,15 @@
 	<Declaration>
 		<Metadata Name="Name" Value="Transformer" />
 		<Metadata Name="Experimental.Features.Definitions" Value="true" />
-		
-		<Property Name="PrimaryVoltage" Type="Double" Default="220" ShowInEditor="true">
+
+		<Property Name="PrimaryVoltage" Type="Double" Default="220" Serializable="true">
 			<Formatting>
 				<Format Conditions="$PrimaryVoltage[LessThan]1000" Value="$PrimaryVoltage  V" />
 				<Format Value="$PrimaryVoltage(Divide_1000)(Round_1)  kV" />
 			</Formatting>
 		</Property>
-		
-		<Property Name="SecondaryVoltage" Type="Double" Default="24" ShowInEditor="true">
+
+		<Property Name="SecondaryVoltage" Type="Double" Default="24" Serializable="true">
 			<Formatting>
 				<Format Conditions="$SecondaryVoltage[LessThan]1000" Value="$SecondaryVoltage  V" />
 				<Format Value="$SecondaryVoltage(Divide_1000)(Round_1)  kV" />
@@ -30,13 +30,13 @@
 			<When Conditions="Horizontal" Value="CenterRight" />
 			<When Conditions="!Horizontal" Value="TopCenter" />
 		</Definition>
-		
+
 		<Definition Name="SecondaryTextAlignment">
 			<When Conditions="Horizontal" Value="CenterLeft" />
 			<When Conditions="!Horizontal" Value="BottomCenter" />
 		</Definition>
 	</Definitions>
-	
+
 	<Render AutoRotate="HorizontalToVertical, FlipPrimary">
 		<RenderGroup>
 			<Path Position="_Middle -0.75x -1y">
@@ -108,7 +108,11 @@
 		</RenderGroup>
 
 		<RenderGroup Conditions="$ShowSecondaryVoltage">
-			<Text X="_Middle +1" Y="_Middle" Value="$SecondaryVoltage" Size="Small" Alignment="$SecondaryTextAlignment" />
+			<Text X="_Middle +1"
+			      Y="_Middle"
+			      Value="$SecondaryVoltage"
+			      Size="Small"
+			      Alignment="$SecondaryTextAlignment" />
 		</RenderGroup>
 	</Render>
 </Component>

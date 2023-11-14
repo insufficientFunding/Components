@@ -4,11 +4,11 @@
 		<Metadata Name="Name" Value="Switch" />
 		<Metadata Name="Experimental.Features.Definitions" Value="true" />
 
-		<Property Name="Text" Type="String" Default="S\u2081" ShowInEditor="true" />
+		<Property Name="Text" Type="String" Default="S\u2081" Serializable="true" />
 
-		<Property Name="Open" Type="Boolean" Default="true" ShowInEditor="false" />
+		<Property Name="Open" Type="Boolean" Default="true" />
 
-		<Property Name="Type" Type="Enum" Default="Toggle" ShowInEditor="false">
+		<Property Name="Type" Type="Enum" Default="Toggle">
 			<Option>Toggle</Option>
 			<Option>PushButton</Option>
 			<Option>ManualButton</Option>
