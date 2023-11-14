@@ -1,0 +1,524 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="https://schemas.alaskasvingen.com/components/schema.xsd"
+           xmlns:ex="https://schemas.alaskasvingen.com/components/schema.xsd">
+
+	<xs:element name="Component">
+		<xs:annotation>
+			<xs:documentation>Declaration of an electronic component, to be used by the CircuitDesigner.UI.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:all>
+				<xs:element ref="ex:Declaration" />
+				<xs:element ref="ex:Definitions" minOccurs="0" />
+				<xs:element ref="ex:Render" />
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="Declaration">
+		<xs:annotation>
+			<xs:documentation>Declaration of a Component's metadata and properties.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ex:Metadata" maxOccurs="unbounded" />
+
+				<xs:element ref="ex:Property" minOccurs="0" maxOccurs="unbounded" />
+
+				<xs:element ref="ex:Configuration" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="Definitions">
+		<xs:annotation>
+			<xs:documentation>Contains all the definitions for the component.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice>
+				<xs:sequence maxOccurs="unbounded">
+					<xs:group ref="ex:DefinitionChoices" maxOccurs="unbounded" />
+				</xs:sequence>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="Render">
+		<xs:annotation>
+			<xs:documentation>Contains all the visual information about the Component.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ex:RenderGroup" maxOccurs="unbounded" />
+			</xs:sequence>
+			<xs:attribute name="AutoRotate" type="ex:AutoRotate" default="HorizontalToVertical" />
+		</xs:complexType>
+	</xs:element>
+
+	<!-- Child Elements -->
+	<xs:element name="Metadata">
+		<xs:annotation>
+			<xs:documentation>Internal Component metadata.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Name" type="xs:string" />
+			<xs:attribute name="Value" type="xs:string" />
+		</xs:complexType>
+	</xs:element>
+
+	<xs:group name="DefinitionChoices">
+		<xs:annotation>
+			<xs:documentation>Contains a list of choices for a definition.</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element ref="ex:Definition" />
+			<xs:element ref="ex:Constant" />
+		</xs:choice>
+	</xs:group>
+
+	<xs:element name="Definition">
+		<xs:annotation>
+			<xs:documentation>Contains a definition for a component.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ex:When" maxOccurs="unbounded" />
+			</xs:sequence>
+			<xs:attribute name="Name" type="xs:string" use="required" />
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="When">
+		<xs:annotation>
+			<xs:documentation>Defines a condition for a definition.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Conditions" type="ex:ConditionsType" use="required" />
+			<xs:attribute name="Value" type="xs:string" use="required" />
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="Constant">
+		<xs:annotation>
+			<xs:documentation>Defines a constant value.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Name" type="xs:string" use="required" />
+			<xs:attribute name="Value" type="xs:string" use="required" />
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="Configuration">
+		<xs:annotation>
+			<xs:documentation>The components configuration.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ex:Bounds" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="Property">
+		<xs:annotation>
+			<xs:documentation>A Component property.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice>
+				<xs:element ref="ex:Option" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element ref="ex:Formatting" minOccurs="0" />
+			</xs:choice>
+
+			<xs:attribute name="Name" type="xs:string" use="required" />
+			<xs:attribute name="Type" type="ex:PropertyType" use="required" />
+			<xs:attribute name="Default" type="xs:string" use="required" />
+			<xs:attribute name="Serializable" type="xs:boolean" default="true">
+				<xs:annotation>
+					<xs:documentation>Indicates if the property can be serialized, i.e. text that can be rendered to the
+						viewport
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Format" type="ex:FormatAttribute" />
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="RenderGroup">
+		<xs:annotation>
+			<xs:documentation>A group containing SVG elements.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice>
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:group ref="ex:SVGElementGroup" />
+				</xs:sequence>
+
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:element ref="ex:Text" />
+				</xs:sequence>
+			</xs:choice>
+			<xs:attribute name="Conditions" type="ex:ConditionsType" default="Horizontal" />
+			<xs:attribute name="AutoRotate" type="ex:AutoRotate" default="HorizontalToVertical" />
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="Bounds">
+		<xs:annotation>
+			<xs:documentation>A Vector2 defining the center point of the component</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ex:BoundsOption" maxOccurs="unbounded" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="BoundsOption">
+		<xs:annotation>
+			<xs:documentation>A conditional bounds option.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Conditions" type="ex:ConditionsType" />
+			<xs:attribute name="Offset" type="ex:Vector2" />
+			<xs:attribute name="Value" type="ex:Vector2" use="required" />
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="Option">
+		<xs:annotation>
+			<xs:documentation>An enum option.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:restriction base="xs:string" />
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="Formatting">
+		<xs:annotation>
+			<xs:documentation>Enables formatting of the property value.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ex:Format" maxOccurs="unbounded" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="Format">
+		<xs:complexType>
+			<xs:attribute name="Conditions" type="ex:ConditionsType" />
+			<xs:attribute name="Value" type="xs:string" use="required" />
+		</xs:complexType>
+	</xs:element>
+
+	<xs:group name="SVGElementGroup">
+		<xs:choice>
+			<xs:element ref="ex:Line" maxOccurs="unbounded" />
+			<xs:element ref="ex:Rectangle" maxOccurs="unbounded" />
+			<xs:element ref="ex:Ellipse" maxOccurs="unbounded" />
+			<xs:element ref="ex:Path" maxOccurs="unbounded" />
+			<xs:element ref="ex:Text" maxOccurs="unbounded" />
+			<xs:element ref="ex:RenderGroup" maxOccurs="unbounded" />
+		</xs:choice>
+	</xs:group>
+
+	<!-- SVG Elements -->
+	<xs:element name="Line">
+		<xs:annotation>
+			<xs:documentation>Defines a line between two points.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Start" type="ex:ComponentPoint" default="0, 0" use="required" />
+			<xs:attribute name="End" type="ex:ComponentPoint" default="0, 0" use="required" />
+			<xs:attribute name="Thickness" type="xs:double" />
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="Rectangle">
+		<xs:annotation>
+			<xs:documentation>Defines a rectangle at the chosen position with the chosen size.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Position" type="ex:ComponentPoint" default="0, 0" use="required" />
+			<xs:attribute name="Size" type="ex:Vector2" default="1, 1" use="required" />
+			<xs:attribute name="Fill" type="xs:boolean" default="false" />
+			<xs:attribute name="Thickness" type="xs:double" />
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="Ellipse">
+		<xs:annotation>
+			<xs:documentation>Defines an ellipse or circle at the chosen position with the chosen radius.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Position" type="ex:ComponentPoint" default="0, 0" use="required" />
+			<xs:attribute name="Radius" type="ex:Vector2" default="1, 1" use="required" />
+			<xs:attribute name="Fill" type="xs:boolean" default="false" />
+			<xs:attribute name="Thickness" type="xs:double" />
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="Text">
+		<xs:annotation>
+			<xs:documentation>Defines text at the chosen position.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Value" type="xs:string" use="required" />
+			<xs:attribute name="X" type="ex:ComponentPointSingle" default="_Middle" use="required" />
+			<xs:attribute name="Y" type="ex:ComponentPointSingle" default="_Middle" use="required" />
+			<xs:attribute name="Weight" type="ex:TextFont" default="Regular" />
+			<xs:attribute name="Alignment" type="ex:TextAlignment" default="Center" />
+			<xs:attribute name="Size" type="ex:TextSize" default="Medium" />
+			<xs:attribute name="Rotate" type="ex:TextRotation" />
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="Path">
+		<xs:annotation>
+			<xs:documentation>Defines an SVG path.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:group ref="ex:PathElementGroup" maxOccurs="unbounded" />
+				<xs:element ref="ex:ClosePath" minOccurs="0" />
+			</xs:sequence>
+
+			<xs:attribute name="Position" type="ex:ComponentPoint" default="0, 0" use="required" />
+			<xs:attribute name="Fill" type="xs:boolean" default="false" />
+			<xs:attribute name="Thickness" type="xs:double" />
+		</xs:complexType>
+	</xs:element>
+
+	<!-- Path Elements -->
+	<xs:group name="PathElementGroup">
+		<xs:choice>
+			<xs:element ref="ex:MoveTo" />
+			<xs:element ref="ex:LineTo" />
+			<xs:element ref="ex:EllipticalArcTo" />
+		</xs:choice>
+	</xs:group>
+
+	<xs:element name="MoveTo">
+		<xs:annotation>
+			<xs:documentation>Moves the path's current point to the defined Position.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attributeGroup ref="ex:SVGPathAttributes" />
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="LineTo">
+		<xs:annotation>
+			<xs:documentation>Draws a line from the path's current point to the defined Position.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attributeGroup ref="ex:SVGPathAttributes" />
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="EllipticalArcTo">
+		<xs:annotation>
+			<xs:documentation>Draws an elliptical arc from the path's current point to the defined Position.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attributeGroup ref="ex:SVGPathAttributes" />
+			<xs:attribute name="Radii" type="ex:Radii" use="required" />
+			<xs:attribute name="Angle" type="ex:Angle" use="required" />
+			<xs:attribute name="IsLargeArc" type="xs:boolean" default="false" use="required" />
+			<xs:attribute name="Direction" type="ex:TurnDirection" default="Clockwise" use="required" />
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="ClosePath">
+		<xs:annotation>
+			<xs:documentation>Close the current path by connecting the first and last points. If the two points are at
+				different coordinates, a straight line will be drawn between them.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<!-- Types -->
+	<xs:simpleType name="Vector2">
+		<xs:annotation>
+			<xs:documentation>A Vector2 defined by two doubles (x, y)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="-?\d+(\.\d+)?,\s*-?\d+(\.\d+)?" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="ComponentPoint">
+		<xs:annotation>
+			<xs:documentation>A component point, defined by the points origin and relative offset.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="(_Start|_Middle|_End) ((\s*[+-]\d+(\.\d+)?[xy])|(\s*[+]\s*)([(]\$\w+[)][xy])+)*?" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="ComponentPointSingle">
+		<xs:annotation>
+			<xs:documentation>A component point, defined by the points origin and relative offset.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="(_Start|_Middle|_End)(\s*([+-]\d+(\.\d+)?)?((\s*[+]\s*\$\w+)+)?)" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="AutoRotate">
+		<xs:annotation>
+			<xs:documentation>Indicates if an how the component can be autorotated.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string" />
+	</xs:simpleType>
+
+	<xs:simpleType name="PropertyType">
+		<xs:annotation>
+			<xs:documentation>The type of the property.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Double">
+				<xs:annotation>
+					<xs:documentation>A double value.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Boolean">
+				<xs:annotation>
+					<xs:documentation>A bool value.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="String">
+				<xs:annotation>
+					<xs:documentation>A string value.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Enum">
+				<xs:annotation>
+					<xs:documentation>An enum option value.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Integer">
+				<xs:annotation>
+					<xs:documentation>An integer value.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="FormatAttribute">
+		<xs:annotation>
+			<xs:documentation>A simplification of the Formatting element, intended for non-conditional value formatting.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string" />
+	</xs:simpleType>
+
+	<xs:simpleType name="ConditionsType">
+		<xs:annotation>
+			<xs:documentation>Conditions declaration for the element.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string" />
+	</xs:simpleType>
+
+	<xs:simpleType name="TextAlignment">
+		<xs:annotation>
+			<xs:documentation>How the text is aligned relative to its position.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="\$.*|(TopLeft|TopCenter|TopRight|CenterLeft|CenterCenter|CenterRight|BottomLeft|BottomCenter|BottomRight)" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="TextRotation">
+		<xs:annotation>
+			<xs:documentation>How the text is rotated relative to its position.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="0" />
+			<xs:enumeration value="90" />
+			<xs:enumeration value="180" />
+			<xs:enumeration value="270" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="TextSize">
+		<xs:annotation>
+			<xs:documentation>The size of the text.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Tiny" />
+			<xs:enumeration value="Small" />
+			<xs:enumeration value="Medium" />
+			<xs:enumeration value="Large" />
+			<xs:enumeration value="Huge" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="TextFont">
+		<xs:annotation>
+			<xs:documentation>The font weight of the text.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ExtraLight" />
+			<xs:enumeration value="Light" />
+			<xs:enumeration value="Regular" />
+			<xs:enumeration value="SemiBold" />
+			<xs:enumeration value="Bold" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="Relative">
+		<xs:annotation>
+			<xs:documentation>Indicates if the given DrawTo vector is in relative or absolute coordinate space.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="true" />
+			<xs:enumeration value="false" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="DrawTo">
+		<xs:annotation>
+			<xs:documentation>The position to draw the SVG element to.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="ex:Vector2" />
+	</xs:simpleType>
+
+	<xs:simpleType name="TurnDirection">
+		<xs:annotation>
+			<xs:documentation>The turning direction of the arc.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Clockwise" />
+			<xs:enumeration value="CounterClockwise" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="Radii">
+		<xs:annotation>
+			<xs:documentation>The radii of the arc, defined by two doubles (rx, ry)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="ex:Vector2" />
+	</xs:simpleType>
+
+	<xs:simpleType name="Angle">
+		<xs:annotation>
+			<xs:documentation>Represents the angle (in degrees) of the ellipse relative to the x-axis.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:double" />
+	</xs:simpleType>
+
+	<!-- Attribute Groups -->
+	<xs:attributeGroup name="SVGPathAttributes">
+		<xs:attribute name="Position" type="ex:Vector2" default="0, 0" use="required" />
+		<xs:attribute name="Relative" type="ex:Relative" default="true" />
+	</xs:attributeGroup>
+</xs:schema>
