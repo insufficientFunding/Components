@@ -48,16 +48,20 @@ public class ConditionTreeLeaf : IConditionTreeLeaf
         }
         else
         {
-            if (!component.TryGetProperty (VariableName, out IComponentProperty? propertyValue))
+            if (!component.TryGetProperty (VariableName, out IComponentProperty? property))
                 throw new Exception ($"Could not find property '{VariableName}' on component '{component.Name}'.");
 
+            PropertyValue propertyValue = property!.Value;
+            if (VariableName.StartsWith ("Show"))
+                propertyValue = new PropertyValue (property.IsVisible);
+            
             if (Comparison == ConditionComparison.Truthy)
-                return propertyValue!.Value.IsTruthy ();
+                return propertyValue!.IsTruthy ();
 
             if (Comparison == ConditionComparison.Falsy)
-                return !propertyValue!.Value.IsTruthy ();
+                return !propertyValue!.IsTruthy ();
 
-            int cv = propertyValue!.Value.CompareTo (CompareTo);
+            int cv = propertyValue!.CompareTo (CompareTo);
             switch (Comparison)
             {
                 case ConditionComparison.Equal:

@@ -17,6 +17,13 @@ public interface IComponentService
     IPositionalComponent? CreateComponent (string name);
 
     /// <summary>
+    ///     Creates the given component's properties, from a <see cref="IComponentDescription"/> matching the component's name.
+    /// </summary>
+    /// <param name="component">The component to create properties for.</param>
+    /// <returns>A collection of properties created from the given component's description.</returns>
+    IEnumerable<IComponentProperty> CreateProperties (IPositionalComponent component);
+    
+    /// <summary>
     ///     Gets all active components created by this service.
     /// </summary>
     /// <returns>A collection of all active components created by this service.</returns>

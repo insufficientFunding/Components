@@ -2,54 +2,91 @@
 <Component xmlns="https://schemas.alaskasvingen.com/components/schema.xsd">
 	<Declaration>
 		<Metadata Name="Name" Value="Transistor" />
+		<Metadata Name="Experimental.Features.Definitions" Value="true" />
 
 		<Property Name="Type" Type="Enum" Default="PNP">
 			<Option>PNP</Option>
 			<Option>NPN</Option>
 		</Property>
 
-		<Property Name="ShowLabels" Type="Boolean" Default="true" />
+		<Property Name="LabelsVisible" Type="Boolean" Default="true" />
 
 		<Configuration>
 			<Bounds>
-				<BoundsOption Value="1, 1" />
+				<BoundsOption Offset="-0.25, 0" Value="0.5, 1" />
 			</Bounds>
 		</Configuration>
 	</Declaration>
 
+	<Definitions>
+		<Definition Name="BaseTextAlignment">
+			<When Conditions="Horizontal" Value="BottomCenter" />
+			<When Conditions="!Horizontal" Value="CenterRight" />
+		</Definition>
+
+		<Definition Name="CollectorAndEmitterTextAlignment">
+			<When Conditions="Horizontal" Value="CenterLeft" />
+			<When Conditions="!Horizontal" Value="BottomCenter" />
+		</Definition>
+
+	</Definitions>
+
 	<Render AutoRotate="HorizontalToVertical, FlipPrimary">
+		<RenderGroup Conditions="$LabelsVisible">
+			<!-- Base -->
+			<Text Value="B"
+			      X="_Middle -0.75"
+			      Y="_Middle -0.1"
+			      Alignment="$BaseTextAlignment"
+			      Size="Tiny" />
+
+			<!-- Collector -->
+			<Text Value="C"
+			      X="_Middle +0.1"
+			      Y="_Middle -0.75"
+			      Alignment="$CollectorAndEmitterTextAlignment"
+			      Size="Tiny" />
+
+			<!-- Emitter -->
+			<Text Value="E"
+			      X="_Middle +0.1"
+			      Y="_Middle +0.75"
+			      Alignment="$CollectorAndEmitterTextAlignment"
+			      Size="Tiny" />
+		</RenderGroup>
+
 		<!-- Body -->
 		<RenderGroup>
 			<!-- Base -->
-			<Line Start="_Middle -1x -1y" End="_Middle -1x +1y" />
-			<Line Start="_Middle -1x" End="_Middle -2x" />
+			<Line Start="_Middle -0.5x -0.5y" End="_Middle -0.5x +0.5y" />
+			<Line Start="_Middle -0.5x" End="_Middle -1x" />
 
 			<!-- Emitter -->
-			<Path Position="_Middle -2y">
-				<LineTo Position="0, 1" />
-				<LineTo Position="-1, 0.5" />
+			<Path Position="_Middle -1y">
+				<LineTo Position="0, 0.5" />
+				<LineTo Position="-0.5, 0.25" />
 			</Path>
 
 			<!-- Collector -->
-			<Path Position="_Middle +2y">
-				<LineTo Position="0, -1" />
-				<LineTo Position="-1, -0.5" />
+			<Path Position="_Middle +1y">
+				<LineTo Position="0, -0.5" />
+				<LineTo Position="-0.5, -0.25" />
 			</Path>
 
 			<!-- PNP -->
 			<RenderGroup Conditions="$Type == PNP">
-				<Path Position="_Middle -0.6x +0.7y" Fill="true">
-					<LineTo Position="0.2, 0.25" />
-					<LineTo Position="0.11, -0.25" />
+				<Path Position="_Middle -0.3x +0.35y" Fill="true">
+					<LineTo Position="0.1, 0.125" />
+					<LineTo Position="0.055, -0.125" />
 					<ClosePath />
 				</Path>
 			</RenderGroup>
 
 			<!-- NPN -->
 			<RenderGroup Conditions="$Type == NPN">
-				<Path Position="_Middle -0.35x +0.82y" Fill="true">
-					<LineTo Position="-0.2, -0.25" />
-					<LineTo Position="-0.11, 0.25" />
+				<Path Position="_Middle -0.175x +0.41y" Fill="true">
+					<LineTo Position="-0.1, -0.125" />
+					<LineTo Position="-0.055, 0.125" />
 					<ClosePath />
 				</Path>
 			</RenderGroup>

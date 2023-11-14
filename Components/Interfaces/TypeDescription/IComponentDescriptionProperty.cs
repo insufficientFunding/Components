@@ -36,4 +36,9 @@ public interface IComponentDescriptionProperty
     ///     Gets the format rules of the property.
     /// </summary>
     public IComponentPropertyFormat [] FormatRules { get; }
+
+    /// <summary>
+    ///     Formats the property according to the format rules.
+    /// </summary>
+    string Format (IPositionalComponent component, IComponentDescription description, PropertyValue value);
 }

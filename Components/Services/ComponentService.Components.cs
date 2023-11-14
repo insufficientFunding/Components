@@ -33,15 +33,23 @@ public sealed partial class ComponentService
     {
         IPositionalComponent component = new PositionalComponent (description.Metadata.Name);
 
-        List<IComponentProperty> properties = description.Properties
-            .Select (descriptionProperty => new ComponentProperty (descriptionProperty.Name, descriptionProperty.Default, descriptionProperty.ShowInEditor, descriptionProperty.EnumOptions))
-            .Cast<IComponentProperty> ().ToList ();
-
-        component.Properties = properties;
+        component.Properties = CreateProperties (component);
 
         _components.Add (component);
 
         return component;
+    }
+
+    public IEnumerable<IComponentProperty> CreateProperties (IPositionalComponent component)
+    {
+        if (!TryGetDescription(component.Name, out IComponentDescription? description))
+            throw new WarningException ($"Could not find component description with name: {component.Name}");
+        
+        List<IComponentProperty> properties = description!.Properties
+            .Select (descriptionProperty => new ComponentProperty (descriptionProperty.Name, descriptionProperty.Default, descriptionProperty.ShowInEditor, descriptionProperty.EnumOptions))
+            .Cast<IComponentProperty> ().ToList ();
+
+        return properties;
     }
 
     private IComponentDescription ReadComponent (XmlLoader loader, string path)

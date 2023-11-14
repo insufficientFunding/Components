@@ -54,10 +54,10 @@ public class Rectangle : IRenderCommand
                 drawRect = new Rect (drawRect.X - Size.Width, drawRect.Y, Size.Width, Size.Height);
                 break;
             case FlipType.Vertical:
-                drawRect = new Rect (drawRect.X, drawRect.Y - Size.Height, Size.Width, Size.Width);
+                drawRect = new Rect (drawRect.X, drawRect.Y - Size.Height, Size.Width, Size.Height);
                 break;
             case FlipType.Both:
-                drawRect = new Rect (drawRect.X - Size.Width, drawRect.Y - Size.Height, Size.Width, Size.Width);
+                drawRect = new Rect (drawRect.X - Size.Width, drawRect.Y - Size.Height, Size.Width, Size.Height);
                 break;
         }
 

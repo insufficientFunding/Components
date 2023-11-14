@@ -1,5 +1,6 @@
 ﻿using Components.Interfaces.Conditions;
 using Components.Primitives;
+using Components.Render.TypeDescription;
 namespace Components.Interfaces.TypeDescription;
 
 /// <summary>

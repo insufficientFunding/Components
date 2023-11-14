@@ -10,6 +10,7 @@ using Components.Xml.Extensions;
 using Components.Xml.Features;
 using Components.Xml.Interfaces;
 using Components.Xml.Logging;
+using Components.Xml.Parsers.ComponentPoints;
 using Components.Xml.Parsers.Conditions;
 using System.Xml.Linq;
 namespace Components.Xml.Readers;
@@ -17,15 +18,18 @@ namespace Components.Xml.Readers;
 internal class DeclarationSectionReader : IXmlSectionReader
 {
     private readonly IConditionParser _conditionParser;
+    private readonly IComponentPointParser _componentPointParser;
     private readonly FeatureSwitcher _featureSwitcher;
     private readonly IXmlLoadLogger _logger;
 
     public DeclarationSectionReader (
         IConditionParser conditionParser,
+        IComponentPointParser componentPointParser,
         FeatureSwitcher featureSwitcher,
         IXmlLoadLogger logger)
     {
         _conditionParser = conditionParser;
+        _componentPointParser = componentPointParser;
         _featureSwitcher = featureSwitcher;
         _logger = logger;
     }
@@ -192,8 +196,8 @@ internal class DeclarationSectionReader : IXmlSectionReader
                 _conditionParser.Parse (conditionsAttribute, description, out conditionCollection);
 
             Point offset = new Point ();
-            if (boundsNode.GetAttributeValueNullable ("Offset", _logger, out string? offsetValue))
-                if (!Point.TryParse (offsetValue!, out offset!))
+            if (boundsNode.Attribute ("Offset") != null)
+                if (!Point.TryParse(boundsNode.Attribute ("Offset")!.Value, out offset!))
                     offset = new Point ();
 
             Size.TryParse (boundsNode.Attribute ("Value")!.Value, out Size? size);
