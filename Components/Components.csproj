@@ -7,6 +7,9 @@
 		<AssemblyName>Egoland.Components</AssemblyName>
 		<Authors>Malware</Authors>
 		<LangVersion>default</LangVersion>
+		<PackageProjectUrl>https://github.com/insufficientFunding/Components</PackageProjectUrl>
+		<PackageLicenseExpression>GPL-2.0-or-later</PackageLicenseExpression>
+		<PackageReadmeFile>readme.md</PackageReadmeFile>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -15,4 +18,8 @@
 	  <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.0-rc.2.23479.6" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<None Include="readme.md" Pack="true" PackagePath="\" />
+	</ItemGroup>
+	
 </Project>
