@@ -1,0 +1,20 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="Components.VisualEditor.App"
+             xmlns:local="using:Components.VisualEditor"
+             xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             RequestedThemeVariant="Dark">
+	<!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+
+	<Application.DataTemplates>
+		<local:ViewLocator />
+	</Application.DataTemplates>
+	
+	<Application.Styles>
+		<FluentTheme />
+
+		<materialIcons:MaterialIconStyles />
+
+		<StyleInclude Source="Styles/ControlStyles.axaml" />
+	</Application.Styles>
+</Application>

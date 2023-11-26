@@ -1,0 +1,82 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:Components.VisualEditor.ViewModels"
+             xmlns:visualEditor="clr-namespace:Components.VisualEditor"
+             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="1080"
+             x:Class="Components.VisualEditor.Views.HierarchyView"
+             x:DataType="viewModels:EditorViewModel"
+             Background="{DynamicResource Background}">
+
+	<Design.DataContext>
+		<viewModels:EditorViewModel />
+	</Design.DataContext>
+
+	<!-- Body -->
+	<DockPanel>
+		<!-- Header -->
+		<Border DockPanel.Dock="Top"
+		        Background="#191919"
+		        VerticalAlignment="Top"
+		        Height="40" Padding="15 0">
+
+			<TextBlock Text="Hierarchy"
+			           VerticalAlignment="Center" />
+		</Border>
+
+		<!-- Section Selector -->
+		<StackPanel DockPanel.Dock="Top">
+			<TextBlock Text="Section" FontSize="20"
+			           Classes="Header"
+			           Margin="0 30 0 0"
+			           HorizontalAlignment="Center" />
+
+			<ComboBox HorizontalAlignment="Stretch"
+			          HorizontalContentAlignment="Center"
+			          Margin="20" MinHeight="40">
+
+				<ComboBoxItem>Metadata</ComboBoxItem>
+				<ComboBoxItem>Properties</ComboBoxItem>
+				<ComboBoxItem>Configuration</ComboBoxItem>
+				<ComboBoxItem>Definitions</ComboBoxItem>
+				<ComboBoxItem>Render</ComboBoxItem>
+			</ComboBox>
+		</StackPanel>
+
+		<!-- Hierarchy Tree View -->
+		<TreeView ItemsSource="{Binding Nodes}"
+		          Margin="20"
+		          SelectionMode="Single">
+
+			<TreeView.Styles>
+				<Style Selector="TreeView TreeViewItem">
+					<Setter Property="CornerRadius" Value="10" />
+
+					<Style Selector="^:selected">
+						<Style Selector="^ /template/ Border#PART_LayoutRoot">
+							<Setter Property="Background" Value="#F9A9FF" />
+						</Style>
+
+						<Style Selector="^ /template/ ContentPresenter#PART_HeaderPresenter">
+							<Setter Property="Foreground" Value="#121212" />
+						</Style>
+
+						<Style Selector="^ /template/ ToggleButton#PART_ExpandCollapseChevron">
+							<Style Selector="^ /template/ Path#ChevronPath">
+								<Setter Property="Fill" Value="#121212" />
+							</Style>
+						</Style>
+					</Style>
+				</Style>
+			</TreeView.Styles>
+
+			<!-- Item Template -->
+			<TreeView.ItemTemplate>
+				<TreeDataTemplate ItemsSource="{Binding SubNodes}">
+					<TextBlock Text="{Binding Name}" />
+				</TreeDataTemplate>
+			</TreeView.ItemTemplate>
+		</TreeView>
+	</DockPanel>
+</UserControl>

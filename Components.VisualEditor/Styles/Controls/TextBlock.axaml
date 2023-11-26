@@ -1,0 +1,13 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<Design.PreviewWith>
+		<Border Padding="20"
+		        Background="#121212">
+			<TextBlock Text="hi guys" />
+		</Border>
+	</Design.PreviewWith>
+
+	<Style Selector="TextBlock.Header">
+		<Setter Property="Foreground" Value="#C4C4C4" />
+	</Style>
+</Styles>

@@ -2,6 +2,9 @@
 <Component xmlns="https://schemas.alaskasvingen.com/components/schema.xsd">
 	<Declaration>
 		<Metadata Name="Name" Value="Connection" />
+		<Metadata Name="Experimental.Features.Definitions" Value="true" />
+
+		<Property Name="Text" Default="x\u2081:1" Type="String" Serializable="true" />
 
 		<Configuration>
 			<Bounds>
@@ -9,10 +12,22 @@
 			</Bounds>
 		</Configuration>
 	</Declaration>
-	
-	<Render AutoRotate="Off">
+
+	<Definitions>
+		<Definition Name="TextAlignment">
+			<When Conditions="Horizontal" Value="CenterLeft" />
+			<When Conditions="!Horizontal" Value="BottomCenter" />
+		</Definition>
+	</Definitions>
+
+	<Render AutoRotate="HorizontalToVertical, FlipPrimary">
 		<RenderGroup>
 			<Ellipse Position="_Middle" Radius="0.025, 0.025" Fill="true" Thickness="2" />
+		</RenderGroup>
+
+		<RenderGroup Conditions="$ShowText">
+
+			<Text Value="$Text" X="_Middle +0.125" Y="_Middle" Alignment="$TextAlignment" Size="Tiny" />
 		</RenderGroup>
 	</Render>
 </Component>

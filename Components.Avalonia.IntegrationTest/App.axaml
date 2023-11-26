@@ -1,0 +1,20 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="Components.Avalonia.IntegrationTest.App"
+             xmlns:local="using:Components.Avalonia.IntegrationTest"
+             RequestedThemeVariant="Default">
+	<!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+
+	<Application.DataTemplates>
+		<local:ViewLocator />
+	</Application.DataTemplates>
+
+	<Application.Resources>
+		<FontFamily x:Key="SourceSans">avares://Components/Assets/SourceSans.Variable.ttf</FontFamily>
+		<FontFamily x:Key="DefaultFontFamily">SourceSans</FontFamily>
+	</Application.Resources>
+
+	<Application.Styles>
+		<FluentTheme />
+	</Application.Styles>
+</Application>

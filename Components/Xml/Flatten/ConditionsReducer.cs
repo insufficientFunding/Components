@@ -15,21 +15,22 @@ internal static class ConditionsReducer
                     IConditionTreeItem left = SimplifyConditions (tree.Left);
                     IConditionTreeItem right = SimplifyConditions (tree.Right);
 
-                    if (Equals (left, ConditionTree.Empty) 
-                        && Equals (right, ConditionTree.Empty))
+
+                    if (left.Equals (ConditionTree.Empty) && right.Equals (ConditionTree.Empty))
                     {
                         return ConditionTree.Empty;
                     }
 
-                    if (Equals (left, ConditionTree.Empty))
+                    if (left.Equals (ConditionTree.Empty))
                     {
                         return right;
                     }
 
-                    if (Equals (right, ConditionTree.Empty))
+                    if (right.Equals (ConditionTree.Empty))
                     {
                         return left;
                     }
+
 
                     return tree;
                 }

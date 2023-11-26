@@ -18,18 +18,15 @@ namespace Components.Xml.Readers;
 internal class DeclarationSectionReader : IXmlSectionReader
 {
     private readonly IConditionParser _conditionParser;
-    private readonly IComponentPointParser _componentPointParser;
     private readonly FeatureSwitcher _featureSwitcher;
     private readonly IXmlLoadLogger _logger;
 
     public DeclarationSectionReader (
         IConditionParser conditionParser,
-        IComponentPointParser componentPointParser,
         FeatureSwitcher featureSwitcher,
         IXmlLoadLogger logger)
     {
         _conditionParser = conditionParser;
-        _componentPointParser = componentPointParser;
         _featureSwitcher = featureSwitcher;
         _logger = logger;
     }

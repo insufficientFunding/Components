@@ -59,11 +59,10 @@ internal class RenderSectionReader : IXmlSectionReader
 
         IRenderDescription [] flatGroups = groups.SelectMany (x => x.FlattenRoot ()).ToArray ();
         ((ComponentDescription)description).RenderDescriptions = flatGroups
-            .GroupBy (x => ConditionsReducer.SimplifyConditions (x.Conditions))
-            .Select (g => new RenderDescription (g.Key, g
-                                                     .SelectMany (
-                                                         x => x.Value)
-                                                     .ToArray ())).ToArray ();
+                                                                     .GroupBy (x => ConditionsReducer.SimplifyConditions (x.Conditions))
+                                                                     .Select (g => new RenderDescription (g.Key, g
+                                                                                                              .SelectMany (x => x.Value)
+                                                                                                              .ToArray ())).ToArray () as IRenderDescription [];
     }
 
     protected virtual IEnumerable<XmlRenderGroup> ReadElement (XElement element, IComponentDescription description, XmlRenderGroup groupContext)

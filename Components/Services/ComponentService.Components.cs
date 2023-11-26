@@ -54,8 +54,11 @@ public sealed partial class ComponentService
 
     private IComponentDescription ReadComponent (XmlLoader loader, string path)
     {
-        using Stream stream = File.OpenRead (path);
+        using FileStream stream = File.OpenRead (path);
 
-        return loader.Load (stream, _logger, out IComponentDescription description) ? description : throw new Exception ("Failed to load component.");
+        if (!loader.Load (stream, _logger, out IComponentDescription description))
+            Console.WriteLine ("error error on the wall, who's the angriest of them all?");
+
+        return description;
     }
 }

@@ -6,6 +6,7 @@ namespace Components.Render.TypeDescription.Conditions;
 public class ConditionTree : IConditionTree
 {
     public static IConditionTreeItem Empty => new ConditionTreeLeaf ();
+    public static IConditionTreeItem EmptyTree => new ConditionTree (ConditionOperator.AND, Empty, Empty);
 
     public enum ConditionOperator : ushort
     {
@@ -54,16 +55,12 @@ public class ConditionTree : IConditionTree
 
     public override bool Equals (object? obj)
     {
-        if (obj == null)
+        if (obj is not ConditionTree tree)
             return false;
 
-        ConditionTree? o = obj as ConditionTree;
-        if (o == null)
-            return false;
-
-        return Operator.Equals (o.Operator)
-               && Left.Equals (o.Left)
-               && Right.Equals (o.Left);
+        return Operator.Equals (tree.Operator)
+               && Left.Equals (tree.Left)
+               && Right.Equals (tree.Left);
     }
 
     public override int GetHashCode ()

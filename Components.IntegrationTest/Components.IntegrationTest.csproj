@@ -2,7 +2,6 @@
 
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
-		<TargetFramework>net7.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
@@ -10,6 +9,7 @@
 		<LangVersion>default</LangVersion>
 		<PackageId>Egoland.Components.IntegrationTest</PackageId>
 		<Authors>Egoland</Authors>
+		<TargetFrameworks>net7.0;net8.0</TargetFrameworks>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -24,16 +24,12 @@
 		<PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0-rc.2.23479.6" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0-rc.2.23479.6" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.0-rc.2.23479.6" />
-
-		<PackageReference Include="Egoland.Components" Version="1.0.1" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\Components.ComponentLibrary\Components.ComponentLibrary.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<Folder Include="Svg\" />
+		<ProjectReference Include="..\Components\Components.csproj" />
 	</ItemGroup>
 
 </Project>

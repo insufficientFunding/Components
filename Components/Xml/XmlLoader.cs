@@ -77,7 +77,7 @@ public class XmlLoader : IDisposable
             XElement root = XElement.Load (stream, LoadOptions.SetLineInfo);
             XElement? declaration = root.Element (ComponentNamespace + "Declaration");
             if (declaration == null)
-                return XmlLoadLoggerExtensions.LogErrorReturnFalse (logger, declaration, $"Declaration element not found in component XML file '{(stream as FileStream)?.Name}'");
+                return logger.LogErrorReturnFalse (declaration, $"Declaration element not found in component XML file '{(stream as FileStream)?.Name}'");
 
             FeatureSwitcher featureSwitcher = new FeatureSwitcher ();
 

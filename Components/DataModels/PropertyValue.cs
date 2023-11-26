@@ -91,9 +91,9 @@ public sealed class PropertyValue : IComparable<PropertyValue>, IEquatable<Prope
     #region Equality and comparisons
     public bool Equals (PropertyValue? other)
     {
-        if (other == null)
+        if (other is null)
             return false;
-
+        
         PropertyValue? thisProperty = this;
         if (PropertyType == Type.Unknown && other.PropertyType != Type.Unknown)
         {
@@ -122,6 +122,10 @@ public sealed class PropertyValue : IComparable<PropertyValue>, IEquatable<Prope
                 return thisProperty.NumericValue.Equals (other.NumericValue);
             case Type.String:
                 return thisProperty.StringValue!.Equals (other.StringValue);
+            case Type.Unset:
+                return Equals (thisProperty.BooleanValue, other.BooleanValue)
+                       && Equals (thisProperty.NumericValue, other.NumericValue)
+                       && Equals(thisProperty.StringValue, other.StringValue);
             default:
                 return false;
         }

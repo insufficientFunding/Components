@@ -10,6 +10,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Components.IntegrationTest"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Components", "Components\Components.csproj", "{894BB7EE-92A8-47B4-9BD8-2299A245180E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Components.Avalonia.IntegrationTest", "Components.Avalonia.IntegrationTest\Components.Avalonia.IntegrationTest.csproj", "{736A484F-0010-4F6D-BC68-1D0510DBB73F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Components.VisualEditor", "Components.VisualEditor\Components.VisualEditor.csproj", "{CC22C184-DCEC-449A-AFEB-CE5794356F3E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +40,13 @@ Global
 		{894BB7EE-92A8-47B4-9BD8-2299A245180E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{894BB7EE-92A8-47B4-9BD8-2299A245180E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{894BB7EE-92A8-47B4-9BD8-2299A245180E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{736A484F-0010-4F6D-BC68-1D0510DBB73F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{736A484F-0010-4F6D-BC68-1D0510DBB73F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{736A484F-0010-4F6D-BC68-1D0510DBB73F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{736A484F-0010-4F6D-BC68-1D0510DBB73F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC22C184-DCEC-449A-AFEB-CE5794356F3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC22C184-DCEC-449A-AFEB-CE5794356F3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC22C184-DCEC-449A-AFEB-CE5794356F3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC22C184-DCEC-449A-AFEB-CE5794356F3E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

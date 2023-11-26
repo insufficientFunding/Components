@@ -54,7 +54,7 @@ public class ConditionTreeLeaf : IConditionTreeLeaf
             PropertyValue propertyValue = property!.Value;
             if (VariableName.StartsWith ("Show"))
                 propertyValue = new PropertyValue (property.IsVisible);
-            
+
             if (Comparison == ConditionComparison.Truthy)
                 return propertyValue!.IsTruthy ();
 
@@ -110,20 +110,18 @@ public class ConditionTreeLeaf : IConditionTreeLeaf
 
     public override bool Equals (object? obj)
     {
-        if (obj == null)
-            return false;
-
-        ConditionTreeLeaf? o = obj as ConditionTreeLeaf;
-        if (o == null)
+        if (obj is not ConditionTreeLeaf o)
             return false;
 
         if (ReferenceEquals (this, obj))
             return true;
 
-        return Type.Equals (o.Type)
-               && Comparison.Equals (o.Comparison)
-               && VariableName.Equals (o.VariableName)
-               && CompareTo.Equals (o.CompareTo);
+        bool result= Type.Equals (o.Type)
+                     && Comparison.Equals (o.Comparison)
+                     && VariableName.Equals (o.VariableName)
+                     && CompareTo.Equals (o.CompareTo);
+        
+        return result;
     }
 
     public override int GetHashCode ()

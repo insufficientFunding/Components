@@ -30,31 +30,31 @@
 		<!-- Pole 1 -->
 		<RenderGroup>
 			<!-- Input and output -->
-			<Line Start="_Middle -1x" End="_Middle -0.7x" />
-			<Line Start="_Middle +1x" End="_Middle +0.7x" />
+			<Line Start="_Middle -1x" End="_Middle -0.5x" />
+			<Line Start="_Middle +1x" End="_Middle +0.5x" />
 
 			<!-- Switch -->
-			<Line Start="_Middle -0.7x" End="_Middle +0.7x -0.5y" />
+			<Line Start="_Middle -0.5x" End="_Middle +0.5x -0.5y" />
 		</RenderGroup>
 
 		<!-- Pole 2 -->
 		<RenderGroup Conditions="$Type == TwoPoled | $Type == ThreePoled">
 			<!-- Input and output -->
-			<Line Start="_Middle -1x +1y" End="_Middle -0.7x +1y" />
-			<Line Start="_Middle +1x +1y" End="_Middle +0.7x +1y" />
+			<Line Start="_Middle -1x +1y" End="_Middle -0.5x +1y" />
+			<Line Start="_Middle +1x +1y" End="_Middle +0.5x +1y" />
 
 			<!-- Switch -->
-			<Line Start="_Middle -0.7x +1y" End="_Middle +0.7x +0.5y" />
+			<Line Start="_Middle -0.5x +1y" End="_Middle +0.5x +0.5y" />
 		</RenderGroup>
 
 		<!-- Pole 3 -->
 		<RenderGroup Conditions="$Type == ThreePoled">
 			<!-- Input and output -->
 			<Line Start="_Middle -1x -1y" End="_Middle -0.7x -1y" />
-			<Line Start="_Middle +1x -1y" End="_Middle +0.7x -1y" />
+			<Line Start="_Middle +1x -1y" End="_Middle +0.5x -1y" />
 
 			<!-- Switch -->
-			<Line Start="_Middle -0.7x -1y" End="_Middle +0.7x -1.5y" />
+			<Line Start="_Middle -0.5x -1y" End="_Middle +0.5x -1.5y" />
 		</RenderGroup>
 
 		<!-- Markings -->

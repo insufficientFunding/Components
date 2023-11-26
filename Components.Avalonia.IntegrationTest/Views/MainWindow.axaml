@@ -1,0 +1,124 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:Components.Avalonia.IntegrationTest.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="Components.Avalonia.IntegrationTest.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Background="#303030"
+        Title="Components.Avalonia.IntegrationTest">
+
+	<Design.DataContext>
+		<!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+		<vm:MainWindowViewModel />
+	</Design.DataContext>
+
+	<Window.Styles>
+		<Style Selector="TextBlock">
+			<Setter Property="Margin" Value="1" />
+			<Setter Property="FontSize" Value="8" />
+			<Setter Property="FontFamily" Value="{StaticResource SourceSans}" />
+			<Setter Property="HorizontalAlignment" Value="Center" />
+			<Setter Property="Foreground" Value="White" />
+		</Style>
+	</Window.Styles>
+
+	<Border Width="120" Height="180"
+	        ClipToBounds="True"
+	        Background="#282828">
+		<Grid ColumnDefinitions="*,20,*">
+			<Panel Grid.Column="0">
+				<Separator Width="0.5" Height="170"
+				           Background="White"
+				           Opacity="0.1"
+				           HorizontalAlignment="Right"
+				           Margin="0.5" />
+
+				<StackPanel>
+					<TextBlock Text="Intern"
+					           Margin="5" />
+
+					<Separator Margin="5 0"
+					           Height="0.5"
+					           Background="White"
+					           Opacity="0.1" />
+
+					<TextBlock Text="F₁-1" />
+					<TextBlock Text="F₁-3" />
+					<TextBlock Text="F₁-5" />
+					<TextBlock Text="Q₁-2" />
+					<TextBlock Text="Q₁-4" />
+					<TextBlock Text="Q₁-6" />
+					<TextBlock Text="F₂-4" />
+					<TextBlock Text="Q₁-13" />
+					<TextBlock Text="Q₁-A₁" />
+					<TextBlock Text="Q₁-54" />
+					<TextBlock Text="Q₁-22" />
+					<TextBlock Text="Q₁-A₂" />
+				</StackPanel>
+			</Panel>
+
+			<!-- x1 -->
+			<Panel Grid.Column="1">
+				<StackPanel>
+					<TextBlock Text="x₁"
+					           FontSize="10"
+					           Margin="0 3.75" />
+
+					<Separator Margin="5 0"
+					           Height="0.5"
+					           Background="White"
+					           Opacity="0.1" />
+
+					<TextBlock Text="1" />
+					<TextBlock Text="2" />
+					<TextBlock Text="3" />
+					<TextBlock Text="4" />
+					<TextBlock Text="5" />
+					<TextBlock Text="6" />
+					<TextBlock Text="7" />
+					<TextBlock Text="8" />
+					<TextBlock Text="9" />
+					<TextBlock Text="10" />
+					<TextBlock Text="11" />
+					<TextBlock Text="12" />
+				</StackPanel>
+			</Panel>
+
+			<Panel Grid.Column="2">
+				<Separator Width="0.5" Height="170"
+				           Background="White"
+				           Opacity="0.1"
+				           HorizontalAlignment="Left"
+				           Margin="0.5" />
+
+				<StackPanel>
+					<TextBlock Text="Ekstern"
+					           Margin="5" />
+
+					<Separator Margin="5 0"
+					           Height="0.5"
+					           Background="White"
+					           Opacity="0.1" />
+
+					<TextBlock Text="L₁" />
+					<TextBlock Text="L₂" />
+					<TextBlock Text="L₃" />
+					<TextBlock Text="M₁-U₁" />
+					<TextBlock Text="M₁-V₁" />
+					<TextBlock Text="M₁-W₁" />
+					<TextBlock Text="S₁-1" />
+					<TextBlock Text="S₁-2" />
+					<TextBlock Text="S₂-4" />
+					<TextBlock Text="H₁-1" />
+					<TextBlock Text="H₂-1" />
+					<TextBlock Text="H₁-2" />
+				</StackPanel>
+			</Panel>
+		</Grid>
+	</Border>
+
+</Window>

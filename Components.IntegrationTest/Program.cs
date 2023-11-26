@@ -36,9 +36,22 @@ class Program
 
         componentService.ReadDescriptions (dataPath);
         
+        SerializeToJson(componentService, solutionPath);
+    }
+
+    private static void SerializeToJson (IComponentService componentService, string solutionPath)
+    {
+        string targetPath = $"{solutionPath}/Components.IntegrationTest/Json";
+
+        
+        TestHelper.SerializeAllToJson (componentService.GetDescriptions(), targetPath);
+    }
+
+    private static void RenderToSvg (IComponentService componentService, string solutionPath)
+    {
         string targetPath = $"{solutionPath}/Components.IntegrationTest/Svg";
 
+        
         TestHelper.RenderAllToSvg (componentService.GetDescriptions(), targetPath);
-
     }
 }
