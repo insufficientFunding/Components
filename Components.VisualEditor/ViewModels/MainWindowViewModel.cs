@@ -1,6 +1,12 @@
-﻿namespace Components.VisualEditor.ViewModels;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+namespace Components.VisualEditor.ViewModels;
 
-public class MainWindowViewModel : ViewModelBase
+public partial class MainWindowViewModel : ViewModelBase
 {
-    public string Greeting => "Welcome to Avalonia!";
+    [ObservableProperty] private EditorViewModel _editorViewModel;
+
+    public MainWindowViewModel ()
+    {
+        EditorViewModel = new EditorViewModel ();
+    }
 }

@@ -11,16 +11,21 @@
 		<RepositoryUrl>https://github.com/insufficientFunding/Components</RepositoryUrl>
 		<PackageLicenseExpression>GPL-2.0-or-later</PackageLicenseExpression>
 		<PackageReadmeFile>readme.md</PackageReadmeFile>
-		<Version>1.0.1</Version>
+		<Version>1.0.3</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Avalonia" Version="11.0.5" />
-		<PackageReference Include="Egoland.Components" Version="1.0.1" />
+		<PackageReference Include="Avalonia.Skia" Version="11.0.5" />
+		<PackageReference Include="Egoland.Components" Version="1.0.8" />
+		<PackageReference Include="Egoland.Components.Render.Skia" Version="1.0.1" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<None Include="readme.md" Pack="true" PackagePath="\" />
+	</ItemGroup>
+
+	<ItemGroup>
 	</ItemGroup>
 
 </Project>

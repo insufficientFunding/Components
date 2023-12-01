@@ -7,15 +7,15 @@ namespace Components.Xml.Primitives;
 
 internal class XmlComponentPoint : IFlattenable<ComponentPoint>
 {
-    public ComponentPosition RelativeToX { get; }
+    public ComponentPoint.Anchor RelativeToX { get; }
 
-    public ComponentPosition RelativeToY { get; }
+    public ComponentPoint.Anchor RelativeToY { get; }
 
     public IReadOnlyList<IXmlComponentPointOffset> Offsets { get; }
 
     public XmlComponentPoint (
-        ComponentPosition relativeToX,
-        ComponentPosition relativeToY,
+        ComponentPoint.Anchor relativeToX,
+        ComponentPoint.Anchor relativeToY,
         IEnumerable<IXmlComponentPointOffset> offsets)
     {
         RelativeToX = relativeToX;

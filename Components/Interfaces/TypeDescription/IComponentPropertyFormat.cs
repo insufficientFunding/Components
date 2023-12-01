@@ -9,12 +9,12 @@ public interface IComponentPropertyFormat
     /// <summary>
     ///     The conditions that must be met for the property to be formatted by this rule.
     /// </summary>
-    IConditionTreeItem Conditions { get; }
+    IConditionTreeItem Conditions { get; set; }
     
     /// <summary>
     ///     The value to format the property with.
     /// </summary>
-    string Value { get; }
+    string Value { get; set; }
 
     /// <summary>
     ///     Formats the property value, by getting the value of the property from the component, and formatting it according to the rule set by the <see cref="Value"/> property.

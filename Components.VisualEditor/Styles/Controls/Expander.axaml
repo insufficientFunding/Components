@@ -1,0 +1,22 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
+        xmlns:assists="clr-namespace:Material.Styles.Assists;assembly=Material.Styles">
+	<Design.PreviewWith>
+		<Border Padding="20" Width="200" Height="400">
+			<Expander Header="higuys">
+				<StackPanel>
+					<TextBlock>h</TextBlock>
+					<TextBlock>h</TextBlock>
+				</StackPanel>
+			</Expander>
+		</Border>
+	</Design.PreviewWith>
+
+	<Style Selector="Expander">
+		<Style Selector="^ /template/ controls|ContentExpandControl#PART_ContentExpand">
+			<Setter Property="Background" Value="{DynamicResource MaterialPaperColor}" />
+			<Setter Property="Multiplier" Value="0" />
+		</Style>
+	</Style>
+</Styles>

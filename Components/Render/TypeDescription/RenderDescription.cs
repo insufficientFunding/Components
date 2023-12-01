@@ -7,7 +7,7 @@ namespace Components.Render.TypeDescription;
 
 public class RenderDescription : Conditional<IRenderCommand []>, IRenderDescription
 {
-    internal protected RenderDescription (IConditionTreeItem conditions, IRenderCommand [] commands)
+    public RenderDescription (IConditionTreeItem conditions, IRenderCommand [] commands)
         : base (commands, conditions)
     { }
 

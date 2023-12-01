@@ -7,14 +7,14 @@ namespace Components.Render.TypeDescription.TypeDescription;
 /// <inheritdoc cref="IComponentDescriptionProperty"/>
 public class ComponentDescriptionProperty : IComponentDescriptionProperty
 {
-    public PropertyName Name { get; }
-    public PropertyValue Default { get; }
-    public PropertyType Type { get; }
-    public string []? EnumOptions { get; }
-    public bool ShowInEditor { get; }
-    public IComponentPropertyFormat [] FormatRules { get; }
+    public PropertyName Name { get; set; }
+    public PropertyValue Default { get; set; }
+    public PropertyType Type { get; set; }
+    public string []? EnumOptions { get; set; }
+    public bool ShowInEditor { get; set; }
+    public IComponentPropertyFormat [] FormatRules { get; set; }
 
-    internal protected ComponentDescriptionProperty (PropertyName name, PropertyValue defaultValue, PropertyType type, IComponentPropertyFormat [] formatRules, bool showInEditor, string []? enumOptions = null)
+    public ComponentDescriptionProperty (PropertyName name, PropertyValue defaultValue, PropertyType type, IComponentPropertyFormat [] formatRules, bool showInEditor, string []? enumOptions = null)
     {
         Name = name;
         Default = defaultValue;
@@ -28,7 +28,7 @@ public class ComponentDescriptionProperty : IComponentDescriptionProperty
     {
         foreach (IComponentPropertyFormat formatRule in FormatRules)
         {
-            if (formatRule.Conditions.IsMet (component, description))
+            if (formatRule.Conditions.IsMet (component))
                 return formatRule.Format (component, description);
         }
 

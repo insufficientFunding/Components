@@ -29,7 +29,7 @@ public class ConditionTreeLeaf : IConditionTreeLeaf
         CompareTo = compareTo;
     }
 
-    public bool IsMet (IPositionalComponent component, IComponentDescription description)
+    public bool IsMet (IPositionalComponent component)
     {
         if (Type == ConditionType.Empty)
             return true;

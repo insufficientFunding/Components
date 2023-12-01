@@ -7,7 +7,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 namespace Components.Xml.Parsers.Conditions;
 
-internal class ConditionParser : IConditionParser
+public class ConditionParser : IConditionParser
 {
     private readonly string [] legalStateNames =
     {

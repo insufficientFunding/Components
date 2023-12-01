@@ -1,0 +1,42 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:Components.VisualEditor.ViewModels"
+             xmlns:views="clr-namespace:Components.VisualEditor.Views"
+             xmlns:controls="clr-namespace:Components.VisualEditor.Controls"
+             xmlns:avalonia="clr-namespace:Components.Avalonia;assembly=Egoland.Components.Avalonia"
+             mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="720"
+             x:Class="Components.VisualEditor.Views.EditorView"
+             x:DataType="viewModels:EditorViewModel">
+
+	<Design.DataContext>
+		<viewModels:EditorViewModel />
+	</Design.DataContext>
+
+	<DockPanel>
+		<views:HierarchyView DockPanel.Dock="Left" Width="400"
+		                     BorderBrush="#15FFFFFF" BorderThickness="0 0 1 0"
+		                     HorizontalAlignment="Left" />
+
+		<views:InspectorView DockPanel.Dock="Left" Width="400"
+		                     BorderBrush="#15FFFFFF" BorderThickness="1 0 2 0"
+		                     HorizontalAlignment="Left" />
+
+		<ZoomBorder ClipToBounds="True" ZoomSpeed="1.05"
+		            Background="Transparent">
+			<Border Width="100" Height="100" Background="#242424">
+				<Panel>
+					<controls:GridDecorator GridCellSize="10"
+					                        EnableGrid="True"
+					                        GridBrush="#0DFFFFFF" />
+					<controls:GridDecorator GridCellSize="50"
+					                        EnableGrid="True"
+					                        GridBrush="#12FFFFFF" />
+					
+					<controls:ComponentPreviewRenderer Width="100" Height="100" />
+				</Panel>
+			</Border>
+		</ZoomBorder>
+	</DockPanel>
+</UserControl>

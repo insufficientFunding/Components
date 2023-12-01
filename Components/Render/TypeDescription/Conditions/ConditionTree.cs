@@ -14,7 +14,7 @@ public class ConditionTree : IConditionTree
         OR = 2,
     }
 
-    private static string ConditionOperatorToString (ConditionOperator op)
+    public static string ConditionOperatorToString (ConditionOperator op)
     {
         switch (op)
         {
@@ -38,12 +38,12 @@ public class ConditionTree : IConditionTree
         Right = right;
     }
 
-    public bool IsMet (IPositionalComponent component, IComponentDescription description)
+    public bool IsMet (IPositionalComponent component)
     {
         if (Operator == ConditionOperator.AND)
-            return Left.IsMet (component, description) && Right.IsMet (component, description);
+            return Left.IsMet (component) && Right.IsMet (component);
         if (Operator == ConditionOperator.OR)
-            return Left.IsMet (component, description) || Right.IsMet (component, description);
+            return Left.IsMet (component) || Right.IsMet (component);
 
         return false;
     }

@@ -7,9 +7,9 @@ namespace Components.Render.TypeDescription.TypeDescription;
 /// </summary>
 public class ComponentDescription : IComponentDescription
 {
-    public IComponentDescriptionProperty [] Properties { get; internal protected set; }
+    public IComponentDescriptionProperty [] Properties { get; set; }
 
-    public IRenderDescription [] RenderDescriptions { get; internal protected set; }
+    public IRenderDescription [] RenderDescriptions { get; set; }
 
     public IComponentConfiguration Configuration { get; internal protected set; }
 
@@ -18,7 +18,7 @@ public class ComponentDescription : IComponentDescription
     /// <summary>
     ///     Creates a new instance of the <see cref="ComponentDescription"/> class.
     /// </summary>
-    internal protected ComponentDescription ()
+    public ComponentDescription ()
     {
         Properties = Array.Empty<IComponentDescriptionProperty> ();
         RenderDescriptions = Array.Empty<IRenderDescription> ();

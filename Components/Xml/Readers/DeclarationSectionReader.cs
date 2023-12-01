@@ -94,9 +94,6 @@ internal class DeclarationSectionReader : IXmlSectionReader
             case "Double":
                 propertyType = PropertyType.Double;
                 break;
-            case "Integer":
-                propertyType = PropertyType.Integer;
-                break;
             case "Boolean":
                 propertyType = PropertyType.Boolean;
                 break;
@@ -124,9 +121,6 @@ internal class DeclarationSectionReader : IXmlSectionReader
         PropertyType propertyType;
         switch (type)
         {
-            case "Integer":
-                propertyType = PropertyType.Integer;
-                break;
             case "Double":
                 propertyType = PropertyType.Double;
                 break;

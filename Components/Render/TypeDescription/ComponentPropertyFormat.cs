@@ -10,8 +10,8 @@ namespace Components.Render.TypeDescription;
 /// <inheritdoc cref="IComponentPropertyFormat"/>
 public class ComponentPropertyFormat : IComponentPropertyFormat
 {
-    public IConditionTreeItem Conditions { get; }
-    public string Value { get; }
+    public IConditionTreeItem Conditions { get; set; }
+    public string Value { get; set; }
 
     internal protected ComponentPropertyFormat (string value, IConditionTreeItem conditions)
     {

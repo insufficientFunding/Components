@@ -8,7 +8,7 @@ public interface IComponentDescriptionMetadata
     /// <summary>
     ///     The name of the component.
     /// </summary>
-    string Name { get; }
+    string Name { get; set; }
 
     /// <summary>
     ///     The group of the component, 
@@ -18,7 +18,7 @@ public interface IComponentDescriptionMetadata
     /// <summary>
     ///     The size of the component's SVG grid.
     /// </summary>
-    double Size { get; }
+    double Size { get; set; }
 
     /// <summary>
     ///     Miscellaneous entries.

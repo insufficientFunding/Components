@@ -9,5 +9,4 @@ public enum PropertyType
     Double = 1,
     String = 2,
     Enum = 4,
-    Integer = 5,
 }

@@ -1,0 +1,111 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:renderCommands="clr-namespace:Components.VisualEditor.ViewModels.RenderCommands"
+             xmlns:extensions="clr-namespace:Components.VisualEditor.Extensions"
+             xmlns:controls="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
+             xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             xmlns:viewModels="clr-namespace:Components.VisualEditor.ViewModels"
+             xmlns:models="clr-namespace:Components.VisualEditor.Models"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Components.VisualEditor.Views.Hierarchy.RenderTab"
+             x:DataType="viewModels:EditorViewModel">
+	
+	<Design.DataContext>
+		<viewModels:EditorViewModel />
+	</Design.DataContext>
+	
+	<DockPanel>
+		<!-- Button Menu -->
+		<StackPanel DockPanel.Dock="Top"
+		            Spacing="15"
+		            Orientation="Horizontal">
+			<!-- Add Button -->
+			<controls:FloatingButton Classes="Mini">
+				<avalonia:MaterialIcon Kind="Plus"
+				                       Width="28" Height="28"
+				                       Foreground="{DynamicResource MaterialPrimaryMidForegroundBrush}" />
+
+				<!-- this is UGLY -->
+				<Interaction.Behaviors>
+					<ButtonClickEventTriggerBehavior>
+						<PopupAction>
+							<FlyoutPresenter Background="{DynamicResource MaterialCardBackgroundBrush}"
+							                 Padding="0">
+
+								<ItemsControl ItemsSource="{x:Static extensions:RenderCommandExtensions.CommandNames}">
+									<ItemsControl.ItemTemplate>
+										<DataTemplate>
+											<MenuItem Header="{Binding}"
+											          Command="{Binding ((viewModels:EditorViewModel)DataContext).AddCommand,
+																													ElementName=HierarchyTreeView}"
+											          CommandParameter="{Binding}" />
+										</DataTemplate>
+									</ItemsControl.ItemTemplate>
+								</ItemsControl>
+							</FlyoutPresenter>
+						</PopupAction>
+					</ButtonClickEventTriggerBehavior>
+				</Interaction.Behaviors>
+			</controls:FloatingButton>
+
+			<!-- Delete Button -->
+			<controls:FloatingButton Classes="Mini"
+			                         Command="{Binding DeleteRenderCommand}"
+			                         HotKey="Shift+X">
+
+				<avalonia:MaterialIcon Kind="Remove" Width="24" Height="24"
+				                       Foreground="{DynamicResource MaterialPrimaryMidForegroundBrush}" />
+			</controls:FloatingButton>
+		</StackPanel>
+
+
+		<TreeView ItemsSource="{Binding RenderDescriptions}"
+		          SelectedItem="{Binding SelectedNode}"
+		          x:Name="HierarchyTreeView"
+		          Margin="10 20"
+		          SelectionMode="Toggle">
+
+			<TreeView.ContextMenu>
+				<ContextMenu>
+					<MenuItem Header="Delete"
+					          HotKey="Delete"
+					          Command="{Binding DeleteRenderCommand}" />
+				</ContextMenu>
+			</TreeView.ContextMenu>
+
+			<!-- Item Template -->
+			<TreeView.DataTemplates>
+				<!-- RenderGroup has its own template, as it can have children (gross) -->
+				<TreeDataTemplate DataType="renderCommands:RenderGroupViewModel"
+				                  ItemsSource="{Binding Children}">
+					<StackPanel Spacing="15"
+					            Orientation="Horizontal">
+
+						<TextBlock VerticalAlignment="Center"
+						           Text="{Binding Name}" />
+
+						<TextBlock VerticalAlignment="Center"
+						           FontSize="11"
+						           Text="{Binding Type, StringFormat='( {0} )'}" />
+					</StackPanel>
+				</TreeDataTemplate>
+
+				<!-- Rest of render commands -->
+				<TreeDataTemplate DataType="models:IEditorRenderCommand">
+					<StackPanel Spacing="15"
+					            Orientation="Horizontal">
+
+						<TextBlock VerticalAlignment="Center"
+						           Text="{Binding Name}" />
+
+						<TextBlock VerticalAlignment="Center"
+						           FontSize="11"
+						           Text="{Binding Type, StringFormat='( {0} )'}" />
+					</StackPanel>
+				</TreeDataTemplate>
+			</TreeView.DataTemplates>
+		</TreeView>
+	</DockPanel>
+</UserControl>

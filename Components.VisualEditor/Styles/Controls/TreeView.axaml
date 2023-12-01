@@ -1,0 +1,31 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<Design.PreviewWith>
+		<Border Padding="20">
+			<!-- Add Controls for Previewer Here -->
+		</Border>
+	</Design.PreviewWith>
+	
+	<!-- TreeViewItem Style -->
+	<Style Selector="TreeViewItem">
+		<Setter Property="CornerRadius" Value="10" />
+		<Setter Property="BorderThickness" Value="0" />
+
+		<Style Selector="^:selected">
+			<Style Selector="^ /template/ Border#PART_LayoutRoot">
+				<Setter Property="Background" Value="{DynamicResource Accent}" />
+			</Style>
+
+			<Style Selector="^ /template/ ContentPresenter#PART_HeaderPresenter">
+				<Setter Property="Foreground" Value="#202020" />
+			</Style>
+
+			<Style Selector="^ /template/ ToggleButton#PART_ExpandCollapseChevron">
+				<Style Selector="^ /template/ Path#ChevronPath">
+					<Setter Property="Fill" Value="#202020" />
+				</Style>
+			</Style>
+		</Style>
+	</Style>
+
+</Styles>

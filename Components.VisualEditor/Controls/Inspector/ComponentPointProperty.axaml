@@ -1,0 +1,88 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:wpf="clr-namespace:Material.Styles.Assists;assembly=Material.Styles"
+        xmlns:controls="using:Components.VisualEditor.Controls.Inspector">
+	<Design.PreviewWith>
+		<controls:ComponentPointProperty Width="400" />
+	</Design.PreviewWith>
+
+	<Style Selector="controls|ComponentPointProperty">
+		<!-- Set Defaults -->
+		<Setter Property="Template">
+			<ControlTemplate>
+				<Expander Margin="0 15"
+				          IsExpanded="True"
+				          HorizontalAlignment="Stretch">
+
+					<Expander.Header>
+						<StackPanel Spacing="10"
+						            Orientation="Horizontal">
+
+							<TextBlock VerticalAlignment="Center"
+							           Classes="Body1" Foreground="{DynamicResource MaterialBodyBrush}"
+							           UseLayoutRounding="False"
+							           Text="{TemplateBinding PropertyName}" />
+
+							<TextBlock VerticalAlignment="Center"
+							           Classes="Body2" Foreground="{DynamicResource MaterialBodyLightBrush}"
+							           UseLayoutRounding="False"
+							           Text="( ComponentPoint )" />
+						</StackPanel>
+					</Expander.Header>
+
+					<Expander.Content>
+						<StackPanel Spacing="10" Margin="20">
+							<!-- Horizontal -->
+							<StackPanel Spacing="5">
+								<TextBlock Text="Horizontal"
+								           HorizontalAlignment="Center"
+								           TextAlignment="Center"
+								           Classes="Body1" Foreground="{DynamicResource MaterialBodyLightBrush}" />
+
+								<Grid ColumnDefinitions="*,*">
+									<ComboBox Grid.Column="0"
+									          Margin="0 0 5 0"
+									          HorizontalAlignment="Stretch" VerticalAlignment="Top"
+									          Theme="{StaticResource MaterialFilledComboBox}"
+									          SelectedItem="{Binding $parent[controls:ComponentPointProperty].AnchorX, Mode=TwoWay}"
+									          ItemsSource="{x:Static controls:ComponentPointProperty.Options}" />
+
+									<TextBox Grid.Column="1"
+									         Classes="filled"
+									         Margin="5 0 0 0" VerticalAlignment="Top"
+									         wpf:TextFieldAssist.Label="Offset"
+									         Text="{Binding $parent[controls:ComponentPointProperty].OffsetX, Mode=TwoWay}" />
+								</Grid>
+							</StackPanel>
+
+							<!-- Vertical -->
+							<StackPanel Spacing="5">
+								<TextBlock Text="Vertical"
+								           HorizontalAlignment="Center"
+								           TextAlignment="Center"
+								           Classes="Body1" Foreground="{DynamicResource MaterialBodyLightBrush}" />
+
+
+								<Grid ColumnDefinitions="*,*">
+									<ComboBox Grid.Column="0"
+									          Margin="0 0 5 0"
+									          HorizontalAlignment="Stretch" VerticalAlignment="Top"
+									          Theme="{StaticResource MaterialFilledComboBox}"
+									          SelectedItem="{Binding $parent[controls:ComponentPointProperty].AnchorY, Mode=TwoWay}"
+									          ItemsSource="{x:Static controls:ComponentPointProperty.Options}" />
+
+									<TextBox Grid.Column="1"
+									         Classes="filled"
+									         Margin="5 0 0 0" VerticalAlignment="Top"
+									         wpf:TextFieldAssist.Label="Offset"
+									         Text="{Binding $parent[controls:ComponentPointProperty].OffsetY, Mode=TwoWay}" />
+								</Grid>
+							</StackPanel>
+						</StackPanel>
+					</Expander.Content>
+				</Expander>
+
+			</ControlTemplate>
+		</Setter>
+	</Style>
+</Styles>

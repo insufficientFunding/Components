@@ -13,7 +13,14 @@
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
 	</Styles.Resources>
+	
+	<StyleInclude Source="/Controls/Inspector/InspectorStyles.axaml" />
 
+	<StyleInclude Source="Controls/CheckBox.axaml" />
 	<StyleInclude Source="Controls/ComboBox.axaml" />
+	<StyleInclude Source="Controls/Expander.axaml" />
+	<StyleInclude Source="Controls/ListBox.axaml" />
 	<StyleInclude Source="Controls/TextBlock.axaml" />
+	<StyleInclude Source="Controls/TextBox.axaml" />
+	<StyleInclude Source="Controls/TreeView.axaml" />
 </Styles>

@@ -9,15 +9,15 @@ public interface IComponentConfiguration
     /// <summary>
     ///     The bounds of the component.
     /// </summary>
-    IEnumerable<IComponentBounds> Bounds { get; }
+    IEnumerable<IComponentBounds> Bounds { get; set; }
 
     /// <summary>
     ///     The auto-rotate type of the component.
     /// </summary>
-    AutoRotateType AutoRotate { get; }
+    AutoRotateType AutoRotate { get; set; }
 
     /// <summary>
     ///     The auto-rotate flip state of the component.
     /// </summary>
-    FlipState AutoRotateFlip { get; }
+    FlipState AutoRotateFlip { get; set; }
 }

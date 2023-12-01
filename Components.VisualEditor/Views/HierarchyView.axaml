@@ -4,79 +4,79 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:Components.VisualEditor.ViewModels"
              xmlns:visualEditor="clr-namespace:Components.VisualEditor"
+             xmlns:renderCommands="clr-namespace:Components.VisualEditor.ViewModels.RenderCommands"
+             xmlns:models="clr-namespace:Components.VisualEditor.Models"
+             xmlns:system="clr-namespace:System;assembly=System.Runtime"
+             xmlns:input="clr-namespace:System.Windows.Input;assembly=System.ObjectModel"
+             xmlns:converters="clr-namespace:Avalonia.Controls.Converters;assembly=Avalonia.Controls"
+             xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             xmlns:extensions="clr-namespace:Components.VisualEditor.Extensions"
+             xmlns:controls="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
+             xmlns:hierarchy="clr-namespace:Components.VisualEditor.Views.Hierarchy"
              mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="1080"
              x:Class="Components.VisualEditor.Views.HierarchyView"
-             x:DataType="viewModels:EditorViewModel"
-             Background="{DynamicResource Background}">
+             x:DataType="viewModels:EditorViewModel">
 
 	<Design.DataContext>
 		<viewModels:EditorViewModel />
 	</Design.DataContext>
 
+	<UserControl.Resources>
+		<converters:EnumToBoolConverter x:Key="EnumToBoolConverter" />
+	</UserControl.Resources>
+
 	<!-- Body -->
 	<DockPanel>
 		<!-- Header -->
 		<Border DockPanel.Dock="Top"
-		        Background="#191919"
+		        Background="Transparent"
 		        VerticalAlignment="Top"
-		        Height="40" Padding="15 0">
+		        Height="40">
 
-			<TextBlock Text="Hierarchy"
-			           VerticalAlignment="Center" />
+			<DockPanel>
+				<TextBlock DockPanel.Dock="Left"
+				           Margin="15 0"
+				           Text="Hierarchy"
+				           VerticalAlignment="Center" />
+
+				<Button DockPanel.Dock="Right"
+				        CornerRadius="50"
+				        HorizontalAlignment="Right"
+				        VerticalAlignment="Stretch"
+				        HorizontalContentAlignment="Center"
+				        VerticalContentAlignment="Center"
+				        Width="100" Margin="5"
+				        Command="{Binding RenderPreview}">
+
+					<TextBlock Text="Preview" />
+				</Button>
+
+				<CheckBox DockPanel.Dock="Right"
+				          x:Name="AutoUpdateCheckBox"
+				          Classes="LeftHeader"
+				          IsChecked="{Binding IsAutoUpdate}"
+				          HorizontalAlignment="Right"
+				          Margin="25 5" Content="Auto-Update" />
+			</DockPanel>
 		</Border>
 
-		<!-- Section Selector -->
-		<StackPanel DockPanel.Dock="Top">
-			<TextBlock Text="Section" FontSize="20"
-			           Classes="Header"
-			           Margin="0 30 0 0"
-			           HorizontalAlignment="Center" />
+		<TabControl Margin="5" SelectedIndex="3" Padding="20">
+			<TabItem Header="Preview">
 
-			<ComboBox HorizontalAlignment="Stretch"
-			          HorizontalContentAlignment="Center"
-			          Margin="20" MinHeight="40">
+			</TabItem>
 
-				<ComboBoxItem>Metadata</ComboBoxItem>
-				<ComboBoxItem>Properties</ComboBoxItem>
-				<ComboBoxItem>Configuration</ComboBoxItem>
-				<ComboBoxItem>Definitions</ComboBoxItem>
-				<ComboBoxItem>Render</ComboBoxItem>
-			</ComboBox>
-		</StackPanel>
+			<TabItem Header="Metadata">
 
-		<!-- Hierarchy Tree View -->
-		<TreeView ItemsSource="{Binding Nodes}"
-		          Margin="20"
-		          SelectionMode="Single">
+			</TabItem>
 
-			<TreeView.Styles>
-				<Style Selector="TreeView TreeViewItem">
-					<Setter Property="CornerRadius" Value="10" />
+			<TabItem Header="Properties">
 
-					<Style Selector="^:selected">
-						<Style Selector="^ /template/ Border#PART_LayoutRoot">
-							<Setter Property="Background" Value="#F9A9FF" />
-						</Style>
+			</TabItem>
 
-						<Style Selector="^ /template/ ContentPresenter#PART_HeaderPresenter">
-							<Setter Property="Foreground" Value="#121212" />
-						</Style>
-
-						<Style Selector="^ /template/ ToggleButton#PART_ExpandCollapseChevron">
-							<Style Selector="^ /template/ Path#ChevronPath">
-								<Setter Property="Fill" Value="#121212" />
-							</Style>
-						</Style>
-					</Style>
-				</Style>
-			</TreeView.Styles>
-
-			<!-- Item Template -->
-			<TreeView.ItemTemplate>
-				<TreeDataTemplate ItemsSource="{Binding SubNodes}">
-					<TextBlock Text="{Binding Name}" />
-				</TreeDataTemplate>
-			</TreeView.ItemTemplate>
-		</TreeView>
+			<!-- Hierarchy Tree View -->
+			<TabItem Header="Render">
+				<hierarchy:RenderTab />
+			</TabItem>
+		</TabControl>
 	</DockPanel>
 </UserControl>

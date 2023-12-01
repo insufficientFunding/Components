@@ -11,15 +11,15 @@ public interface IComponentBounds
     /// <summary>
     ///     The size of the component's bounds.
     /// </summary>
-    public Size Size { get; }
+    public Size Size { get; set; }
 
     /// <summary>
     ///     The offset of the component's bounds.
     /// </summary>
-    public Point Offset { get; }
+    public Point Offset { get; set; }
 
     /// <summary>
     ///     The conditions that must be met for the component bounds to be drawn.
     /// </summary>
-    public IConditionTreeItem Conditions { get; }
+    public IConditionTreeItem Conditions { get; set; }
 }

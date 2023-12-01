@@ -1,0 +1,109 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:Components.VisualEditor.ViewModels"
+             xmlns:renderCommands="clr-namespace:Components.VisualEditor.ViewModels.RenderCommands"
+             xmlns:models="clr-namespace:Components.VisualEditor.Models"
+             xmlns:inspector="clr-namespace:Components.VisualEditor.Controls.Inspector"
+             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="1080"
+             x:Class="Components.VisualEditor.Views.InspectorView"
+             x:DataType="viewModels:EditorViewModel">
+
+	<Design.DataContext>
+		<viewModels:EditorViewModel />
+	</Design.DataContext>
+
+	<UserControl.DataTemplates>
+
+		<DataTemplate DataType="renderCommands:RenderGroupViewModel">
+			<StackPanel Spacing="15">
+				<inspector:StringProperty PropertyName="Name"
+				                          Value="{Binding Name, Mode=TwoWay}" />
+
+				<ContentControl Content="{Binding RawConditions, Mode=TwoWay}" />
+
+				<inspector:BoolProperty PropertyName="Force Hide"
+				                        Value="{Binding ForceHidden, Mode=TwoWay}" />
+			</StackPanel>
+		</DataTemplate>
+
+		<DataTemplate DataType="renderCommands:RenderPathViewModel">
+			<StackPanel Spacing="15">
+				<inspector:StringProperty PropertyName="Name"
+				                          Value="{Binding Name, Mode=TwoWay}" />
+
+				<ItemsControl ItemsSource="{Binding Properties}">
+					<ItemsControl.ItemTemplate>
+						<DataTemplate>
+							<Border Margin="0 10">
+								<ContentControl Content="{Binding}" />
+							</Border>
+						</DataTemplate>
+					</ItemsControl.ItemTemplate>
+				</ItemsControl>
+
+				<inspector:PathCommandsProperty PropertyName="Commands"
+				                                AddPathCommand="{Binding AddPathCommand}"
+				                                DeletePathCommand="{Binding DeletePathCommand}"
+				                                Commands="{Binding Commands}" />
+			</StackPanel>
+		</DataTemplate>
+
+		<DataTemplate DataType="renderCommands:RenderCommandViewModel">
+			<StackPanel Spacing="15">
+				<inspector:StringProperty PropertyName="Name"
+				                          Value="{Binding Name, Mode=TwoWay}" />
+
+				<ItemsControl ItemsSource="{Binding Properties}">
+					<ItemsControl.ItemTemplate>
+						<DataTemplate>
+							<ContentControl Margin="0 0 0 7.5"
+							                Content="{Binding}" />
+						</DataTemplate>
+					</ItemsControl.ItemTemplate>
+				</ItemsControl>
+			</StackPanel>
+		</DataTemplate>
+	</UserControl.DataTemplates>
+
+	<!-- Body -->
+	<DockPanel>
+		<!-- Header -->
+		<Border DockPanel.Dock="Top"
+		        Background="Transparent"
+		        VerticalAlignment="Top"
+		        Height="40" Padding="15 0">
+
+			<TextBlock Text="Inspector"
+			           VerticalAlignment="Center" />
+		</Border>
+
+		<!-- Header -->
+		<StackPanel Spacing="15"
+		            DockPanel.Dock="Top"
+		            HorizontalAlignment="Center"
+		            Orientation="Horizontal">
+
+			<TextBlock Text="{Binding ((models:IEditorRenderCommand)SelectedNode).Name, FallbackValue=Nothing selected}"
+			           FontSize="20"
+			           Classes="Header"
+			           Margin="0 30 0 0"
+			           HorizontalAlignment="Center" />
+
+			<TextBlock
+				Text="{Binding ((models:IEditorRenderCommand)SelectedNode).Type, FallbackValue=( ), StringFormat='( {0} )'}"
+				FontSize="16"
+				Foreground="{DynamicResource ForegroundLow}"
+				Classes="Header"
+				Margin="0 30 0 0"
+				VerticalAlignment="Center"
+				HorizontalAlignment="Center" />
+		</StackPanel>
+
+		<ScrollViewer>
+			<ContentControl Margin="30"
+			                Content="{Binding SelectedNode, FallbackValue={x:Null}}" />
+		</ScrollViewer>
+	</DockPanel>
+</UserControl>

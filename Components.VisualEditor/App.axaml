@@ -3,18 +3,21 @@
              x:Class="Components.VisualEditor.App"
              xmlns:local="using:Components.VisualEditor"
              xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             xmlns:models="clr-namespace:Components.VisualEditor.Models"
+             xmlns:themes="clr-namespace:Material.Styles.Themes;assembly=Material.Styles"
              RequestedThemeVariant="Dark">
 	<!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
 	<Application.DataTemplates>
 		<local:ViewLocator />
 	</Application.DataTemplates>
-	
+
 	<Application.Styles>
-		<FluentTheme />
+		<themes:MaterialTheme BaseTheme="Dark" PrimaryColor="Amber" SecondaryColor="Lime" />
 
 		<materialIcons:MaterialIconStyles />
 
-		<StyleInclude Source="Styles/ControlStyles.axaml" />
+		<StyleInclude Source="/Controls/Inspector/InspectorStyles.axaml" />
+		<StyleInclude Source="/Styles/Controls/Expander.axaml" />
 	</Application.Styles>
 </Application>

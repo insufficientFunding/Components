@@ -6,23 +6,23 @@ namespace Components.Render.TypeDescription;
 
 public class ComponentPoint
 {
-    public ComponentPosition RelativeToX { get; set; }
+    public Anchor RelativeToX { get; set; }
 
-    public ComponentPosition RelativeToY { get; set; }
+    public Anchor RelativeToY { get; set; }
 
 
     public Point Offset { get; set; }
 
     public ComponentPoint ()
     {
-        RelativeToX = ComponentPosition.Start;
-        RelativeToY = ComponentPosition.Start;
+        RelativeToX = Anchor.Start;
+        RelativeToY = Anchor.Start;
         Offset = new Point ();
     }
 
     public ComponentPoint (
-        ComponentPosition relativeToX,
-        ComponentPosition relativeToY,
+        Anchor relativeToX,
+        Anchor relativeToY,
         Point offset)
     {
         RelativeToX = relativeToX;
@@ -46,19 +46,19 @@ public class ComponentPoint
         if (flipState == FlipState.Secondary)
             return returnPoint;
 
-        if (RelativeToX == ComponentPosition.Start)
-            returnPoint.RelativeToX = ComponentPosition.End;
-        else if (RelativeToX == ComponentPosition.Middle)
-            returnPoint.RelativeToX = ComponentPosition.Middle;
-        else if (RelativeToX == ComponentPosition.End)
-            returnPoint.RelativeToX = ComponentPosition.Start;
+        if (RelativeToX == Anchor.Start)
+            returnPoint.RelativeToX = Anchor.End;
+        else if (RelativeToX == Anchor.Middle)
+            returnPoint.RelativeToX = Anchor.Middle;
+        else if (RelativeToX == Anchor.End)
+            returnPoint.RelativeToX = Anchor.Start;
 
-        if (RelativeToY == ComponentPosition.Start)
-            returnPoint.RelativeToY = ComponentPosition.End;
-        else if (RelativeToY == ComponentPosition.Middle)
-            returnPoint.RelativeToY = ComponentPosition.Middle;
-        else if (RelativeToY == ComponentPosition.End)
-            returnPoint.RelativeToY = ComponentPosition.Start;
+        if (RelativeToY == Anchor.Start)
+            returnPoint.RelativeToY = Anchor.End;
+        else if (RelativeToY == Anchor.Middle)
+            returnPoint.RelativeToY = Anchor.Middle;
+        else if (RelativeToY == Anchor.End)
+            returnPoint.RelativeToY = Anchor.Start;
 
         return returnPoint;
     }
@@ -71,14 +71,14 @@ public class ComponentPoint
         double x = tempPoint.Offset.X;
         double y = tempPoint.Offset.Y;
 
-        if (tempPoint.RelativeToX == ComponentPosition.Middle)
+        if (tempPoint.RelativeToX == Anchor.Middle)
             x += layout.Size / 2;
-        if (tempPoint.RelativeToY == ComponentPosition.Middle)
+        if (tempPoint.RelativeToY == Anchor.Middle)
             y += layout.Size / 2;
 
-        if (tempPoint.RelativeToX == ComponentPosition.End)
+        if (tempPoint.RelativeToX == Anchor.End)
             x += layout.Size;
-        if (tempPoint.RelativeToY == ComponentPosition.End)
+        if (tempPoint.RelativeToY == Anchor.End)
             y += layout.Size;
 
         return new Point (x, y);
@@ -114,11 +114,12 @@ public class ComponentPoint
     {
         return HashCode.Combine ((int)RelativeToX, (int)RelativeToY, Offset);
     }
-}
-public enum ComponentPosition
-{
-    Absolute = 0,
-    Start = 1,
-    Middle = 2,
-    End = 3,
+
+    public enum Anchor
+    {
+        Absolute = 0,
+        Start = 1,
+        Middle = 2,
+        End = 3,
+    }
 }

@@ -8,12 +8,12 @@ public interface IComponentDescription
     /// <summary>
     ///     The properties of the component.
     /// </summary>
-    IComponentDescriptionProperty [] Properties { get; }
+    IComponentDescriptionProperty [] Properties { get; set; }
 
     /// <summary>
     ///     The render descriptions of the component.
     /// </summary>
-    IRenderDescription [] RenderDescriptions { get; }
+    IRenderDescription [] RenderDescriptions { get; set; }
 
     /// <summary>
     ///     The configuration of the component.

@@ -3,7 +3,7 @@ namespace Components.Render.TypeDescription.Conditions;
 
 public class Conditional<T> : IConditional<T>
 {
-    public IConditionTreeItem Conditions { get; private set; }
+    public IConditionTreeItem Conditions { get; protected set; }
 
     public T Value { get; set; }
 

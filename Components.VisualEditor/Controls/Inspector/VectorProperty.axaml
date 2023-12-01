@@ -1,0 +1,57 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:wpf="clr-namespace:Material.Styles.Assists;assembly=Material.Styles"
+        xmlns:controls="using:Components.VisualEditor.Controls.Inspector">
+
+	<Design.PreviewWith>
+		<Border Padding="20" Width="300">
+			<controls:VectorProperty X="21" Y="22" />
+		</Border>
+	</Design.PreviewWith>
+
+	<Style Selector="controls|VectorProperty">
+		<Setter Property="Template">
+			<ControlTemplate>
+				<Grid ColumnDefinitions="*,*" Margin="0 15">
+					<StackPanel Grid.Column="0"
+					            Spacing="10"
+					            Orientation="Horizontal">
+
+						<TextBlock VerticalAlignment="Center"
+						           Classes="Body1" Foreground="{DynamicResource MaterialBodyBrush}"
+						           UseLayoutRounding="False"
+						           Text="{TemplateBinding PropertyName}" />
+
+						<TextBlock VerticalAlignment="Center"
+						           Classes="Body2" Foreground="{DynamicResource MaterialBodyLightBrush}"
+						           UseLayoutRounding="False"
+						           Text="( Vector )" />
+					</StackPanel>
+
+					<Grid Grid.Column="1"
+					      ColumnDefinitions="*,*">
+						<!-- X -->
+						<TextBox Grid.Column="0"
+						         Margin="5 0 5 0"
+						         MinWidth="10"
+						         Classes="filled"
+						         wpf:TextFieldAssist.Label="X"
+						         UseFloatingWatermark="True"
+						         Text="{Binding $parent[controls:VectorProperty].X, Mode=TwoWay}" />
+
+
+						<!-- Y -->
+						<TextBox Grid.Column="1"
+						         Margin="5 0 0 0"
+						         MinWidth="10"
+						         Classes="filled"
+						         wpf:TextFieldAssist.Label="Y"
+						         UseFloatingWatermark="True"
+						         Text="{Binding $parent[controls:VectorProperty].Y, Mode=TwoWay}" />
+					</Grid>
+				</Grid>
+
+			</ControlTemplate>
+		</Setter>
+	</Style>
+</Styles>

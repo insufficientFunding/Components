@@ -6,11 +6,11 @@ namespace Components.Render.TypeDescription.TypeDescription;
 /// <inheritdoc cref="IComponentBounds"/>
 public class ComponentBounds : IComponentBounds
 {
-    public Size Size { get; }
+    public Size Size { get; set; }
     
-    public Point Offset { get; }
+    public Point Offset { get; set; }
 
-    public IConditionTreeItem Conditions { get; }
+    public IConditionTreeItem Conditions { get; set; }
 
     /// <summary>
     ///     Creates a new instance of the <see cref="ComponentBounds"/> class.

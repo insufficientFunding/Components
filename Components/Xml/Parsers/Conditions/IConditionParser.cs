@@ -3,12 +3,12 @@ using Components.Interfaces.TypeDescription;
 using System.Xml.Linq;
 namespace Components.Xml.Parsers.Conditions;
 
-internal interface IConditionParser
+public interface IConditionParser
 {
     IConditionTreeItem Parse (IComponentDescription description, string input);
 }
 
-internal static class ConditionParserExtension
+public static class ConditionParserExtension
 {
     public static bool Parse (this IConditionParser parser, XAttribute conditionsAttribute, IComponentDescription description, out IConditionTreeItem value)
     {

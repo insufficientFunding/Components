@@ -22,13 +22,13 @@ internal class ComponentPointParser : IComponentPointParser
         x = x.Replace (" ", string.Empty);
         y = y.Replace (" ", string.Empty);
 
-        if (!TryParseComponentPosition (x, xRange, out ComponentPosition relativeToX, out string remainingX))
+        if (!TryParseComponentPosition (x, xRange, out ComponentPoint.Anchor relativeToX, out string remainingX))
             return false;
 
         if (!TryParseOffsets (remainingX, OffsetAxis.X, xRange, out IList<IXmlComponentPointOffset> xOffsets))
             return false;
 
-        if (!TryParseComponentPosition (y, yRange, out ComponentPosition relativeToY, out string remainingY))
+        if (!TryParseComponentPosition (y, yRange, out ComponentPoint.Anchor relativeToY, out string remainingY))
             return false;
 
         if (!TryParseOffsets (remainingY, OffsetAxis.Y, yRange, out IList<IXmlComponentPointOffset> yOffsets))
@@ -44,7 +44,7 @@ internal class ComponentPointParser : IComponentPointParser
     {
         position = position.Replace (" ", string.Empty);
 
-        if (!TryParseComponentPosition (position, range, out ComponentPosition relativeTo, out string remaining))
+        if (!TryParseComponentPosition (position, range, out ComponentPoint.Anchor relativeTo, out string remaining))
         {
             componentPoint = null;
             return false;
@@ -60,28 +60,28 @@ internal class ComponentPointParser : IComponentPointParser
         return true;
     }
 
-    private bool TryParseComponentPosition (string s, FileRange range, out ComponentPosition componentPosition, out string remaining)
+    private bool TryParseComponentPosition (string s, FileRange range, out ComponentPoint.Anchor componentPosition, out string remaining)
     {
         if (s.StartsWith ("_Start", StringComparison.OrdinalIgnoreCase))
         {
-            componentPosition = ComponentPosition.Start;
+            componentPosition = ComponentPoint.Anchor.Start;
             remaining = s.Substring ("_Start".Length);
             return true;
         }
         if (s.StartsWith ("_Middle", StringComparison.OrdinalIgnoreCase))
         {
-            componentPosition = ComponentPosition.Middle;
+            componentPosition = ComponentPoint.Anchor.Middle;
             remaining = s.Substring ("_Middle".Length);
             return true;
         }
         if (s.StartsWith ("_End", StringComparison.OrdinalIgnoreCase))
         {
-            componentPosition = ComponentPosition.End;
+            componentPosition = ComponentPoint.Anchor.End;
             remaining = s.Substring ("_End".Length);
             return true;
         }
         _logger.Log (LogLevel.Error, range, $"Invalid point '{s}' (expected a string beginning with '_Start', '_Middle' or '_End'");
-        componentPosition = ComponentPosition.Absolute;
+        componentPosition = ComponentPoint.Anchor.Absolute;
         remaining = string.Empty;
         return false;
     }

@@ -57,7 +57,7 @@ public static class TestHelper
 
         foreach (IRenderDescription renderDescription in description.RenderDescriptions)
         {
-            if (renderDescription.Conditions.IsMet (component, description))
+            if (renderDescription.Conditions.IsMet (component))
                 renderDescription.Render (context, layoutContext, component.Layout);
         }
 

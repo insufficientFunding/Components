@@ -16,20 +16,20 @@
 
 	<!-- ComboBox -->
 	<Style Selector="ComboBox">
-		<Setter Property="Background" Value="#1A1A1A" />
+		<Setter Property="Background" Value="#33000000" />
 		<Setter Property="BorderThickness" Value="0" />
 
 		<!-- Background Border -->
 		<Style Selector="^ /template/ Border#Background">
 			<Style Selector="^:pointerover">
-				<Setter Property="Background" Value="#202020" />
+				<Setter Property="Background" Value="#29000000" />
 			</Style>
 		</Style>
 
 		<!-- Popup Border -->
 		<Style Selector="^ /template/ Border#PopupBorder">
 			<Style Selector="^:not(.No-Style)">
-				<Setter Property="Background" Value="#1F1F1F" />
+				<Setter Property="Background" Value="#303030" />
 				<Setter Property="BorderThickness" Value="0" />
 			</Style>
 		</Style>
@@ -38,8 +38,8 @@
 	<!-- ComboBoxItem -->
 	<Style Selector="ComboBoxItem">
 		<Style Selector="^:selected /template/ ContentPresenter">
-			<Setter Property="Background" Value="#F9A9FF" />
-			<Setter Property="Foreground" Value="#121212" />
+			<Setter Property="Background" Value="{DynamicResource Accent}" />
+			<Setter Property="Foreground" Value="#202020" />
 		</Style>
 	</Style>
 </Styles>

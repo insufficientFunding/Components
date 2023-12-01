@@ -1,0 +1,21 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<Design.PreviewWith>
+		<Border Padding="20">
+			<ListBox>
+				<ListBoxItem>ListItem1</ListBoxItem>
+				<ListBoxItem>ListItem2</ListBoxItem>
+				<ListBoxItem>ListItem3</ListBoxItem>
+			</ListBox>
+		</Border>
+	</Design.PreviewWith>
+
+	<Style Selector="ListBoxItem">
+		<Style Selector="^:selected">
+			<Style Selector="^ /template/ ContentPresenter">
+				<Setter Property="Background" Value="{DynamicResource Accent}" />
+				<Setter Property="Foreground" Value="{DynamicResource Background}" />
+			</Style>
+		</Style>
+	</Style>
+</Styles>

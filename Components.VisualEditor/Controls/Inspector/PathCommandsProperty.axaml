@@ -1,0 +1,124 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Components.VisualEditor.Controls.Inspector"
+        xmlns:objectModel="clr-namespace:System.Collections.ObjectModel;assembly=System.ObjectModel"
+        xmlns:renderCommands="clr-namespace:Components.VisualEditor.ViewModels.RenderCommands"
+        xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+        xmlns:input="clr-namespace:System.Windows.Input;assembly=System.ObjectModel"
+        xmlns:extensions="clr-namespace:Components.VisualEditor.Extensions"
+        xmlns:controls1="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
+        xmlns:assists="clr-namespace:Material.Styles.Assists;assembly=Material.Styles">
+	<Design.PreviewWith>
+		<Border Padding="20" Width="350" Height="800">
+			<controls:PathCommandsProperty VerticalAlignment="Top" />
+		</Border>
+	</Design.PreviewWith>
+
+	<Style Selector="controls|PathCommandsProperty">
+		<!-- Set Defaults -->
+		<Setter Property="Template">
+			<ControlTemplate>
+				<Expander x:Name="RootExpander"
+				          Margin="0 3" Padding="20"
+				          IsExpanded="True"
+				          assists:ShadowAssist.ShadowDepth="Depth0"
+				          HorizontalAlignment="Stretch">
+
+					<Expander.Header>
+						<StackPanel Grid.Column="0"
+						            Spacing="15"
+						            Orientation="Horizontal">
+
+							<Button Classes="Mini"
+							        CornerRadius="50"
+							        Width="30"
+							        Height="30"
+							        UseLayoutRounding="False">
+								<avalonia:MaterialIcon Kind="Plus"
+								                       Width="24" Height="24"
+								                       Foreground="{DynamicResource MaterialPrimaryMidForegroundBrush}" />
+
+								<Interaction.Behaviors>
+									<ButtonClickEventTriggerBehavior>
+										<PopupAction>
+											<FlyoutPresenter Background="{DynamicResource MaterialCardBackgroundBrush}" Padding="0">
+												<ItemsControl ItemsSource="{x:Static extensions:RenderCommandExtensions.PathCommandNames}">
+													<ItemsControl.ItemTemplate>
+														<DataTemplate>
+															<MenuItem Header="{Binding}" Padding="10"
+															          Command="{Binding Path=$parent[controls:PathCommandsProperty].AddPathHandler}"
+															          CommandParameter="{Binding}" />
+														</DataTemplate>
+													</ItemsControl.ItemTemplate>
+												</ItemsControl>
+											</FlyoutPresenter>
+										</PopupAction>
+									</ButtonClickEventTriggerBehavior>
+								</Interaction.Behaviors>
+
+							</Button>
+
+							<TextBlock Classes="Body1" Foreground="{DynamicResource MaterialBodyBrush}"
+							           VerticalAlignment="Center"
+							           TextAlignment="Center"
+							           UseLayoutRounding="False"
+							           Text="{TemplateBinding PropertyName}" />
+
+							<TextBlock Classes="Body1" Foreground="{DynamicResource MaterialBodyLightBrush}"
+							           VerticalAlignment="Center"
+							           TextAlignment="Center"
+							           UseLayoutRounding="False"
+							           FontSize="10"
+							           Text="( PathCommands )" />
+						</StackPanel>
+					</Expander.Header>
+
+					<Expander.Content>
+						<ItemsControl ItemsSource="{TemplateBinding Commands}"
+						              Margin="20">
+							<ItemsControl.ItemTemplate>
+								<DataTemplate DataType="renderCommands:PathCommandViewModel">
+									<Expander Margin="0 10" Padding="20"
+									          IsExpanded="True"
+									          HorizontalAlignment="Stretch">
+
+										<Expander.ContextMenu>
+											<ContextMenu>
+												<MenuItem Header="Delete"
+												          Command="{Binding $parent[controls:PathCommandsProperty].DeletePathHandler}"
+												          HotKey="Delete"
+												          CommandParameter="{Binding }" />
+											</ContextMenu>
+										</Expander.ContextMenu>
+
+										<Expander.Header>
+											<StackPanel Spacing="10"
+											            Orientation="Horizontal">
+
+												<TextBlock VerticalAlignment="Center"
+												           Classes="Body1" Foreground="{DynamicResource MaterialBodyBrush}"
+												           UseLayoutRounding="False"
+												           Text="{Binding  Type}" />
+											</StackPanel>
+										</Expander.Header>
+
+										<Expander.Content>
+											<ItemsControl Margin="20" ItemsSource="{Binding Properties}">
+												<ItemsControl.ItemTemplate>
+													<DataTemplate>
+														<ContentControl Content="{Binding}"
+														                Margin="0 10 0 0"/>
+													</DataTemplate>
+												</ItemsControl.ItemTemplate>
+											</ItemsControl>
+										</Expander.Content>
+									</Expander>
+								</DataTemplate>
+							</ItemsControl.ItemTemplate>
+						</ItemsControl>
+					</Expander.Content>
+				</Expander>
+			</ControlTemplate>
+		</Setter>
+	</Style>
+</Styles>

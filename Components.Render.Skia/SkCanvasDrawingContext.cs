@@ -30,6 +30,11 @@ public class SkCanvasDrawingContext : IDrawingContext
     public double BoundsSize { get; set; } = 120D;
 
     /// <summary>
+    ///     The size of the component's rendering area.
+    /// </summary>
+    public double ComponentSize { get; set; } = 100D;
+
+    /// <summary>
     ///     The color to draw with.
     /// </summary>
     public SKColor Color { get; set; } = SKColors.White;
@@ -55,8 +60,8 @@ public class SkCanvasDrawingContext : IDrawingContext
             StrokeCap = SKStrokeCap.Round,
         };
 
-        SKPoint startPoint = start.ToSkPoint ().ScaleToCanvasSize (BoundsSize);
-        SKPoint endPoint = end.ToSkPoint ().ScaleToCanvasSize (BoundsSize);
+        SKPoint startPoint = start.ToSkPoint ().ScaleToCanvasSize (BoundsSize, (float)ComponentSize);
+        SKPoint endPoint = end.ToSkPoint ().ScaleToCanvasSize (BoundsSize, (float)ComponentSize);
 
         SkCanvas?.DrawLine (startPoint, endPoint, paint);
     }
@@ -72,8 +77,8 @@ public class SkCanvasDrawingContext : IDrawingContext
             StrokeCap = SKStrokeCap.Round,
         };
 
-        SKPoint startPoint = start.ToSkPoint ().ScaleToCanvasSize (BoundsSize);
-        SKSize skSize = size.ToSkSize () .ScaleToCanvasSize (BoundsSize);
+        SKPoint startPoint = start.ToSkPoint ().ScaleToCanvasSize (BoundsSize, (float)ComponentSize);
+        SKSize skSize = size.ToSkSize () .ScaleToCanvasSize (BoundsSize, (float)ComponentSize);
 
         SkCanvas?.DrawRect (startPoint.X, startPoint.Y, skSize.Width, skSize.Height, paint);
     }
@@ -89,8 +94,8 @@ public class SkCanvasDrawingContext : IDrawingContext
             StrokeCap = SKStrokeCap.Round,
         };
 
-        SKPoint centerPoint = center.ToSkPoint ().ScaleToCanvasSize (BoundsSize);
-        SKSize skiaRadius = radius.ToSkSize  ().ScaleToCanvasSize (BoundsSize);
+        SKPoint centerPoint = center.ToSkPoint ().ScaleToCanvasSize (BoundsSize, (float)ComponentSize);
+        SKSize skiaRadius = radius.ToSkSize  ().ScaleToCanvasSize (BoundsSize, (float)ComponentSize);
 
         SkCanvas?.DrawOval (centerPoint.X, centerPoint.Y, skiaRadius.Width, skiaRadius.Height, paint);
     }
@@ -106,13 +111,13 @@ public class SkCanvasDrawingContext : IDrawingContext
             StrokeCap = SKStrokeCap.Round,
         };
 
-        SKPoint startPoint = start.ToSkPoint ().ScaleToCanvasSize (BoundsSize);
+        SKPoint startPoint = start.ToSkPoint ().ScaleToCanvasSize (BoundsSize, (float)ComponentSize);
 
         SKPath path = new SKPath ();
         path.MoveTo (startPoint);
         foreach (IPathCommand command in commands)
         {
-            SKPoint endPoint = command.End.ToSkPoint ().ScaleToCanvasSize (BoundsSize);
+            SKPoint endPoint = command.End.ToSkPoint ().ScaleToCanvasSize (BoundsSize, (float)ComponentSize);
             endPoint = command.Relative ? path.LastPoint + endPoint : endPoint;
 
             switch (command)
@@ -130,7 +135,7 @@ public class SkCanvasDrawingContext : IDrawingContext
                     SKPathDirection pathDirection = arcTo.SweepDirection == SweepDirection.Clockwise ? SKPathDirection.Clockwise : SKPathDirection.CounterClockwise;
 
                     path.ArcTo (
-                        arcTo.Radii.ToSkPoint ().ScaleToCanvasSize (BoundsSize),
+                        arcTo.Radii.ToSkPoint ().ScaleToCanvasSize (BoundsSize, (float)ComponentSize),
                         (float)arcTo.Angle,
                         pathArcSize,
                         pathDirection,
@@ -180,7 +185,7 @@ public class SkCanvasDrawingContext : IDrawingContext
             totalHeight = Math.Max (totalHeight, bounds.Height);
         }
 
-        SKPoint startLocation = anchor.ToSkPoint ().ScaleToCanvasSize (BoundsSize);
+        SKPoint startLocation = anchor.ToSkPoint ().ScaleToCanvasSize (BoundsSize, (float)ComponentSize);
 
         SkCanvas?.Save ();
         SkCanvas?.RotateDegrees ((float)rotation, startLocation.X, startLocation.Y);

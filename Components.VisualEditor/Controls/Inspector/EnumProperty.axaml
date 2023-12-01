@@ -1,0 +1,38 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Components.VisualEditor.Controls.Inspector">
+	<Design.PreviewWith>
+		<Border Padding="50">
+		<controls:EnumProperty />
+		</Border>
+	</Design.PreviewWith>
+
+	<Style Selector="controls|EnumProperty">
+		<!-- Set Defaults -->
+		<Setter Property="Template">
+			<ControlTemplate>
+				<Grid ColumnDefinitions="*,*" Margin="0 15">
+					<StackPanel Grid.Column="0"
+					            Spacing="10"
+					            Orientation="Horizontal">
+
+						<TextBlock VerticalAlignment="Center"
+						           Classes="Body1" Foreground="{DynamicResource MaterialBodyBrush}"
+						           UseLayoutRounding="False"
+						           Text="{TemplateBinding PropertyName}" />
+
+						<TextBlock VerticalAlignment="Center"
+						           Classes="Body2" Foreground="{DynamicResource MaterialBodyLightBrush}"
+						           UseLayoutRounding="False"
+						           Text="( Enum )" />
+					</StackPanel>
+
+					<ComboBox Grid.Column="1"
+					          Theme="{StaticResource MaterialFilledComboBox}"
+					         SelectedItem="{Binding $parent[controls:EnumProperty].SelectedItem, Mode=TwoWay}"
+					         ItemsSource="{TemplateBinding ItemsSource}"/>
+				</Grid>
+			</ControlTemplate>
+		</Setter>
+	</Style>
+</Styles>

@@ -1,0 +1,145 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Components.VisualEditor.Controls.Inspector"
+        xmlns:viewModels="clr-namespace:Components.VisualEditor.ViewModels"
+        xmlns:assists="clr-namespace:Material.Styles.Assists;assembly=Material.Styles"
+        xmlns:system="clr-namespace:System;assembly=System.Runtime"
+        xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+        xmlns:validation="clr-namespace:Components.VisualEditor.ViewModels.Validation"
+        xmlns:converters="clr-namespace:Components.VisualEditor.Converters"
+        xmlns:conditions="clr-namespace:Components.Render.TypeDescription.Conditions;assembly=Egoland.Components">
+	<Design.PreviewWith>
+		<Border Width="400" Padding="20">
+			<controls:ConditionsProperty />
+		</Border>
+	</Design.PreviewWith>
+
+	<Style Selector="controls|ConditionsProperty">
+		<Style.Resources>
+			<converters:EnumerableConverter x:Key="EnumerableConverter" />
+			<converters:ToStringEqualsConverter x:Key="ToStringEqualsConverter" />
+		</Style.Resources>
+
+		<!-- Set Defaults -->
+		<Setter Property="Template">
+			<ControlTemplate>
+				<Expander Margin="0 15"
+				          IsExpanded="True"
+				          HorizontalAlignment="Stretch">
+
+					<Expander.Header>
+						<StackPanel Spacing="10"
+						            Orientation="Horizontal">
+
+							<TextBlock VerticalAlignment="Center"
+							           Classes="Body1" Foreground="{DynamicResource MaterialBodyBrush}"
+							           UseLayoutRounding="False"
+							           Text="Conditions" />
+
+							<TextBlock VerticalAlignment="Center"
+							           Classes="Body2" Foreground="{DynamicResource MaterialBodyLightBrush}"
+							           UseLayoutRounding="False"
+							           Text="( ConditionTree )" />
+						</StackPanel>
+					</Expander.Header>
+
+					<Expander.Content>
+						<Border Padding="20 20 20 5">
+							<StackPanel Spacing="15">
+								<!-- First item is separated, to remove the Operator button -->
+								<ContentPresenter
+									Content="{Binding $parent[controls:ConditionsProperty].ConditionsCollection,
+																			Converter={StaticResource EnumerableConverter},
+																			ConverterParameter=At:0,
+																			Mode=OneWay}">
+									<ContentPresenter.ContentTemplate>
+										<DataTemplate DataType="validation:ConditionStatementViewModel">
+											<Grid ColumnDefinitions="*,Auto" Margin="0 0 0 15">
+
+												<!-- Left -->
+												<TextBox Grid.Column="0"
+												         Classes="filled" VerticalAlignment="Center"
+												         Text="{Binding Statement, Mode=TwoWay}"
+												         Margin="47 0 10 0" />
+
+												<Button Grid.Column="1" Width="36" Height="36"
+												        Padding="0"
+												        ToolTip.Tip="Remove"
+												        UseLayoutRounding="False"
+												        Command="{Binding $parent[controls:ConditionsProperty].RemoveConditionCommand}"
+												        CommandParameter="{Binding}"
+												        HorizontalContentAlignment="Center" VerticalAlignment="Top"
+												        Classes="outline">
+
+													<avalonia:MaterialIcon Kind="Remove" />
+												</Button>
+											</Grid>
+										</DataTemplate>
+									</ContentPresenter.ContentTemplate>
+								</ContentPresenter>
+
+								<!-- Rest of items -->
+								<ItemsControl Name="ItemsControl"
+								              ItemsSource="{Binding $parent[controls:ConditionsProperty].ConditionsCollection,
+																		Mode=OneWay,
+																		Converter={StaticResource EnumerableConverter},
+																		ConverterParameter=Skip:1}">
+									<ItemsControl.ItemTemplate>
+										<DataTemplate DataType="validation:ConditionStatementViewModel">
+											<Grid ColumnDefinitions="Auto,*,Auto" Margin="0 0 0 15">
+
+												<Button Grid.Column="0" Width="36" Height="36"
+												        Padding="0"
+												        ToolTip.Tip="Operator"
+												        UseLayoutRounding="False"
+												        HorizontalContentAlignment="Center" VerticalAlignment="Top"
+												        Command="{Binding ChangeOperator}"
+												        Classes="outline">
+													<Panel>
+														<avalonia:MaterialIcon Kind="And"
+														                       IsVisible="{Binding Operator, 
+																									Converter={StaticResource ToStringEqualsConverter},
+																									ConverterParameter=AND}" />
+
+														<avalonia:MaterialIcon Kind="SlashForward"
+														                       IsVisible="{Binding Operator, 
+																									Converter={StaticResource ToStringEqualsConverter},
+																									ConverterParameter=OR}" />
+													</Panel>
+												</Button>
+
+												<!-- Left -->
+												<TextBox Grid.Column="1"
+												         Classes="filled" VerticalAlignment="Center"
+												         Text="{Binding Statement, Mode=TwoWay}"
+												         Margin="10 0 10 0" />
+
+												<Button Grid.Column="2" Width="36" Height="36"
+												        Padding="0"
+												        ToolTip.Tip="Remove"
+												        UseLayoutRounding="False"
+												        Command="{Binding $parent[controls:ConditionsProperty].RemoveConditionCommand}"
+												        CommandParameter="{Binding}"
+												        HorizontalContentAlignment="Center" VerticalAlignment="Top"
+												        Classes="outline">
+
+													<avalonia:MaterialIcon Kind="Remove" />
+												</Button>
+											</Grid>
+										</DataTemplate>
+									</ItemsControl.ItemTemplate>
+								</ItemsControl>
+
+								<Button CornerRadius="50"
+								        Classes="outline"
+								        Height="40" Margin="0 0 0 15"
+								        Content="New Condition"
+								        Command="{Binding $parent[controls:ConditionsProperty].AddConditionCommand}" />
+							</StackPanel>
+						</Border>
+					</Expander.Content>
+				</Expander>
+			</ControlTemplate>
+		</Setter>
+	</Style>
+</Styles>

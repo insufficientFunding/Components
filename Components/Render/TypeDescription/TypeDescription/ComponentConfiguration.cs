@@ -5,9 +5,9 @@ namespace Components.Render.TypeDescription.TypeDescription;
 /// <inheritdoc cref="IComponentConfiguration"/>
 public class ComponentConfiguration : IComponentConfiguration
 {
-    public IEnumerable<IComponentBounds> Bounds { get; internal protected set; } = null!;
+    public IEnumerable<IComponentBounds> Bounds { get; set; } = null!;
 
-    public AutoRotateType AutoRotate { get; internal protected set; }
+    public AutoRotateType AutoRotate { get; set; }
 
-    public FlipState AutoRotateFlip { get; internal protected set; }
+    public FlipState AutoRotateFlip { get; set; }
 }

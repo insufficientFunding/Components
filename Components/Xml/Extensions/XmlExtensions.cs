@@ -12,8 +12,6 @@ internal static class XmlExtensions
                 return PropertyValue.Type.Boolean;
             case PropertyType.Double:
                 return PropertyValue.Type.Numeric;
-            case PropertyType.Integer:
-                return PropertyValue.Type.Numeric;
             case PropertyType.Enum:
                 return PropertyValue.Type.String;
             case PropertyType.String:
