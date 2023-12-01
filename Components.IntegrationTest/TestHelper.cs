@@ -1,16 +1,13 @@
-﻿using Components.Interfaces;
-using Components.Interfaces.Render;
-using Components.Interfaces.TypeDescription;
+﻿using Components.Base.Models;
 using Components.Render.Drawing;
 using Components.Render.Drawing.DrawingContext;
+using Components.Render.TypeDescription;
+using Components.Render.TypeDescription.TypeDescription;
 using Components.Services;
 using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Text.Json.Serialization.Metadata;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace Components.IntegrationTest;
@@ -29,11 +26,11 @@ public static class TestHelper
     }
 
     #region Svg
-    public static void RenderAllToSvg (HashSet<IComponentDescription> componentDescriptions, string path)
+    public static void RenderAllToSvg (HashSet<ComponentDescription> componentDescriptions, string path)
     {
         IComponentService componentService = Program.Services.GetRequiredService<IComponentService> ();
 
-        foreach (IComponentDescription description in componentDescriptions)
+        foreach (ComponentDescription description in componentDescriptions)
         {
             IPositionalComponent? component = componentService.CreateComponent (description.Metadata.Name);
             if (component is null)
@@ -47,7 +44,7 @@ public static class TestHelper
         }
     }
 
-    public static void RenderToSvg (IPositionalComponent component, IComponentDescription description, string path)
+    public static void RenderToSvg (IPositionalComponent component, ComponentDescription description, string path)
     {
         using FileStream? fileStream = File.Open (path + $"/{component.Name}.svg", FileMode.OpenOrCreate, FileAccess.ReadWrite);
 
@@ -55,7 +52,7 @@ public static class TestHelper
 
         ILayoutContext layoutContext = new LayoutContext ();
 
-        foreach (IRenderDescription renderDescription in description.RenderDescriptions)
+        foreach (RenderDescription renderDescription in description.RenderDescriptions)
         {
             if (renderDescription.Conditions.IsMet (component))
                 renderDescription.Render (context, layoutContext, component.Layout);
@@ -65,11 +62,11 @@ public static class TestHelper
     #endregion
 
     #region Serialize
-    public static void SerializeAllToJson (HashSet<IComponentDescription> componentDescriptions, string path)
+    public static void SerializeAllToJson (HashSet<ComponentDescription> componentDescriptions, string path)
     {
         IComponentService componentService = Program.Services.GetRequiredService<IComponentService> ();
 
-        foreach (IComponentDescription description in componentDescriptions)
+        foreach (ComponentDescription description in componentDescriptions)
         {
             IPositionalComponent? component = componentService.CreateComponent (description.Metadata.Name);
             if (component is null)
@@ -83,7 +80,7 @@ public static class TestHelper
         }
     }
 
-    public static void SerializeToJson (IPositionalComponent component, IComponentDescription description, string path)
+    public static void SerializeToJson (IPositionalComponent component, ComponentDescription description, string path)
     {
         using FileStream? fileStream = File.Open (path + $"/{component.Name}.json", FileMode.Create, FileAccess.ReadWrite);
 
