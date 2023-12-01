@@ -1,8 +1,7 @@
-﻿using Components.Interfaces;
-using Components.Interfaces.TypeDescription;
+﻿using Components.Base.Models;
+using Components.IO.Xml;
 using Components.Logging;
-using Components.Xml;
-using Components.Xml.Definitions;
+using Components.Render.TypeDescription.TypeDescription;
 using System.ComponentModel;
 namespace Components.Services;
 
@@ -23,13 +22,13 @@ public sealed partial class ComponentService
 
     public IPositionalComponent? CreateComponent (string name)
     {
-        if (!TryGetDescription (name, out IComponentDescription? description))
+        if (!TryGetDescription (name, out ComponentDescription? description))
             return _logger.LogErrorReturnDefault<IPositionalComponent?> ($"Could not find component description with name: {name}");
 
         return CreateComponent (description!);
     }
 
-    private IPositionalComponent CreateComponent (IComponentDescription description)
+    private IPositionalComponent CreateComponent (ComponentDescription description)
     {
         IPositionalComponent component = new PositionalComponent (description.Metadata.Name);
 
@@ -42,7 +41,7 @@ public sealed partial class ComponentService
 
     public IEnumerable<IComponentProperty> CreateProperties (IPositionalComponent component)
     {
-        if (!TryGetDescription(component.Name, out IComponentDescription? description))
+        if (!TryGetDescription(component.Name, out ComponentDescription? description))
             throw new WarningException ($"Could not find component description with name: {component.Name}");
         
         List<IComponentProperty> properties = description!.Properties
@@ -52,11 +51,11 @@ public sealed partial class ComponentService
         return properties;
     }
 
-    private IComponentDescription ReadComponent (XmlLoader loader, string path)
+    private ComponentDescription ReadComponent (XmlLoader loader, string path)
     {
         using FileStream stream = File.OpenRead (path);
 
-        if (!loader.Load (stream, _logger, out IComponentDescription description))
+        if (!loader.Load (stream, _logger, out ComponentDescription description))
             Console.WriteLine ("error error on the wall, who's the angriest of them all?");
 
         return description;

@@ -1,19 +1,19 @@
-﻿using Components.DataModels;
-using Components.Enums;
-using Components.Extensions;
-using Components.Interfaces;
+﻿using Components.Base.DataModels;
+using Components.Base.Enums;
+using Components.Base.Extensions;
+using Components.Base.Models;
 namespace Components;
 
 /// <inheritdoc cref="IComponentProperty"/>
 internal class ComponentProperty : IComponentProperty
 {
-    public PropertyName Name { get; init; }
+    public PropertyName Name { get; set; }
     
     public PropertyValue Value { get; set; }
     
-    public PropertyType Type { get; init; }
+    public PropertyType Type { get; set; }
     
-    public string []? EnumOptions { get; init; }
+    public string []? EnumOptions { get; set; }
     
     public bool Serializable { get; init; }
     

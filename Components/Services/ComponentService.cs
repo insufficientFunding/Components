@@ -1,11 +1,6 @@
-﻿using Components.Interfaces;
-using Components.Interfaces.TypeDescription;
-using Components.Logging;
-using Components.Xml;
-using Components.Xml.Definitions;
+﻿using Components.Base.Models;
+using Components.Render.TypeDescription.TypeDescription;
 using Microsoft.Extensions.Logging;
-using System.Collections;
-using System.Collections.ObjectModel;
 namespace Components.Services;
 
 /// <inheritdoc cref="IComponentService"/>
@@ -14,7 +9,7 @@ namespace Components.Services;
 /// </summary>
 public sealed partial class ComponentService : IComponentService
 {
-    private readonly HashSet<IComponentDescription> _descriptions = new HashSet<IComponentDescription> ();
+    private readonly HashSet<ComponentDescription> _descriptions = new HashSet<ComponentDescription> ();
     private readonly HashSet<IPositionalComponent> _components = new HashSet<IPositionalComponent> ();
 
     private readonly ILogger<ComponentService> _logger;

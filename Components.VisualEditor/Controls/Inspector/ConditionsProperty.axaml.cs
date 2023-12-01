@@ -53,10 +53,7 @@ public class ConditionsProperty : TemplatedControl
     {
         ConditionsCollection =
         [
-            new ConditionStatementViewModel ("$Type == Gay"),
-            new ConditionStatementViewModel (""),
-            new ConditionStatementViewModel ("!Horizontal"),
-            new ConditionStatementViewModel ("!Gay"),
+            new ConditionStatementViewModel ("Horizontal"),
         ];
 
         RemoveConditionCommand = new RelayCommand<ConditionStatementViewModel> (RemoveCondition);

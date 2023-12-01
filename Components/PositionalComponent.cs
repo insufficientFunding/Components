@@ -1,6 +1,6 @@
-﻿using Components.DataModels;
-using Components.Enums;
-using Components.Interfaces;
+﻿using Components.Base.DataModels;
+using Components.Base.Models;
+using Components.Base.Properties;
 namespace Components;
 
 /// <summary>
@@ -61,9 +61,9 @@ public class PositionalComponent : Component, IPositionalComponent
             return false;
 
         // If we are setting the visibility of the property, then we set the visibility and return true.
-        if (isSettingVisibility)
+        if (property is ISerializableProperty visibleProperty)
         {
-            property!.IsVisible = (bool)((object?)value ?? false);
+            visibleProperty.IsVisible = (bool)((object?)value ?? false);
             return true;
         }
 

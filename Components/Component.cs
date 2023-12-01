@@ -1,5 +1,4 @@
-﻿using Components.DataModels;
-using Components.Interfaces;
+﻿using Components.Base.Models;
 namespace Components;
 
 /// <summary>

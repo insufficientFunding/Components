@@ -1,5 +1,5 @@
-﻿using Components.Interfaces.TypeDescription;
-using Components.Logging;
+﻿using Components.Logging;
+using Components.Render.TypeDescription.TypeDescription;
 using Components.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -7,7 +7,7 @@ namespace Components.IntegrationTest;
 
 class Program
 {
-    public static IDictionary<string, IComponentDescription> ComponentDescriptions { get; private set; } = null!;
+    public static IDictionary<string, ComponentDescription> ComponentDescriptions { get; private set; } = null!;
 
     #region Services
     public static IServiceProvider Services { get; private set; } = null!;
@@ -37,6 +37,7 @@ class Program
         componentService.ReadDescriptions (dataPath);
         
         SerializeToJson(componentService, solutionPath);
+        RenderToSvg(componentService, solutionPath);
     }
 
     private static void SerializeToJson (IComponentService componentService, string solutionPath)

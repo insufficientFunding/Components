@@ -16,8 +16,10 @@
 		<viewModels:MainWindowViewModel />
 	</Design.DataContext>
 	
-	<Panel>
+	<DockPanel>
+		<views:MenuView DockPanel.Dock="Top" />
+		
 		<views:EditorView DataContext="{Binding EditorViewModel}" />
-	</Panel>
+	</DockPanel>
 
 </Window>
