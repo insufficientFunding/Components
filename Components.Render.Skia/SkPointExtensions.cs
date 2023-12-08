@@ -1,4 +1,4 @@
-﻿using Components.Primitives;
+﻿using Components.Base.Primitives;
 using SkiaSharp;
 namespace Components.Render.Skia;
 

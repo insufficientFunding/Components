@@ -1,16 +1,16 @@
-﻿using Components.Enums;
-using Components.Interfaces.Render;
-using Components.Primitives;
+﻿using Components.Base.Enums;
+using Components.Base.Primitives;
+using Components.Render.Drawing.DrawingContext;
 using Components.Render.Drawing.RenderCommands.Path;
-using Components.Text;
+using Components.Render.Text;
 using SkiaSharp;
 using System.Text;
 
 namespace Components.Render.Skia;
 
-/// <inheritdoc cref="Components.Interfaces.Render.IDrawingContext"/>
+/// <inheritdoc cref="IDrawingContext"/>
 /// <summary>
-///     A <see cref="Components.Interfaces.Render.IDrawingContext"/> implementation for <see cref="SkiaSharp.SKCanvas"/>.
+///     A <see cref="IDrawingContext"/> implementation for <see cref="SkiaSharp.SKCanvas"/>.
 /// </summary>
 public class SkCanvasDrawingContext : IDrawingContext
 {

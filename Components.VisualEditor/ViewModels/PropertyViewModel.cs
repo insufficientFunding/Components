@@ -1,5 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using Components.Enums;
+using Components.Base.Enums;
 using Components.VisualEditor.Models;
 using System.Collections.ObjectModel;
 namespace Components.VisualEditor.ViewModels;

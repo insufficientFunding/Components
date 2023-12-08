@@ -11,6 +11,7 @@ public static class PropertyTypeExtensions
             case PropertyType.Boolean:
                 return PropertyValue.Type.Boolean;
             case PropertyType.Double:
+                return PropertyValue.Type.Numeric;
             case PropertyType.Enum:
             case PropertyType.String:
                 return PropertyValue.Type.String;

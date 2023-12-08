@@ -8,6 +8,7 @@
              xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
              xmlns:viewModels="clr-namespace:Components.VisualEditor.ViewModels"
              xmlns:models="clr-namespace:Components.VisualEditor.Models"
+             xmlns:render="clr-namespace:Components.VisualEditor.Models.Render"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Components.VisualEditor.Views.Hierarchy.RenderTab"
              x:DataType="viewModels:EditorViewModel">
@@ -93,7 +94,7 @@
 				</TreeDataTemplate>
 
 				<!-- Rest of render commands -->
-				<TreeDataTemplate DataType="models:IEditorRenderCommand">
+				<TreeDataTemplate DataType="render:IEditorRenderCommand">
 					<StackPanel Spacing="15"
 					            Orientation="Horizontal">
 

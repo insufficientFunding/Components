@@ -6,6 +6,8 @@
 		<Nullable>enable</Nullable>
 		<AssemblyName>Egoland.Components.Base</AssemblyName>
 		<LangVersion>default</LangVersion>
+		<Authors>Malware</Authors>
+		<IsPackable>true</IsPackable>
 	</PropertyGroup>
 
 </Project>

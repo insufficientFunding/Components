@@ -1,11 +1,11 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
-using Components.Interfaces.TypeDescription;
+using Components.Render.TypeDescription;
 using Components.VisualEditor.Enums;
 using Components.VisualEditor.Extensions;
 using Components.VisualEditor.Messages;
 using Components.VisualEditor.Models;
+using Components.VisualEditor.Models.Render;
 using Components.VisualEditor.ViewModels.RenderCommands;
 using System;
 using System.Collections.Generic;
@@ -17,10 +17,10 @@ public partial class EditorViewModel
 {
     public void RenderPreview ()
     {
-        IList<IRenderDescription> renderDescriptions = [];
+        IList<RenderDescription> renderDescriptions = [];
         foreach (IEditorRenderCommand node in RenderDescriptions)
         {
-            if (node.Flatten (PreviewDescription, _conditionParser) is IRenderDescription flattenedNode)
+            if (node.Flatten (PreviewDescription, _conditionParser) is RenderDescription flattenedNode)
                 renderDescriptions.Add (flattenedNode);
         }
         PreviewDescription.RenderDescriptions = renderDescriptions.ToArray ();
@@ -31,7 +31,6 @@ public partial class EditorViewModel
     public RelayCommand<string> AddCommand { get; }
     public void AddRenderCommand (string? parameter)
     {
-        Console.WriteLine ("hi");
         if (!Enum.TryParse (parameter, out RenderCommandType type))
             return;
 

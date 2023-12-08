@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           targetNamespace="https://schemas.alaskasvingen.com/components/schema.xsd"
-           xmlns:ex="https://schemas.alaskasvingen.com/components/schema.xsd">
+           targetNamespace="https://schemas.alaskasvingen.com/components"
+           xmlns:ex="https://schemas.alaskasvingen.com/components">
 
 	<xs:element name="Component">
 		<xs:annotation>
@@ -232,8 +232,8 @@
 			<xs:documentation>Defines a line between two points.</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
-			<xs:attribute name="Start" type="ex:ComponentPoint" default="0, 0" use="required" />
-			<xs:attribute name="End" type="ex:ComponentPoint" default="0, 0" use="required" />
+			<xs:attribute name="Start" type="ex:ComponentPoint" use="required" />
+			<xs:attribute name="End" type="ex:ComponentPoint" use="required" />
 			<xs:attribute name="Thickness" type="xs:double" />
 		</xs:complexType>
 	</xs:element>
@@ -243,8 +243,8 @@
 			<xs:documentation>Defines a rectangle at the chosen position with the chosen size.</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
-			<xs:attribute name="Position" type="ex:ComponentPoint" default="0, 0" use="required" />
-			<xs:attribute name="Size" type="ex:Vector2" default="1, 1" use="required" />
+			<xs:attribute name="Position" type="ex:ComponentPoint" use="required" />
+			<xs:attribute name="Size" type="ex:Vector2" use="required" />
 			<xs:attribute name="Fill" type="xs:boolean" default="false" />
 			<xs:attribute name="Thickness" type="xs:double" />
 		</xs:complexType>
@@ -256,8 +256,8 @@
 			</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
-			<xs:attribute name="Position" type="ex:ComponentPoint" default="0, 0" use="required" />
-			<xs:attribute name="Radius" type="ex:Vector2" default="1, 1" use="required" />
+			<xs:attribute name="Position" type="ex:ComponentPoint" use="required" />
+			<xs:attribute name="Radius" type="ex:Vector2" use="required" />
 			<xs:attribute name="Fill" type="xs:boolean" default="false" />
 			<xs:attribute name="Thickness" type="xs:double" />
 		</xs:complexType>
@@ -269,12 +269,15 @@
 		</xs:annotation>
 		<xs:complexType>
 			<xs:attribute name="Value" type="xs:string" use="required" />
-			<xs:attribute name="X" type="ex:ComponentPointSingle" default="_Middle" use="required" />
-			<xs:attribute name="Y" type="ex:ComponentPointSingle" default="_Middle" use="required" />
+			<xs:attribute name="X" type="ex:ComponentPointSingle" default="_Middle" />
+			<xs:attribute name="Y" type="ex:ComponentPointSingle" default="_Middle" />
+			<xs:attribute name="Position" type="ex:ComponentPoint" default="_Middle" />
 			<xs:attribute name="Weight" type="ex:TextFont" default="Regular" />
-			<xs:attribute name="Alignment" type="ex:TextAlignment" default="Center" />
+			<xs:attribute name="Alignment" type="ex:TextAlignment" default="CenterCenter" />
 			<xs:attribute name="Size" type="ex:TextSize" default="Medium" />
 			<xs:attribute name="Rotate" type="ex:TextRotation" />
+			
+			<xs:assert test="(@X and @Y) or (@Position)" />
 		</xs:complexType>
 	</xs:element>
 
@@ -288,7 +291,7 @@
 				<xs:element ref="ex:ClosePath" minOccurs="0" />
 			</xs:sequence>
 
-			<xs:attribute name="Position" type="ex:ComponentPoint" default="0, 0" use="required" />
+			<xs:attribute name="Position" type="ex:ComponentPoint" use="required" />
 			<xs:attribute name="Fill" type="xs:boolean" default="false" />
 			<xs:attribute name="Thickness" type="xs:double" />
 		</xs:complexType>
@@ -330,8 +333,8 @@
 			<xs:attributeGroup ref="ex:SVGPathAttributes" />
 			<xs:attribute name="Radii" type="ex:Radii" use="required" />
 			<xs:attribute name="Angle" type="ex:Angle" use="required" />
-			<xs:attribute name="IsLargeArc" type="xs:boolean" default="false" use="required" />
-			<xs:attribute name="Direction" type="ex:TurnDirection" default="Clockwise" use="required" />
+			<xs:attribute name="IsLargeArc" type="xs:boolean" use="required" />
+			<xs:attribute name="Direction" type="ex:TurnDirection" use="required" />
 		</xs:complexType>
 	</xs:element>
 
@@ -518,7 +521,7 @@
 
 	<!-- Attribute Groups -->
 	<xs:attributeGroup name="SVGPathAttributes">
-		<xs:attribute name="Position" type="ex:Vector2" default="0, 0" use="required" />
+		<xs:attribute name="Position" type="ex:Vector2" use="required" />
 		<xs:attribute name="Relative" type="ex:Relative" default="true" />
 	</xs:attributeGroup>
 </xs:schema>

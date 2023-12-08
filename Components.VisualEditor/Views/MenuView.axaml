@@ -3,47 +3,50 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:Components.VisualEditor.ViewModels"
+             xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
              mc:Ignorable="d" d:DesignWidth="1240" d:DesignHeight="720"
              x:Class="Components.VisualEditor.Views.MenuView"
-             x:DataType="viewModels:EditorViewModel">
+             x:DataType="viewModels:MainWindowViewModel">
 
 	<Design.DataContext>
-		<viewModels:EditorViewModel />
+		<viewModels:MainWindowViewModel />
 	</Design.DataContext>
 
-	<DockPanel VerticalAlignment="Top"
-	           Background="{DynamicResource MaterialCardBackgroundColor}">
+	<Border VerticalAlignment="Top"
+	        BorderBrush="{DynamicResource MaterialDividerColor}"
+	        BorderThickness="0 0 0 1">
+		<DockPanel>
 
-		<Menu DockPanel.Dock="Left">
-			<!-- File Tab -->
-			<MenuItem Header="File">
-				<MenuItem Header="New" />
+			<Menu DockPanel.Dock="Left">
+				<!-- File Tab -->
+				<MenuItem Header="File">
+					<MenuItem Header="New"
+					          Command="{Binding NewCommand}"/>
 
-				<MenuItem Header="Open..." />
+					<MenuItem Header="Save..." 
+					          Command="{Binding SaveCommand}"/>
 
-				<MenuItem Header="Save..." />
-			</MenuItem>
+					<MenuItem Header="Open..." 
+					          Command="{Binding OpenCommand}"/>
+				</MenuItem>
 
-			<MenuItem Header="View">
-				<!-- Hierarchy Tab -->
-				<MenuItem Header="Hierarchy">
-					<MenuItem Header="Is Visible">
+				<MenuItem Header="View">
+					<!-- Hierarchy Tab -->
+					<MenuItem Header="Hierarchy">
 						<MenuItem.Icon>
-							<CheckBox />
+							<avalonia:MaterialIcon Kind="Check" />
+						</MenuItem.Icon>
+					</MenuItem>
+
+					<!-- Inspector Tab -->
+					<MenuItem Header="Inspector">
+						<MenuItem.Icon>
+							<avalonia:MaterialIcon Kind="Check" />
 						</MenuItem.Icon>
 					</MenuItem>
 				</MenuItem>
+			</Menu>
 
-				<!-- Inspector Tab -->
-				<MenuItem Header="Inspector">
-					<MenuItem Header="Is Visible">
-						<MenuItem.Icon>
-							<CheckBox />
-						</MenuItem.Icon>
-					</MenuItem>
-				</MenuItem>
-			</MenuItem>
-		</Menu>
-
-	</DockPanel>
+		</DockPanel>
+	</Border>
 </UserControl>

@@ -5,10 +5,14 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<LangVersion>default</LangVersion>
+		<PackageId>Egoland.Components.Render</PackageId>
+		<Authors>Malware</Authors>
+		<IsPackable>true</IsPackable>
+		<Version>1.0.1</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Components.Base\Components.Base.csproj" />
+		<PackageReference Include="Egoland.Components.Base" Version="*" />
 	</ItemGroup>
 
 </Project>

@@ -1,11 +1,10 @@
 ﻿using Avalonia.Threading;
 using CommunityToolkit.Mvvm.Messaging;
 using Components.Avalonia;
-using Components.Interfaces;
-using Components.Interfaces.Render;
-using Components.Interfaces.TypeDescription;
+using Components.Base.Models;
 using Components.Render.Drawing;
 using Components.Render.Skia;
+using Components.Render.TypeDescription;
 using Components.VisualEditor.Messages;
 using Components.VisualEditor.ViewModels;
 using SkiaSharp;
@@ -17,7 +16,7 @@ public class ComponentPreviewRenderer : SkiaCanvas, IRecipient<RenderPreviewMess
     private IPositionalComponent? _previewComponent;
     private ILayoutContext? _layoutContext;
     private readonly SkCanvasDrawingContext _drawingContext;
-    private IEnumerable<IRenderDescription>? _flattenedRenderDescriptions;
+    private IEnumerable<RenderDescription>? _flattenedRenderDescriptions;
 
     public ComponentPreviewRenderer (double width, double height) : base (width, height)
     {

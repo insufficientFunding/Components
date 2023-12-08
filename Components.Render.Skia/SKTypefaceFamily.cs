@@ -1,4 +1,4 @@
-﻿using Components.Enums;
+﻿using Components.Base.Enums;
 using SkiaSharp;
 
 namespace Components.Render.Skia;

@@ -1,6 +1,5 @@
 ﻿using Components.VisualEditor.Parsers;
 using System.ComponentModel.DataAnnotations;
-using System.Globalization;
 namespace Components.VisualEditor.Validation;
 
 public static class NumberValidation

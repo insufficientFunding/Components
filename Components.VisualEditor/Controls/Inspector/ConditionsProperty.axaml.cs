@@ -1,18 +1,13 @@
 ﻿using Avalonia;
-using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using CommunityToolkit.Mvvm.Input;
-using Components.Interfaces.TypeDescription;
 using Components.Render.TypeDescription.Conditions;
-using Components.VisualEditor.ViewModels;
+using Components.VisualEditor.Models;
 using Components.VisualEditor.ViewModels.Validation;
-using Components.Xml.Parsers.Conditions;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Text;
-using System.Windows.Input;
+using System.Text.RegularExpressions;
 
 namespace Components.VisualEditor.Controls.Inspector;
 
@@ -34,8 +29,10 @@ public class ConditionsProperty : TemplatedControl
     public IRelayCommand<ConditionStatementViewModel> RemoveConditionCommand { get; }
     private void RemoveCondition (ConditionStatementViewModel? condition)
     {
-        if (condition is not null)
-            Console.WriteLine (ConditionsCollection.Remove (condition));
+        if (condition is null)
+            return;
+        
+        ConditionsCollection.Remove (condition);
 
         ConditionsCollection = new ObservableCollection<ConditionStatementViewModel> (ConditionsCollection);
     }
@@ -72,16 +69,41 @@ public class ConditionsProperty : TemplatedControl
 
             string flattenedOperator = item.Operator == ConditionTree.ConditionOperator.AND ? "," : "|";
 
+            builder.Append ('[');
+
             if (i > 0)
-                builder.Append ($" {flattenedOperator} ");
+                builder.Append ($"{flattenedOperator}");
 
             builder.Append (item.Statement);
+            builder.Append (']');
         }
 
         var result = builder.ToString ();
-
-        Console.WriteLine (result);
         
         return result;
+    }
+
+    public void Parse (string conditions)
+    {
+        var regex = new Regex (@"\[(.*?)\]");
+        var matches = regex.Matches (conditions);
+
+        foreach (Match match in matches)
+        {
+            var trimmed = match.Value.TrimStart ('[').TrimEnd (']');
+
+            var isOR = trimmed.StartsWith ('|');
+            var isAND = trimmed.StartsWith (',');
+
+            if (isOR || isAND)
+                trimmed = trimmed.Substring (1);
+            
+            var condition = new ConditionStatementViewModel (trimmed)
+            {
+                Operator = isOR? ConditionTree.ConditionOperator.OR : ConditionTree.ConditionOperator.AND,
+            };
+
+            ConditionsCollection.Add (condition);
+        }
     }
 }

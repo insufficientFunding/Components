@@ -1,14 +1,13 @@
 ﻿using Avalonia;
-using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using CommunityToolkit.Mvvm.Messaging;
 using Components.VisualEditor.Messages;
+using Components.VisualEditor.Models;
 using System.Collections;
-using System.Collections.Generic;
 
 namespace Components.VisualEditor.Controls.Inspector;
 
-public class EnumProperty : TemplatedControl
+public class EnumProperty : TemplatedControl, IPropertyView
 {
     public static readonly StyledProperty<string> PropertyNameProperty = AvaloniaProperty.Register<EnumProperty, string> (
         "PropertyName");

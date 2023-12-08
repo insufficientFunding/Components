@@ -1,16 +1,16 @@
 ﻿
-using Components.Primitives;
+using Components.Base.Primitives;
 using AvaloniaRect = Avalonia.Rect;
 
 namespace Components.Avalonia.Extensions;
 
 /// <summary>
-///     A class containing extension methods for the <see cref="Components.Primitives.Rect"/> struct.
+///     A class containing extension methods for the <see cref="Components.Base.Primitives.Rect"/> struct.
 /// </summary>
 public static class RectExtensions
 {
     /// <summary>
-    ///     Converts the given Avalonia.<see cref="AvaloniaRect"/> to a <see cref="Components.Primitives.Rect"/>.
+    ///     Converts the given Avalonia.<see cref="AvaloniaRect"/> to a <see cref="Components.Base.Primitives.Rect"/>.
     /// </summary>
     /// <param name="rect">The Avalonia Rect to convert.</param>
     /// <returns>The converted Rect.</returns>
@@ -20,7 +20,7 @@ public static class RectExtensions
     }
     
     /// <summary>
-    ///     Converts the given <see cref="Components.Primitives.Rect"/> to an Avalonia.<see cref="AvaloniaRect"/>.
+    ///     Converts the given <see cref="Components.Base.Primitives.Rect"/> to an Avalonia.<see cref="AvaloniaRect"/>.
     /// </summary>
     /// <param name="rect">The Rect to convert.</param>
     /// <returns>The converted Avalonia rect.</returns>

@@ -1,20 +1,15 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using Components.Enums;
-using Components.Extensions;
-using Components.Interfaces.TypeDescription;
+using Components.Base.Enums;
+using Components.IO.Xml.Parsers.Conditions;
 using Components.Render.Drawing.RenderCommands.Path;
-using Components.Render.TypeDescription;
+using Components.Render.TypeDescription.TypeDescription;
 using Components.VisualEditor.Controls.Inspector;
 using Components.VisualEditor.Enums;
 using Components.VisualEditor.Models;
 using Components.VisualEditor.Parsers;
-using Components.Xml.Parsers.Conditions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-
 using static Components.VisualEditor.Extensions.RenderCommandExtensions;
 
 namespace Components.VisualEditor.ViewModels.RenderCommands;
@@ -26,17 +21,17 @@ public partial class PathCommandViewModel : ObservableObject
 {
     public PathCommandType Type { get; }
 
-    [ObservableProperty] private ObservableCollection<object> _properties = [];
+    [ObservableProperty] private ObservableCollection<IPropertyView> _properties = [];
     
-    public PathCommandViewModel (PathCommandType type, IEnumerable<object>? properties = null)
+    public PathCommandViewModel (PathCommandType type, IEnumerable<IPropertyView>? properties = null)
     {
         Type = type;
         
         if (properties is not null)
-            Properties = new ObservableCollection<object> (properties);
+            Properties = new ObservableCollection<IPropertyView> (properties);
     }
 
-    public object Flatten (IComponentDescription description, IConditionParser conditionParser)
+    public object Flatten (ComponentDescription description, IConditionParser conditionParser)
     {
         switch (Type)
         {

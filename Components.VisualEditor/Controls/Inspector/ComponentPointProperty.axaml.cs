@@ -1,9 +1,9 @@
 ﻿using Avalonia;
-using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using CommunityToolkit.Mvvm.Messaging;
 using Components.Render.TypeDescription;
 using Components.VisualEditor.Messages;
+using Components.VisualEditor.Models;
 using Components.VisualEditor.Parsers;
 using Components.VisualEditor.Validation;
 using System;
@@ -14,7 +14,7 @@ using System.Linq;
 
 namespace Components.VisualEditor.Controls.Inspector;
 
-public class ComponentPointProperty : TemplatedControl
+public class ComponentPointProperty : TemplatedControl, IPropertyView
 {
     public static readonly StyledProperty<string> PropertyNameProperty = AvaloniaProperty.Register<ComponentPointProperty, string> (
         "PropertyName");
@@ -81,10 +81,13 @@ public class ComponentPointProperty : TemplatedControl
     
     public static List<string> Options => Enum.GetNames (typeof (ComponentPoint.Anchor)).ToList ();
 
-    public ComponentPointProperty (string propertyName, ComponentPoint value)
+    public ComponentPointProperty (string propertyName, ComponentPoint? value = null)
     {
         PropertyName = propertyName;
 
+        if (value is null)
+            return;
+        
         AnchorX = value.RelativeToX.ToString ();
         AnchorY = value.RelativeToY.ToString ();
 

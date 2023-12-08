@@ -1,16 +1,15 @@
 ﻿using Avalonia;
-using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using CommunityToolkit.Mvvm.Messaging;
 using Components.VisualEditor.Messages;
+using Components.VisualEditor.Models;
 using Components.VisualEditor.Validation;
-using System;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 
 namespace Components.VisualEditor.Controls.Inspector;
 
-public class NumericProperty : TemplatedControl
+public class NumericProperty : TemplatedControl, IPropertyView
 {
     public static readonly StyledProperty<string> PropertyNameProperty = AvaloniaProperty.Register<NumericProperty, string> (
         "PropertyName", "Name");

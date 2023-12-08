@@ -1,15 +1,13 @@
-﻿using Components.Enums;
-using Components.Primitives;
+﻿using Components.Base.Enums;
+using Components.Base.Primitives;
 using Components.Render.TypeDescription;
 using Components.VisualEditor.Controls.Inspector;
 using Components.VisualEditor.Enums;
 using Components.VisualEditor.Models;
+using Components.VisualEditor.Models.Render;
 using Components.VisualEditor.ViewModels.RenderCommands;
-using DynamicData.Binding;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using RenderCommandType = Components.VisualEditor.Enums.RenderCommandType;
 namespace Components.VisualEditor.Extensions;
@@ -70,7 +68,7 @@ public static class RenderCommandExtensions
                 ]);
 
             case RenderCommandType.Path:
-                return new RenderPathViewModel (type, name, [
+                return new RenderPathViewModel (name, [
                     new ComponentPointProperty ("Start", new ComponentPoint (ComponentPoint.Anchor.Middle, ComponentPoint.Anchor.Middle, new Point (0, 0))),
                     new NumericProperty ("Thickness", 1D),
                     new BoolProperty ("Fill", false),
@@ -138,7 +136,7 @@ public static class RenderCommandExtensions
             .Cast<TTarget> ()
             .First (x => (string)property?.GetValue (x)! == propertyName);
     }
-    
+
     /// <summary>
     ///     Gets a property of type <typeparamref name="T"/> from a collection of type <see cref="object"/>.
     /// </summary>

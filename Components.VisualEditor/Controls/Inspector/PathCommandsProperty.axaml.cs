@@ -1,12 +1,7 @@
 ﻿using Avalonia;
-using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
-using Avalonia.Data;
-using Avalonia.Input;
-using Avalonia.Interactivity;
-using CommunityToolkit.Mvvm.Input;
+using Components.VisualEditor.Models;
 using Components.VisualEditor.ViewModels.RenderCommands;
-using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 

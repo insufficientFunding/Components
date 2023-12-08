@@ -1,16 +1,16 @@
 ﻿
-using Components.Primitives;
+using Components.Base.Primitives;
 using AvaloniaPoint = Avalonia.Point;
 
 namespace Components.Avalonia.Extensions;
 
 /// <summary>
-///     A class containing extension methods for the <see cref="Components.Primitives.Point"/> struct.
+///     A class containing extension methods for the <see cref="Components.Base.Primitives.Point"/> struct.
 /// </summary>
 public static class PointExtensions
 {
     /// <summary>
-    ///     Converts the given Avalonia.<see cref="AvaloniaPoint"/> to a <see cref="Components.Primitives.Point"/>.
+    ///     Converts the given Avalonia.<see cref="AvaloniaPoint"/> to a <see cref="Components.Base.Primitives.Point"/>.
     /// </summary>
     /// <param name="point">The Point to convert.</param>
     /// <returns>The converted Point.</returns>
@@ -20,7 +20,7 @@ public static class PointExtensions
     }
 
     /// <summary>
-    ///     Converts the given <see cref="Components.Primitives.Point"/> to an Avalonia.<see cref="AvaloniaPoint"/>.
+    ///     Converts the given <see cref="Components.Base.Primitives.Point"/> to an Avalonia.<see cref="AvaloniaPoint"/>.
     /// </summary>
     /// <param name="point">The Point to convert.</param>
     /// <returns>The converted Avalonia point.</returns>

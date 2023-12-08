@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-namespace Components.VisualEditor.Parsers;
+﻿namespace Components.VisualEditor.Parsers;
 
 public static class IntParser
 {

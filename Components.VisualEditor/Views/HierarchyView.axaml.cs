@@ -1,7 +1,4 @@
-﻿using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
-using System;
+﻿using Avalonia.Controls;
 
 namespace Components.VisualEditor.Views;
 

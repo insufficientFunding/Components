@@ -13,6 +13,7 @@
              xmlns:extensions="clr-namespace:Components.VisualEditor.Extensions"
              xmlns:controls="clr-namespace:Material.Styles.Controls;assembly=Material.Styles"
              xmlns:hierarchy="clr-namespace:Components.VisualEditor.Views.Hierarchy"
+             xmlns:inspector="clr-namespace:Components.VisualEditor.Controls.Inspector"
              mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="1080"
              x:Class="Components.VisualEditor.Views.HierarchyView"
              x:DataType="viewModels:EditorViewModel">
@@ -66,7 +67,10 @@
 			</TabItem>
 
 			<TabItem Header="Metadata">
-
+				<StackPanel Spacing="20">
+					<inspector:StringProperty PropertyName="Name"
+					                          Value="{Binding Metadata.Name}" />
+				</StackPanel>
 			</TabItem>
 
 			<TabItem Header="Properties">

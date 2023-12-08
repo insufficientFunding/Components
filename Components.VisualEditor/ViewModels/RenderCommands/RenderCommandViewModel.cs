@@ -1,18 +1,18 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using Components.Enums;
-using Components.Interfaces.TypeDescription;
+using Components.Base.Enums;
+using Components.IO.Xml.Parsers.Conditions;
 using Components.Render.Drawing.RenderCommands;
-using Components.Text;
+using Components.Render.Text;
+using Components.Render.TypeDescription.TypeDescription;
 using Components.VisualEditor.Controls.Inspector;
 using Components.VisualEditor.Enums;
 using Components.VisualEditor.Extensions;
 using Components.VisualEditor.Models;
+using Components.VisualEditor.Models.Render;
 using Components.VisualEditor.Parsers;
-using Components.Xml.Parsers.Conditions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using RenderCommandType = Components.VisualEditor.Enums.RenderCommandType;
 namespace Components.VisualEditor.ViewModels.RenderCommands;
 
@@ -22,22 +22,22 @@ public partial class RenderCommandViewModel : ObservableObject, IEditorRenderCom
 
     [ObservableProperty] private string _name;
 
-    [ObservableProperty] private ObservableCollection<object> _properties = [];
+    [ObservableProperty] private ObservableCollection<IPropertyView> _properties = [];
 
-    public RenderCommandViewModel (RenderCommandType type, string? name = null, IEnumerable<object>? properties = null)
+    public RenderCommandViewModel (RenderCommandType type, string? name = null, IEnumerable<IPropertyView>? properties = null)
     {
         Type = type;
         Name = name ?? $"New {type}";
 
         if (properties is not null)
-            Properties = new ObservableCollection<object> (properties);
+            Properties = new ObservableCollection<IPropertyView> (properties);
     }
 
     public RenderCommandViewModel ()
         : this (RenderCommandType.Rectangle, string.Empty)
     { }
 
-    public object Flatten (IComponentDescription description, IConditionParser conditionParser)
+    public object Flatten (ComponentDescription description, IConditionParser conditionParser)
     {
         switch (Type)
         {

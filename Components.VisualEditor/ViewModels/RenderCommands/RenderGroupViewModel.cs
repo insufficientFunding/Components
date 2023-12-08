@@ -1,17 +1,15 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
-using Components.DataModels;
-using Components.Interfaces.Conditions;
-using Components.Interfaces.Render;
-using Components.Interfaces.TypeDescription;
+using Components.IO.Xml.Parsers.Conditions;
+using Components.Render.Drawing.RenderCommands;
 using Components.Render.TypeDescription;
 using Components.Render.TypeDescription.Conditions;
+using Components.Render.TypeDescription.TypeDescription;
 using Components.VisualEditor.Controls.Inspector;
 using Components.VisualEditor.Enums;
 using Components.VisualEditor.Messages;
 using Components.VisualEditor.Models;
-using Components.Xml.Parsers.Conditions;
+using Components.VisualEditor.Models.Render;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -46,7 +44,7 @@ public partial class RenderGroupViewModel : Conditional<IEditorRenderCommand []?
     { }
     #endregion
 
-    public object Flatten (IComponentDescription description, IConditionParser conditionParser)
+    public object Flatten (ComponentDescription description, IConditionParser conditionParser)
     {
         if (ForceHidden)
             return new RenderDescription (ConditionTree.Empty, []);

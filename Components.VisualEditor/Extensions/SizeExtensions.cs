@@ -1,4 +1,4 @@
-﻿using Components.Primitives;
+﻿using Components.Base.Primitives;
 namespace Components.VisualEditor.Extensions;
 
 public static class SizeExtensions

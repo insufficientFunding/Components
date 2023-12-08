@@ -4,11 +4,14 @@
 		<TargetFramework>net8.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
+		<PackageId>Egoland.Components.IO</PackageId>
+		<IsPackable>true</IsPackable>
+		<Version>1.0.1</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Components.Base\Components.Base.csproj" />
-	  <ProjectReference Include="..\Components.Render\Components.Render.csproj" />
+	  <PackageReference Include="Egoland.Components.Base" Version="*" />
+		<PackageReference Include="Egoland.Components.Render" Version="*" />
 	</ItemGroup>
 
 	<ItemGroup>

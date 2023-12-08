@@ -200,7 +200,7 @@ public class ConditionParser : IConditionParser
         if (isState)
         {
             if (!legalStateNames.Contains (propertyName.ToLowerInvariant ()))
-                throw new Exception (string.Format ("Unknown component state '{0}'", propertyName));
+                throw new Exception ($"Unknown component state '{propertyName}'");
 
             return new ConditionTreeLeaf (ConditionType.State, propertyName, comparison, PropertyValue.Parse (compareToStr, PropertyValue.Type.Boolean));
         }
@@ -213,7 +213,7 @@ public class ConditionParser : IConditionParser
                 {
                     string subbedName = propertyName.Substring (4);
                     if ((property = description.Properties.FirstOrDefault (x => x.Name == subbedName)) is null)
-                        throw new Exception (string.Format ("Unknown property '{0}'", subbedName));
+                        throw new Exception ($"Unknown property '{subbedName}'");
                 }
             }
 

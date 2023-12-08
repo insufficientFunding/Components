@@ -1,12 +1,12 @@
 ﻿using Avalonia;
-using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using CommunityToolkit.Mvvm.Messaging;
 using Components.VisualEditor.Messages;
+using Components.VisualEditor.Models;
 
 namespace Components.VisualEditor.Controls.Inspector;
 
-public class StringProperty : TemplatedControl
+public class StringProperty : TemplatedControl, IPropertyView
 {
     public static readonly StyledProperty<string> PropertyNameProperty = AvaloniaProperty.Register<StringProperty, string> (
         "PropertyName", "Name");

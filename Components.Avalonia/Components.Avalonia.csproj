@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net7.0</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<AssemblyName>Egoland.Components.Avalonia</AssemblyName>
@@ -11,21 +11,19 @@
 		<RepositoryUrl>https://github.com/insufficientFunding/Components</RepositoryUrl>
 		<PackageLicenseExpression>GPL-2.0-or-later</PackageLicenseExpression>
 		<PackageReadmeFile>readme.md</PackageReadmeFile>
-		<Version>1.0.3</Version>
+		<Version>1.1.1</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Avalonia" Version="11.0.5" />
 		<PackageReference Include="Avalonia.Skia" Version="11.0.5" />
-		<PackageReference Include="Egoland.Components" Version="1.0.8" />
-		<PackageReference Include="Egoland.Components.Render.Skia" Version="1.0.1" />
+		<PackageReference Include="Egoland.Components" Version="*" />
+		<PackageReference Include="Egoland.Components.Base" Version="*" />
+		<PackageReference Include="Egoland.Components.Render.Skia" Version="*" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<None Include="readme.md" Pack="true" PackagePath="\" />
-	</ItemGroup>
-
-	<ItemGroup>
 	</ItemGroup>
 
 </Project>

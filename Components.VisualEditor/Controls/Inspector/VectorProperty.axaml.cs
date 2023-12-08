@@ -1,19 +1,18 @@
 ﻿using Avalonia;
-using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
-using Avalonia.Threading;
 using CommunityToolkit.Mvvm.Messaging;
 using Components.VisualEditor.Messages;
+using Components.VisualEditor.Models;
 using Components.VisualEditor.Parsers;
 using Components.VisualEditor.Validation;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
-using Point = Components.Primitives.Point;
+using Point = Components.Base.Primitives.Point;
 
 namespace Components.VisualEditor.Controls.Inspector;
 
-public class VectorProperty : TemplatedControl
+public class VectorProperty : TemplatedControl, IPropertyView
 {
     public static readonly StyledProperty<string> PropertyNameProperty = AvaloniaProperty.Register<VectorProperty, string> (
         "PropertyName", "Vector");
@@ -60,17 +59,18 @@ public class VectorProperty : TemplatedControl
     }
     #endregion
 
-    public VectorProperty (string propertyName, Point point)
+    public VectorProperty (string propertyName, Point? point = null)
     {
         PropertyName = propertyName;
-
-        Console.WriteLine (propertyName);
-
+        
+        if (point is null)
+            return;
+        
         X = point.X.ToString (CultureInfo.InvariantCulture);
         Y = point.Y.ToString (CultureInfo.InvariantCulture);
     }
 
-    public VectorProperty () { Console.WriteLine ("hi again"); }
+    public VectorProperty () { }
 
     /// <summary>
     ///     Flattens the property into a single <see cref="Point"/>

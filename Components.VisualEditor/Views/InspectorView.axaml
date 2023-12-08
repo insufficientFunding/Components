@@ -6,6 +6,7 @@
              xmlns:renderCommands="clr-namespace:Components.VisualEditor.ViewModels.RenderCommands"
              xmlns:models="clr-namespace:Components.VisualEditor.Models"
              xmlns:inspector="clr-namespace:Components.VisualEditor.Controls.Inspector"
+             xmlns:render="clr-namespace:Components.VisualEditor.Models.Render"
              mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="1080"
              x:Class="Components.VisualEditor.Views.InspectorView"
              x:DataType="viewModels:EditorViewModel">
@@ -85,14 +86,14 @@
 		            HorizontalAlignment="Center"
 		            Orientation="Horizontal">
 
-			<TextBlock Text="{Binding ((models:IEditorRenderCommand)SelectedNode).Name, FallbackValue=Nothing selected}"
+			<TextBlock Text="{Binding ((render:IEditorRenderCommand)SelectedNode).Name, FallbackValue=Nothing selected}"
 			           FontSize="20"
 			           Classes="Header"
 			           Margin="0 30 0 0"
 			           HorizontalAlignment="Center" />
 
 			<TextBlock
-				Text="{Binding ((models:IEditorRenderCommand)SelectedNode).Type, FallbackValue=( ), StringFormat='( {0} )'}"
+				Text="{Binding ((render:IEditorRenderCommand)SelectedNode).Type, FallbackValue=( ), StringFormat='( {0} )'}"
 				FontSize="16"
 				Foreground="{DynamicResource ForegroundLow}"
 				Classes="Header"

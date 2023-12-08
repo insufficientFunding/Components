@@ -19,7 +19,7 @@
 	<DockPanel>
 		<views:MenuView DockPanel.Dock="Top" />
 		
-		<views:EditorView DataContext="{Binding EditorViewModel}" />
+		<views:EditorView DataContext="{Binding Editor}" />
 	</DockPanel>
 
 </Window>

@@ -1,5 +1,4 @@
-﻿using Components.DataModels;
-using Components.Enums;
+﻿using Components.Base.Enums;
 using System.Collections.ObjectModel;
 namespace Components.VisualEditor.Models;
 
